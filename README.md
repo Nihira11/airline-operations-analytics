@@ -1,10 +1,14 @@
-# Airline Operations Analytics & Delay Prediction
+# Airline Operations Analytics
 
 A portfolio project for data analyst, business intelligence, and data scientist applications.
 
-**Business question:** Where are flight disruptions concentrated, and which scheduled flights have a higher risk of arriving late?
+**Business question:** Where are flight disruptions concentrated, and which dates, origins, routes, and departure windows warrant operational review?
 
-**Status:** January 2025 acquisition, preparation, and the first business-analysis SQL are complete. All 539,747 records are retained. One source measurement anomaly is explicitly flagged. The Tableau workbook and full-year analysis/modelling remain in progress.
+**Status:** The January 2025 analytics handoff includes validated data, ten SQL analyses, two figure sets, a business case study, and a reproducible release check. All 539,747 records are retained. Tableau authoring and screenshots are user-managed and still pending. Full-year acquisition and prediction are deferred until after this January release.
+
+Start with the [case study](reports/2025-01/case_study.md), [reproduction instructions](docs/reproduce.md), [data model](docs/data_model.md), and [step-by-step Tableau guide](docs/tableau_guide.md). The [release manifest](data/metadata/bts_2025_01_release.json) distinguishes verified analytics from the unfinished dashboard.
+
+With the project environment installed, run `.venv/bin/python src/run_january.py --reuse-prepared` to verify cached preparation, regenerate the analysis/figures, and run checks. A fresh build uses the same command without `--reuse-prepared`.
 
 ## Intended audience and decisions
 
@@ -14,12 +18,11 @@ An airline operations manager needs to monitor service reliability, identify rou
 
 | Tool | Purpose |
 | --- | --- |
-| Python and pandas | Inspect and clean data; build repeatable preparation scripts |
+| Python | Download, inventory, validate, and orchestrate repeatable scripts |
 | SQL with DuckDB | Store analytical tables locally and demonstrate joins, CTEs, aggregations, and window functions |
-| Jupyter and Matplotlib | Explore distributions, check assumptions, and explain findings |
-| Tableau Public | Build and share interactive portfolio dashboards |
-| scikit-learn | Build and evaluate arrival-delay classifiers after the analytics foundation is complete |
-| Git and GitHub | Track changes and present reproducible work |
+| Matplotlib | Explain SQL findings in static PNG/SVG figures |
+| Tableau Public | User-authored interactive dashboard, pending |
+| Git | Small local commits and a reproducible repository; remote publication is separate |
 
 DuckDB runs within Python and supports a local database file, avoiding a separate database server. Tableau will consume the validated CSV exports; a direct database connector is not required.
 
@@ -30,11 +33,11 @@ References: [DuckDB Python documentation](https://duckdb.org/docs/stable/clients
 Use the US Bureau of Transportation Statistics **Reporting Carrier On-Time Performance** dataset. Its flight-level records support comparisons by airline, airport, route, calendar period, and scheduled departure time, as well as analysis of recorded delay categories.
 
 - Start with January 2025 to establish ingestion, validation, and metric calculations.
-- Expand to January–December 2025 for the final analysis and chronological model evaluation.
+- Defer January–December 2025 acquisition and chronological model evaluation to a later extension.
 - Analyse reported US domestic flights; do not describe the coverage as all global or all US flights.
 - Record the download date, source URL, selected fields, row counts, and file checksums when acquiring data.
 - Keep raw data unchanged and outside Git. Commit scripts, SQL, metadata, and appropriately sized presentation outputs.
-- Obtain carrier and airport lookup tables and document their join keys.
+- Use and validate observed carrier/airport mappings; external master-data enrichment is optional future work.
 
 Sources: [official download page](https://www.transtats.bts.gov/DL_SelectFields.aspx?QO_fu146_anzr=%5D&gnoyr_VQ=FGJ), [field definitions](https://www.transtats.bts.gov/Fields.asp?QO_fu146_anzr=b0-gvzr&gnoyr_VQ=FGJ), [BTS reporting guidance](https://www.bts.gov/topics/airlines-and-airports/number-31-technical-directive-time-reporting-effective-jan-1-2019).
 
@@ -42,16 +45,16 @@ An Australian alternative is [BITRE domestic on-time performance](https://www.bi
 
 ## Questions the analysis will answer
 
-1. How do arrival reliability and cancellation rates change across months?
+1. How do arrival reliability and cancellation rates change across January dates?
 2. Which airlines, origin airports, and directional routes have high disruption rates and substantial flight volumes?
 3. How does performance vary by scheduled departure hour and day of week?
 4. Which recorded delay categories account for the most reported delay minutes?
 5. How do airline comparisons change when comparing common routes and similar departure windows?
-6. Can schedule information identify flights at higher risk of an arrival delay of at least 15 minutes?
+6. How severe are delayed arrivals, and how complete is the reported category coverage?
 
 ## Metric contract
 
-These are project definitions to implement and validate against the downloaded schema. Always display denominators and missing-data counts.
+These definitions are implemented and validated against the downloaded schema. Always display denominators and missing-data counts.
 
 | Metric | Project definition |
 | --- | --- |
@@ -73,13 +76,15 @@ Recorded delay categories describe reported attribution; comparisons do not esta
 
 Build one workbook with three analytical views:
 
-1. **Operations overview:** flight volume, arrival on-time rate, cancellation rate, diversion rate, and monthly trends.
+1. **Operations overview:** flight volume, arrival on-time rate, cancellation rate, diversion rate, and daily trends.
 2. **Disruption hotspots:** airline, airport, and route comparisons; departure-hour and day-of-week heatmap; rates alongside volumes.
-3. **Delay diagnostics:** reported delay-category minutes, severity distribution, and comparisons within common routes.
+3. **Delay diagnostics:** reported delay-category shares and severity distribution. Common-route comparisons are an optional full-month supplement with explicit coverage.
 
 Include date, airline, origin, and destination filters; clear metric definitions; accessible colours; useful tooltips; and source/coverage notes. Keep aggregate exports small enough to explore comfortably. Prediction results can become a separate extension after evaluation.
 
-## Data science extension
+## Deferred data science extension
+
+No prediction model has been trained in this January release. The following is a future plan, not a result.
 
 - **Target:** arrival delay of at least 15 minutes, conditional on a flight completing without diversion and having an observed arrival delay. This does not predict cancellation or overall disruption risk.
 - **Prediction point:** before scheduled departure, using schedule information available at that point.
@@ -97,11 +102,13 @@ Include date, airline, origin, and destination filters; clear metric definitions
 - [x] Validate types, missingness, flight identifiers, duplicates, observed-source dimension joins, and status flags.
 - [x] Build repeatable cleaning scripts and a local analytical database.
 - [x] Implement SQL metrics and verify January aggregate counts and rates.
-- [ ] Expand to the complete 2025 analysis period.
 - [x] Explore the January pilot and produce evidence-backed findings.
-- [ ] Export Tableau tables, build the workbook, and reconcile dashboard totals with SQL.
-- [ ] Train and evaluate the prediction extension.
-- [ ] Prepare screenshots, a concise business case study, limitations, and reproduction instructions.
+- [x] Export and reconcile dashboard inputs, severity bands, and category coverage.
+- [x] Prepare the business case study, figures, limitations, reproduction instructions, and manual dashboard guide.
+- [x] Verify the analytics release and local documentation links.
+- [ ] User builds the Tableau workbook, checks filtered/unfiltered totals, and captures screenshots.
+- [ ] User publishes the completed dashboard if desired and adds the actual portfolio link.
+- [ ] Later: expand to the complete 2025 analysis period and evaluate prediction models.
 
 The first complete portfolio release is the analytics pipeline, SQL, Tableau dashboard, and case study. The prediction extension follows that release.
 
@@ -111,10 +118,10 @@ The first complete portfolio release is the analytics pipeline, SQL, Tableau das
 data/raw/          Original downloads; ignored by Git
 data/processed/    Cleaned tables and local database; ignored by Git
 data/metadata/     Source manifest, checksums, column profiles, and field definitions
-notebooks/         Exploration and model experiments
-src/               Repeatable data preparation and modelling code
+docs/              Data model, reproduction instructions, and Tableau walkthrough
+src/               Repeatable data acquisition, preparation, analysis, and checks
 sql/               Table definitions, quality checks, and analytical queries
-tableau/           Tableau workbook and dashboard assets
+tableau/           Reserved for the user's Tableau workbook
 reports/           Findings, figures, and final case study
 ```
 
@@ -214,7 +221,7 @@ python3.12 -m venv .venv
 .venv/bin/python -m unittest discover -s tests -v
 ```
 
-Nine preparation tests cover early arrivals, the 15-minute cutoff, midnight, cancelled/diverted labels, source-issue flags, malformed values, duplicate multiplicities, CSV round trips, and read-only checks without persisted scratch views. Synthetic fixtures are confined to tests; exported project data comes from BTS.
+Nine preparation tests cover early arrivals, the 15-minute cutoff, midnight, cancelled/diverted labels, source-issue flags, malformed values, duplicate multiplicities, CSV round trips, and read-only checks without persisted scratch views. Four analysis tests cover shared-stratum weighting, overlap thresholds, unavailable zero-denominator rates, and severity-band boundaries. Synthetic fixtures are confined to tests; exported project data comes from BTS.
 
 The build verifies the raw CSV against its acquisition checksum and publishes outputs only after its core validation and export comparisons pass. Large data/database files and `.venv` are ignored by Git; code, SQL, requirements, and metadata are retained.
 
@@ -226,7 +233,7 @@ Compute arrival on-time rate as `SUM([on_time_arrival_count]) / SUM([eligible_ar
 
 ## January pilot findings
 
-The [analysis evidence](data/metadata/bts_2025_01_analysis.json) records denominators, thresholds, source database checksum, query fingerprints, and result-export checksums. Eight queries cover the overview, daily performance, airlines, origin airports, directional routes, departure windows, reported delay categories, and pairwise common-route comparisons.
+The [analysis evidence](data/metadata/bts_2025_01_analysis.json) records denominators, thresholds, source database checksum, query fingerprints, and result-export checksums. Ten queries cover the overview, daily performance, airlines, origin airports, directional routes, departure windows, reported delay categories, pairwise common-route comparisons, severity bands, and category reporting coverage.
 
 | Measure | January 2025 result |
 | --- | --- |
@@ -242,6 +249,7 @@ The [analysis evidence](data/metadata/bts_2025_01_analysis.json) records denomin
 3. **High-volume routes deserve a separate view.** ORD–LGA recorded the largest number of delayed eligible arrivals: 200 out of 905 eligible arrivals, from 923 scheduled flights. Route-rate comparisons require at least 500 eligible arrivals; route volumes remain available below that threshold.
 4. **Recorded category minutes suggest where to investigate.** Air-carrier and late-aircraft categories represented 36.16% and 34.72% of reported delay-category minutes. Review operational logs around those categories. This does not establish the underlying cause or the share of delays that an airline can prevent.
 5. **Unadjusted airline comparisons can change substantially with coverage.** WN's full-network arrival on-time rate exceeded UA's by 2.42 percentage points. On 123 shared directional routes and four-hour departure blocks, using the same pooled stratum weights for both carriers, the point estimates were 80.95% for UA and 80.92% for WN. The matched subset covers only 16.69% of UA's and 8.96% of WN's eligible arrivals; it does not establish an overall airline ranking or a statistically significant difference.
+6. **Long delays deserve a distinct view.** 13,517 arrivals were delayed at least 120 minutes: 13.77% of delayed arrivals and 2.59% of eligible arrivals. All 98,130 delayed eligible arrivals had complete category reporting, covering 6,943,994 reported category minutes.
 
 ### Reproduce business analysis
 
@@ -250,17 +258,21 @@ The [analysis evidence](data/metadata/bts_2025_01_analysis.json) records denomin
 .venv/bin/python -m unittest discover -s tests -v
 ```
 
-The analysis opens the prepared database read-only and exports reconciled result tables to `data/processed/2025-01/analysis/`. Rates are fractions, not formatted percentages. All grouped flight totals reconcile with the overview and preparation report; delay-category minutes reconcile with the typed source. Three additional tests cover shared-stratum weighting, overlap thresholds, and zero denominators.
+The analysis opens the prepared database read-only and exports reconciled result tables to `data/processed/2025-01/analysis/`. Rates are fractions, not formatted percentages. All grouped flight totals reconcile with the overview and preparation report; category minutes, coverage, and severity bands are also reconciled.
 
 Comparison thresholds are recorded in the analysis manifest: 1,000 eligible arrivals for origin arrival-rate comparisons, 500 for route arrival-rate comparisons, and 100 for departure-window cells. Cancellation thresholds use scheduled flights. Pairwise comparisons require at least 20 eligible arrivals per carrier/stratum, 10 shared strata, and 1,000 matched eligible arrivals per carrier. Scores use pair-specific overlap populations and must not be combined into a global league table.
 
-This month is a descriptive pilot. Annual/seasonal claims, financial savings estimates, and predictive performance require additional evidence. The next step is to finish and verify the Tableau workbook before scaling to the full 2025 period.
+This month is a descriptive pilot. Annual/seasonal claims, financial savings estimates, and predictive performance require additional evidence. The remaining January work is the user's Tableau workbook, interaction checks, and screenshots.
 
 ### Portfolio figure
 
 ![January 2025 operations analysis](reports/2025-01/operations_overview.png)
 
 The [SVG version](reports/2025-01/operations_overview.svg) is available for sharp export. These are static SQL-analysis figures, not screenshots of a Tableau dashboard.
+
+![Delay severity and comparison](reports/2025-01/delay_diagnostics.png)
+
+The [diagnostics SVG](reports/2025-01/delay_diagnostics.svg) provides the same severity and comparison figures for sharp export.
 
 ```bash
 .venv/bin/python -m pip install -r requirements-visuals.txt
@@ -269,6 +281,6 @@ The [SVG version](reports/2025-01/operations_overview.svg) is available for shar
 
 ## Tableau handoff
 
-Tableau authoring is user-managed. Previous generated workbooks, packages, Hyper extracts, draft metadata, builders, and their dedicated dependencies/tests were removed at the user’s request. The `tableau/` folder is reserved for the workbook the user creates. The validated `tableau_flights.csv` and analysis CSV files remain available for a fresh build.
+Tableau authoring is user-managed. The `tableau/` folder is reserved for the workbook the user creates; all previous generated drafts and draft-building files have been removed. The validated `tableau_flights.csv` and analysis CSV files remain available for a fresh build.
 
-A guided build will follow completion of the January analytics work. Native screenshots and interactive verification will be added after the user builds the dashboard.
+Use the [manual Tableau guide](docs/tableau_guide.md) one checkpoint at a time. Native screenshots and interactive verification will be added after the user builds the dashboard. The [release verifier](src/verify_release.py) verifies the analytics handoff without opening Tableau or asserting publication.
