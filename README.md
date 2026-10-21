@@ -255,3 +255,14 @@ The analysis opens the prepared database read-only and exports reconciled result
 Comparison thresholds are recorded in the analysis manifest: 1,000 eligible arrivals for origin arrival-rate comparisons, 500 for route arrival-rate comparisons, and 100 for departure-window cells. Cancellation thresholds use scheduled flights. Pairwise comparisons require at least 20 eligible arrivals per carrier/stratum, 10 shared strata, and 1,000 matched eligible arrivals per carrier. Scores use pair-specific overlap populations and must not be combined into a global league table.
 
 This month is a descriptive pilot. Annual/seasonal claims, financial savings estimates, and predictive performance require additional evidence. The next step is to finish and verify the Tableau workbook before scaling to the full 2025 period.
+
+### Portfolio figure
+
+![January 2025 operations analysis](reports/2025-01/operations_overview.png)
+
+The [SVG version](reports/2025-01/operations_overview.svg) is available for sharp export. These are static SQL-analysis figures, not screenshots of a Tableau dashboard.
+
+```bash
+.venv/bin/python -m pip install -r requirements-visuals.txt
+.venv/bin/python src/plot_findings.py
+```
