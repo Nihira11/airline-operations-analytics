@@ -1,0 +1,36 @@
+{
+  "dataset": "BTS Reporting Carrier On-Time Performance (1987-present)",
+  "publisher": "US Department of Transportation, Bureau of Transportation Statistics",
+  "period": "2025-01",
+  "source_url": "https://transtats.bts.gov/PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2025_1.zip",
+  "source_directory_url": "https://transtats.bts.gov/PREZIP/",
+  "field_definitions_url": "https://www.transtats.bts.gov/DL_SelectFields.aspx?QO_fu146_anzr=%5D&gnoyr_VQ=FGJ",
+  "download_completed_at_utc": "2026-10-21T07:13:45.585600+00:00",
+  "download_timestamp_basis": "Archive last-write time on initial acquisition",
+  "archive": {
+    "path": "data/raw/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2025_1.zip",
+    "bytes": 27108664,
+    "sha256": "868387dcedaef1b8d8392e608e642219fde50d594c3cf2094aec858167629ccf",
+    "crc_integrity_check": "passed"
+  },
+  "members": [
+    {
+      "path": "data/raw/2025-01/On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2025_1.csv",
+      "bytes": 243177378,
+      "sha256": "d7c7d59452cad1215d9605e8ff350a4bad7282750765084fe57928a5ad275453",
+      "zip_crc32": "33f841f7"
+    },
+    {
+      "path": "data/raw/2025-01/readme.html",
+      "bytes": 12152,
+      "sha256": "0ba795b87d903d1b556ea93c19924cab0d240deb478e53a2f551b37ea6686867",
+      "zip_crc32": "9e76459b"
+    }
+  ],
+  "selection": "Complete monthly pre-zipped file; no fields or rows filtered",
+  "raw_transformations": "None; archive members extracted byte-for-byte",
+  "row_count": 539747,
+  "named_column_count": 109,
+  "profile_path": "data/metadata/bts_2025_01_profile.json",
+  "dictionary_path": "data/metadata/bts_2025_01_dictionary.json"
+}

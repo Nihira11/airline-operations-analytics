@@ -1,0 +1,442 @@
+{
+  "description_source": "data/raw/2025-01/readme.html",
+  "source_archive_url": "https://transtats.bts.gov/PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2025_1.zip",
+  "fields": [
+    {
+      "name": "Year",
+      "source_description": "Year"
+    },
+    {
+      "name": "Quarter",
+      "source_description": "Quarter (1-4)"
+    },
+    {
+      "name": "Month",
+      "source_description": "Month"
+    },
+    {
+      "name": "DayofMonth",
+      "source_description": "Day of Month"
+    },
+    {
+      "name": "DayOfWeek",
+      "source_description": "Day of Week"
+    },
+    {
+      "name": "FlightDate",
+      "source_description": "Flight Date (yyyymmdd)"
+    },
+    {
+      "name": "Reporting_Airline",
+      "source_description": "Unique Carrier Code. When the same code has been used by multiple carriers, a numeric suffix is used for earlier users, for example, PA, PA(1), PA(2). Use this field for analysis across a range of years."
+    },
+    {
+      "name": "DOT_ID_Reporting_Airline",
+      "source_description": "An identification number assigned by US DOT to identify a unique airline (carrier). A unique airline (carrier) is defined as one holding and reporting under the same DOT certificate regardless of its Code, Name, or holding company/corporation."
+    },
+    {
+      "name": "IATA_CODE_Reporting_Airline",
+      "source_description": "Code assigned by IATA and commonly used to identify a carrier. As the same code may have been assigned to different carriers over time, the code is not always unique. For analysis, use the Unique Carrier Code."
+    },
+    {
+      "name": "Tail_Number",
+      "source_description": "Tail Number"
+    },
+    {
+      "name": "Flight_Number_Reporting_Airline",
+      "source_description": "Flight Number"
+    },
+    {
+      "name": "OriginAirportID",
+      "source_description": "Origin Airport, Airport ID. An identification number assigned by US DOT to identify a unique airport. Use this field for airport analysis across a range of years because an airport can change its airport code and airport codes can be reused."
+    },
+    {
+      "name": "OriginAirportSeqID",
+      "source_description": "Origin Airport, Airport Sequence ID. An identification number assigned by US DOT to identify a unique airport at a given point of time. Airport attributes, such as airport name or coordinates, may change over time."
+    },
+    {
+      "name": "OriginCityMarketID",
+      "source_description": "Origin Airport, City Market ID. City Market ID is an identification number assigned by US DOT to identify a city market. Use this field to consolidate airports serving the same city market."
+    },
+    {
+      "name": "Origin",
+      "source_description": "Origin Airport"
+    },
+    {
+      "name": "OriginCityName",
+      "source_description": "Origin Airport, City Name"
+    },
+    {
+      "name": "OriginState",
+      "source_description": "Origin Airport, State Code"
+    },
+    {
+      "name": "OriginStateFips",
+      "source_description": "Origin Airport, State Fips"
+    },
+    {
+      "name": "OriginStateName",
+      "source_description": "Origin Airport, State Name"
+    },
+    {
+      "name": "OriginWac",
+      "source_description": "Origin Airport, World Area Code"
+    },
+    {
+      "name": "DestAirportID",
+      "source_description": "Destination Airport, Airport ID. An identification number assigned by US DOT to identify a unique airport. Use this field for airport analysis across a range of years because an airport can change its airport code and airport codes can be reused."
+    },
+    {
+      "name": "DestAirportSeqID",
+      "source_description": "Destination Airport, Airport Sequence ID. An identification number assigned by US DOT to identify a unique airport at a given point of time. Airport attributes, such as airport name or coordinates, may change over time."
+    },
+    {
+      "name": "DestCityMarketID",
+      "source_description": "Destination Airport, City Market ID. City Market ID is an identification number assigned by US DOT to identify a city market. Use this field to consolidate airports serving the same city market."
+    },
+    {
+      "name": "Dest",
+      "source_description": "Destination Airport"
+    },
+    {
+      "name": "DestCityName",
+      "source_description": "Destination Airport, City Name"
+    },
+    {
+      "name": "DestState",
+      "source_description": "Destination Airport, State Code"
+    },
+    {
+      "name": "DestStateFips",
+      "source_description": "Destination Airport, State Fips"
+    },
+    {
+      "name": "DestStateName",
+      "source_description": "Destination Airport, State Name"
+    },
+    {
+      "name": "DestWac",
+      "source_description": "Destination Airport, World Area Code"
+    },
+    {
+      "name": "CRSDepTime",
+      "source_description": "CRS Departure Time (local time: hhmm)"
+    },
+    {
+      "name": "DepTime",
+      "source_description": "Actual Departure Time (local time: hhmm)"
+    },
+    {
+      "name": "DepDelay",
+      "source_description": "Difference in minutes between scheduled and actual departure time. Early departures show negative numbers."
+    },
+    {
+      "name": "DepDelayMinutes",
+      "source_description": "Difference in minutes between scheduled and actual departure time. Early departures set to 0."
+    },
+    {
+      "name": "DepDel15",
+      "source_description": "Departure Delay Indicator, 15 Minutes or More (1=Yes)"
+    },
+    {
+      "name": "DepartureDelayGroups",
+      "source_description": "Departure Delay intervals, every (15 minutes from 180)"
+    },
+    {
+      "name": "DepTimeBlk",
+      "source_description": "CRS Departure Time Block, Hourly Intervals"
+    },
+    {
+      "name": "TaxiOut",
+      "source_description": "Taxi Out Time, in Minutes"
+    },
+    {
+      "name": "WheelsOff",
+      "source_description": "Wheels Off Time (local time: hhmm)"
+    },
+    {
+      "name": "WheelsOn",
+      "source_description": "Wheels On Time (local time: hhmm)"
+    },
+    {
+      "name": "TaxiIn",
+      "source_description": "Taxi In Time, in Minutes"
+    },
+    {
+      "name": "CRSArrTime",
+      "source_description": "CRS Arrival Time (local time: hhmm)"
+    },
+    {
+      "name": "ArrTime",
+      "source_description": "Actual Arrival Time (local time: hhmm)"
+    },
+    {
+      "name": "ArrDelay",
+      "source_description": "Difference in minutes between scheduled and actual arrival time. Early arrivals show negative numbers."
+    },
+    {
+      "name": "ArrDelayMinutes",
+      "source_description": "Difference in minutes between scheduled and actual arrival time. Early arrivals set to 0."
+    },
+    {
+      "name": "ArrDel15",
+      "source_description": "Arrival Delay Indicator, 15 Minutes or More (1=Yes)"
+    },
+    {
+      "name": "ArrivalDelayGroups",
+      "source_description": "Arrival Delay intervals, every (15-minutes from 180)"
+    },
+    {
+      "name": "ArrTimeBlk",
+      "source_description": "CRS Arrival Time Block, Hourly Intervals"
+    },
+    {
+      "name": "Cancelled",
+      "source_description": "Cancelled Flight Indicator (1=Yes)"
+    },
+    {
+      "name": "CancellationCode",
+      "source_description": "Specifies The Reason For Cancellation"
+    },
+    {
+      "name": "Diverted",
+      "source_description": "Diverted Flight Indicator (1=Yes)"
+    },
+    {
+      "name": "CRSElapsedTime",
+      "source_description": "CRS Elapsed Time of Flight, in Minutes"
+    },
+    {
+      "name": "ActualElapsedTime",
+      "source_description": "Elapsed Time of Flight, in Minutes"
+    },
+    {
+      "name": "AirTime",
+      "source_description": "Flight Time, in Minutes"
+    },
+    {
+      "name": "Flights",
+      "source_description": "Number of Flights"
+    },
+    {
+      "name": "Distance",
+      "source_description": "Distance between airports (miles)"
+    },
+    {
+      "name": "DistanceGroup",
+      "source_description": "Distance Intervals, every 250 Miles, for Flight Segment"
+    },
+    {
+      "name": "CarrierDelay",
+      "source_description": "Carrier Delay, in Minutes"
+    },
+    {
+      "name": "WeatherDelay",
+      "source_description": "Weather Delay, in Minutes"
+    },
+    {
+      "name": "NASDelay",
+      "source_description": "National Air System Delay, in Minutes"
+    },
+    {
+      "name": "SecurityDelay",
+      "source_description": "Security Delay, in Minutes"
+    },
+    {
+      "name": "LateAircraftDelay",
+      "source_description": "Late Aircraft Delay, in Minutes"
+    },
+    {
+      "name": "FirstDepTime",
+      "source_description": "First Gate Departure Time at Origin Airport"
+    },
+    {
+      "name": "TotalAddGTime",
+      "source_description": "Total Ground Time Away from Gate for Gate Return or Cancelled Flight"
+    },
+    {
+      "name": "LongestAddGTime",
+      "source_description": "Longest Time Away from Gate for Gate Return or Cancelled Flight"
+    },
+    {
+      "name": "DivAirportLandings",
+      "source_description": "Number of Diverted Airport Landings"
+    },
+    {
+      "name": "DivReachedDest",
+      "source_description": "Diverted Flight Reaching Scheduled Destination Indicator (1=Yes)"
+    },
+    {
+      "name": "DivActualElapsedTime",
+      "source_description": "Elapsed Time of Diverted Flight Reaching Scheduled Destination, in Minutes. The ActualElapsedTime column remains NULL for all diverted flights."
+    },
+    {
+      "name": "DivArrDelay",
+      "source_description": "Difference in minutes between scheduled and actual arrival time for a diverted flight reaching scheduled destination. The ArrDelay column remains NULL for all diverted flights."
+    },
+    {
+      "name": "DivDistance",
+      "source_description": "Distance between scheduled destination and final diverted airport (miles). Value will be 0 for diverted flight reaching scheduled destination."
+    },
+    {
+      "name": "Div1Airport",
+      "source_description": "Diverted Airport Code1"
+    },
+    {
+      "name": "Div1AirportID",
+      "source_description": "Airport ID of Diverted Airport 1. Airport ID is a Unique Key for an Airport"
+    },
+    {
+      "name": "Div1AirportSeqID",
+      "source_description": "Airport Sequence ID of Diverted Airport 1. Unique Key for Time Specific Information for an Airport"
+    },
+    {
+      "name": "Div1WheelsOn",
+      "source_description": "Wheels On Time (local time: hhmm) at Diverted Airport Code1"
+    },
+    {
+      "name": "Div1TotalGTime",
+      "source_description": "Total Ground Time Away from Gate at Diverted Airport Code1"
+    },
+    {
+      "name": "Div1LongestGTime",
+      "source_description": "Longest Ground Time Away from Gate at Diverted Airport Code1"
+    },
+    {
+      "name": "Div1WheelsOff",
+      "source_description": "Wheels Off Time (local time: hhmm) at Diverted Airport Code1"
+    },
+    {
+      "name": "Div1TailNum",
+      "source_description": "Aircraft Tail Number for Diverted Airport Code1"
+    },
+    {
+      "name": "Div2Airport",
+      "source_description": "Diverted Airport Code2"
+    },
+    {
+      "name": "Div2AirportID",
+      "source_description": "Airport ID of Diverted Airport 2. Airport ID is a Unique Key for an Airport"
+    },
+    {
+      "name": "Div2AirportSeqID",
+      "source_description": "Airport Sequence ID of Diverted Airport 2. Unique Key for Time Specific Information for an Airport"
+    },
+    {
+      "name": "Div2WheelsOn",
+      "source_description": "Wheels On Time (local time: hhmm) at Diverted Airport Code2"
+    },
+    {
+      "name": "Div2TotalGTime",
+      "source_description": "Total Ground Time Away from Gate at Diverted Airport Code2"
+    },
+    {
+      "name": "Div2LongestGTime",
+      "source_description": "Longest Ground Time Away from Gate at Diverted Airport Code2"
+    },
+    {
+      "name": "Div2WheelsOff",
+      "source_description": "Wheels Off Time (local time: hhmm) at Diverted Airport Code2"
+    },
+    {
+      "name": "Div2TailNum",
+      "source_description": "Aircraft Tail Number for Diverted Airport Code2"
+    },
+    {
+      "name": "Div3Airport",
+      "source_description": "Diverted Airport Code3"
+    },
+    {
+      "name": "Div3AirportID",
+      "source_description": "Airport ID of Diverted Airport 3. Airport ID is a Unique Key for an Airport"
+    },
+    {
+      "name": "Div3AirportSeqID",
+      "source_description": "Airport Sequence ID of Diverted Airport 3. Unique Key for Time Specific Information for an Airport"
+    },
+    {
+      "name": "Div3WheelsOn",
+      "source_description": "Wheels On Time (local time: hhmm) at Diverted Airport Code3"
+    },
+    {
+      "name": "Div3TotalGTime",
+      "source_description": "Total Ground Time Away from Gate at Diverted Airport Code3"
+    },
+    {
+      "name": "Div3LongestGTime",
+      "source_description": "Longest Ground Time Away from Gate at Diverted Airport Code3"
+    },
+    {
+      "name": "Div3WheelsOff",
+      "source_description": "Wheels Off Time (local time: hhmm) at Diverted Airport Code3"
+    },
+    {
+      "name": "Div3TailNum",
+      "source_description": "Aircraft Tail Number for Diverted Airport Code3"
+    },
+    {
+      "name": "Div4Airport",
+      "source_description": "Diverted Airport Code4"
+    },
+    {
+      "name": "Div4AirportID",
+      "source_description": "Airport ID of Diverted Airport 4. Airport ID is a Unique Key for an Airport"
+    },
+    {
+      "name": "Div4AirportSeqID",
+      "source_description": "Airport Sequence ID of Diverted Airport 4. Unique Key for Time Specific Information for an Airport"
+    },
+    {
+      "name": "Div4WheelsOn",
+      "source_description": "Wheels On Time (local time: hhmm) at Diverted Airport Code4"
+    },
+    {
+      "name": "Div4TotalGTime",
+      "source_description": "Total Ground Time Away from Gate at Diverted Airport Code4"
+    },
+    {
+      "name": "Div4LongestGTime",
+      "source_description": "Longest Ground Time Away from Gate at Diverted Airport Code4"
+    },
+    {
+      "name": "Div4WheelsOff",
+      "source_description": "Wheels Off Time (local time: hhmm) at Diverted Airport Code4"
+    },
+    {
+      "name": "Div4TailNum",
+      "source_description": "Aircraft Tail Number for Diverted Airport Code4"
+    },
+    {
+      "name": "Div5Airport",
+      "source_description": "Diverted Airport Code5"
+    },
+    {
+      "name": "Div5AirportID",
+      "source_description": "Airport ID of Diverted Airport 5. Airport ID is a Unique Key for an Airport"
+    },
+    {
+      "name": "Div5AirportSeqID",
+      "source_description": "Airport Sequence ID of Diverted Airport 5. Unique Key for Time Specific Information for an Airport"
+    },
+    {
+      "name": "Div5WheelsOn",
+      "source_description": "Wheels On Time (local time: hhmm) at Diverted Airport Code5"
+    },
+    {
+      "name": "Div5TotalGTime",
+      "source_description": "Total Ground Time Away from Gate at Diverted Airport Code5"
+    },
+    {
+      "name": "Div5LongestGTime",
+      "source_description": "Longest Ground Time Away from Gate at Diverted Airport Code5"
+    },
+    {
+      "name": "Div5WheelsOff",
+      "source_description": "Wheels Off Time (local time: hhmm) at Diverted Airport Code5"
+    },
+    {
+      "name": "Div5TailNum",
+      "source_description": "Aircraft Tail Number for Diverted Airport Code5"
+    }
+  ]
+}

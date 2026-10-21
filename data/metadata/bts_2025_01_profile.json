@@ -1,0 +1,1290 @@
+{
+  "csv_path": "data/raw/2025-01/On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_2025_1.csv",
+  "row_count": 539747,
+  "physical_column_count": 110,
+  "named_column_count": 109,
+  "columns": [
+    {
+      "position": 1,
+      "name": "Year",
+      "blank_count": 0,
+      "blank_percent": 0.0,
+      "example_nonblank_values": [
+        "2025"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 2,
+      "name": "Quarter",
+      "blank_count": 0,
+      "blank_percent": 0.0,
+      "example_nonblank_values": [
+        "1"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 3,
+      "name": "Month",
+      "blank_count": 0,
+      "blank_percent": 0.0,
+      "example_nonblank_values": [
+        "1"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 4,
+      "name": "DayofMonth",
+      "blank_count": 0,
+      "blank_percent": 0.0,
+      "example_nonblank_values": [
+        "1",
+        "2",
+        "3"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 5,
+      "name": "DayOfWeek",
+      "blank_count": 0,
+      "blank_percent": 0.0,
+      "example_nonblank_values": [
+        "3",
+        "4",
+        "5"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 6,
+      "name": "FlightDate",
+      "blank_count": 0,
+      "blank_percent": 0.0,
+      "example_nonblank_values": [
+        "2025-01-01",
+        "2025-01-02",
+        "2025-01-03"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 7,
+      "name": "Reporting_Airline",
+      "blank_count": 0,
+      "blank_percent": 0.0,
+      "example_nonblank_values": [
+        "AA",
+        "AS",
+        "B6"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 8,
+      "name": "DOT_ID_Reporting_Airline",
+      "blank_count": 0,
+      "blank_percent": 0.0,
+      "example_nonblank_values": [
+        "19805",
+        "19930",
+        "20409"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 9,
+      "name": "IATA_CODE_Reporting_Airline",
+      "blank_count": 0,
+      "blank_percent": 0.0,
+      "example_nonblank_values": [
+        "AA",
+        "AS",
+        "B6"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 10,
+      "name": "Tail_Number",
+      "blank_count": 2530,
+      "blank_percent": 0.4687,
+      "example_nonblank_values": [
+        "N104NN",
+        "N110AN",
+        "N106NN"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 11,
+      "name": "Flight_Number_Reporting_Airline",
+      "blank_count": 0,
+      "blank_percent": 0.0,
+      "example_nonblank_values": [
+        "1",
+        "2",
+        "3"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 12,
+      "name": "OriginAirportID",
+      "blank_count": 0,
+      "blank_percent": 0.0,
+      "example_nonblank_values": [
+        "12478",
+        "12892",
+        "13495"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 13,
+      "name": "OriginAirportSeqID",
+      "blank_count": 0,
+      "blank_percent": 0.0,
+      "example_nonblank_values": [
+        "1247805",
+        "1289208",
+        "1349505"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 14,
+      "name": "OriginCityMarketID",
+      "blank_count": 0,
+      "blank_percent": 0.0,
+      "example_nonblank_values": [
+        "31703",
+        "32575",
+        "33495"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 15,
+      "name": "Origin",
+      "blank_count": 0,
+      "blank_percent": 0.0,
+      "example_nonblank_values": [
+        "JFK",
+        "LAX",
+        "MSY"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 16,
+      "name": "OriginCityName",
+      "blank_count": 0,
+      "blank_percent": 0.0,
+      "example_nonblank_values": [
+        "New York, NY",
+        "Los Angeles, CA",
+        "New Orleans, LA"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 17,
+      "name": "OriginState",
+      "blank_count": 0,
+      "blank_percent": 0.0,
+      "example_nonblank_values": [
+        "NY",
+        "CA",
+        "LA"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 18,
+      "name": "OriginStateFips",
+      "blank_count": 0,
+      "blank_percent": 0.0,
+      "example_nonblank_values": [
+        "36",
+        "06",
+        "22"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 19,
+      "name": "OriginStateName",
+      "blank_count": 0,
+      "blank_percent": 0.0,
+      "example_nonblank_values": [
+        "New York",
+        "California",
+        "Louisiana"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 20,
+      "name": "OriginWac",
+      "blank_count": 0,
+      "blank_percent": 0.0,
+      "example_nonblank_values": [
+        "22",
+        "91",
+        "72"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 21,
+      "name": "DestAirportID",
+      "blank_count": 0,
+      "blank_percent": 0.0,
+      "example_nonblank_values": [
+        "12892",
+        "12478",
+        "12889"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 22,
+      "name": "DestAirportSeqID",
+      "blank_count": 0,
+      "blank_percent": 0.0,
+      "example_nonblank_values": [
+        "1289208",
+        "1247805",
+        "1288904"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 23,
+      "name": "DestCityMarketID",
+      "blank_count": 0,
+      "blank_percent": 0.0,
+      "example_nonblank_values": [
+        "32575",
+        "31703",
+        "32211"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 24,
+      "name": "Dest",
+      "blank_count": 0,
+      "blank_percent": 0.0,
+      "example_nonblank_values": [
+        "LAX",
+        "JFK",
+        "LAS"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 25,
+      "name": "DestCityName",
+      "blank_count": 0,
+      "blank_percent": 0.0,
+      "example_nonblank_values": [
+        "Los Angeles, CA",
+        "New York, NY",
+        "Las Vegas, NV"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 26,
+      "name": "DestState",
+      "blank_count": 0,
+      "blank_percent": 0.0,
+      "example_nonblank_values": [
+        "CA",
+        "NY",
+        "NV"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 27,
+      "name": "DestStateFips",
+      "blank_count": 0,
+      "blank_percent": 0.0,
+      "example_nonblank_values": [
+        "06",
+        "36",
+        "32"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 28,
+      "name": "DestStateName",
+      "blank_count": 0,
+      "blank_percent": 0.0,
+      "example_nonblank_values": [
+        "California",
+        "New York",
+        "Nevada"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 29,
+      "name": "DestWac",
+      "blank_count": 0,
+      "blank_percent": 0.0,
+      "example_nonblank_values": [
+        "91",
+        "22",
+        "85"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 30,
+      "name": "CRSDepTime",
+      "blank_count": 0,
+      "blank_percent": 0.0,
+      "example_nonblank_values": [
+        "0659",
+        "0700",
+        "0800"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 31,
+      "name": "DepTime",
+      "blank_count": 15886,
+      "blank_percent": 2.9432,
+      "example_nonblank_values": [
+        "0656",
+        "0652",
+        "0653"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 32,
+      "name": "DepDelay",
+      "blank_count": 15923,
+      "blank_percent": 2.9501,
+      "example_nonblank_values": [
+        "-3.00",
+        "-7.00",
+        "-4.00"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 33,
+      "name": "DepDelayMinutes",
+      "blank_count": 15923,
+      "blank_percent": 2.9501,
+      "example_nonblank_values": [
+        "0.00",
+        "4.00",
+        "204.00"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 34,
+      "name": "DepDel15",
+      "blank_count": 15923,
+      "blank_percent": 2.9501,
+      "example_nonblank_values": [
+        "0.00",
+        "1.00"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 35,
+      "name": "DepartureDelayGroups",
+      "blank_count": 15923,
+      "blank_percent": 2.9501,
+      "example_nonblank_values": [
+        "-1",
+        "0",
+        "12"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 36,
+      "name": "DepTimeBlk",
+      "blank_count": 0,
+      "blank_percent": 0.0,
+      "example_nonblank_values": [
+        "0600-0659",
+        "0700-0759",
+        "0800-0859"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 37,
+      "name": "TaxiOut",
+      "blank_count": 16227,
+      "blank_percent": 3.0064,
+      "example_nonblank_values": [
+        "23.00",
+        "30.00",
+        "13.00"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 38,
+      "name": "WheelsOff",
+      "blank_count": 16227,
+      "blank_percent": 3.0064,
+      "example_nonblank_values": [
+        "0719",
+        "0722",
+        "0705"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 39,
+      "name": "WheelsOn",
+      "blank_count": 16580,
+      "blank_percent": 3.0718,
+      "example_nonblank_values": [
+        "1004",
+        "1015",
+        "0952"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 40,
+      "name": "TaxiIn",
+      "blank_count": 16580,
+      "blank_percent": 3.0718,
+      "example_nonblank_values": [
+        "9.00",
+        "7.00",
+        "11.00"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 41,
+      "name": "CRSArrTime",
+      "blank_count": 0,
+      "blank_percent": 0.0,
+      "example_nonblank_values": [
+        "1020",
+        "1026",
+        "1035"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 42,
+      "name": "ArrTime",
+      "blank_count": 16580,
+      "blank_percent": 3.0718,
+      "example_nonblank_values": [
+        "1013",
+        "1022",
+        "1003"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 43,
+      "name": "ArrDelay",
+      "blank_count": 17478,
+      "blank_percent": 3.2382,
+      "example_nonblank_values": [
+        "-7.00",
+        "2.00",
+        "-17.00"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 44,
+      "name": "ArrDelayMinutes",
+      "blank_count": 17478,
+      "blank_percent": 3.2382,
+      "example_nonblank_values": [
+        "0.00",
+        "2.00",
+        "13.00"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 45,
+      "name": "ArrDel15",
+      "blank_count": 17478,
+      "blank_percent": 3.2382,
+      "example_nonblank_values": [
+        "0.00",
+        "1.00"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 46,
+      "name": "ArrivalDelayGroups",
+      "blank_count": 17478,
+      "blank_percent": 3.2382,
+      "example_nonblank_values": [
+        "-1",
+        "0",
+        "-2"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 47,
+      "name": "ArrTimeBlk",
+      "blank_count": 0,
+      "blank_percent": 0.0,
+      "example_nonblank_values": [
+        "1000-1059",
+        "1600-1659",
+        "1500-1559"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 48,
+      "name": "Cancelled",
+      "blank_count": 0,
+      "blank_percent": 0.0,
+      "example_nonblank_values": [
+        "0.00",
+        "1.00"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 49,
+      "name": "CancellationCode",
+      "blank_count": 523435,
+      "blank_percent": 96.9778,
+      "example_nonblank_values": [
+        "A",
+        "B",
+        "C"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 50,
+      "name": "Diverted",
+      "blank_count": 0,
+      "blank_percent": 0.0,
+      "example_nonblank_values": [
+        "0.00",
+        "1.00"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 51,
+      "name": "CRSElapsedTime",
+      "blank_count": 0,
+      "blank_percent": 0.0,
+      "example_nonblank_values": [
+        "381.00",
+        "386.00",
+        "395.00"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 52,
+      "name": "ActualElapsedTime",
+      "blank_count": 17478,
+      "blank_percent": 3.2382,
+      "example_nonblank_values": [
+        "377.00",
+        "390.00",
+        "371.00"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 53,
+      "name": "AirTime",
+      "blank_count": 17478,
+      "blank_percent": 3.2382,
+      "example_nonblank_values": [
+        "345.00",
+        "353.00",
+        "347.00"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 54,
+      "name": "Flights",
+      "blank_count": 0,
+      "blank_percent": 0.0,
+      "example_nonblank_values": [
+        "1.00"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 55,
+      "name": "Distance",
+      "blank_count": 0,
+      "blank_percent": 0.0,
+      "example_nonblank_values": [
+        "2475.00",
+        "2248.00",
+        "837.00"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 56,
+      "name": "DistanceGroup",
+      "blank_count": 0,
+      "blank_percent": 0.0,
+      "example_nonblank_values": [
+        "10",
+        "9",
+        "4"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 57,
+      "name": "CarrierDelay",
+      "blank_count": 441617,
+      "blank_percent": 81.8193,
+      "example_nonblank_values": [
+        "204.00",
+        "0.00",
+        "122.00"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 58,
+      "name": "WeatherDelay",
+      "blank_count": 441617,
+      "blank_percent": 81.8193,
+      "example_nonblank_values": [
+        "0.00",
+        "40.00",
+        "37.00"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 59,
+      "name": "NASDelay",
+      "blank_count": 441617,
+      "blank_percent": 81.8193,
+      "example_nonblank_values": [
+        "41.00",
+        "25.00",
+        "0.00"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 60,
+      "name": "SecurityDelay",
+      "blank_count": 441617,
+      "blank_percent": 81.8193,
+      "example_nonblank_values": [
+        "0.00",
+        "5.00",
+        "22.00"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 61,
+      "name": "LateAircraftDelay",
+      "blank_count": 441617,
+      "blank_percent": 81.8193,
+      "example_nonblank_values": [
+        "0.00",
+        "316.00",
+        "33.00"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 62,
+      "name": "FirstDepTime",
+      "blank_count": 535480,
+      "blank_percent": 99.2094,
+      "example_nonblank_values": [
+        "1528",
+        "1525",
+        "0929"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 63,
+      "name": "TotalAddGTime",
+      "blank_count": 535480,
+      "blank_percent": 99.2094,
+      "example_nonblank_values": [
+        "44.00",
+        "65.00",
+        "366.00"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 64,
+      "name": "LongestAddGTime",
+      "blank_count": 535480,
+      "blank_percent": 99.2094,
+      "example_nonblank_values": [
+        "44.00",
+        "34.00",
+        "214.00"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 65,
+      "name": "DivAirportLandings",
+      "blank_count": 0,
+      "blank_percent": 0.0,
+      "example_nonblank_values": [
+        "0",
+        "1",
+        "2"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 66,
+      "name": "DivReachedDest",
+      "blank_count": 538581,
+      "blank_percent": 99.784,
+      "example_nonblank_values": [
+        "1.00",
+        "0.00"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 67,
+      "name": "DivActualElapsedTime",
+      "blank_count": 538849,
+      "blank_percent": 99.8336,
+      "example_nonblank_values": [
+        "503.00",
+        "294.00",
+        "613.00"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 68,
+      "name": "DivArrDelay",
+      "blank_count": 538849,
+      "blank_percent": 99.8336,
+      "example_nonblank_values": [
+        "172.00",
+        "144.00",
+        "390.00"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 69,
+      "name": "DivDistance",
+      "blank_count": 538581,
+      "blank_percent": 99.784,
+      "example_nonblank_values": [
+        "0.00",
+        "24.00",
+        "11.00"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 70,
+      "name": "Div1Airport",
+      "blank_count": 538495,
+      "blank_percent": 99.768,
+      "example_nonblank_values": [
+        "DFW",
+        "IND",
+        "PHL"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 71,
+      "name": "Div1AirportID",
+      "blank_count": 538495,
+      "blank_percent": 99.768,
+      "example_nonblank_values": [
+        "11298",
+        "12339",
+        "14100"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 72,
+      "name": "Div1AirportSeqID",
+      "blank_count": 538495,
+      "blank_percent": 99.768,
+      "example_nonblank_values": [
+        "1129806",
+        "1233904",
+        "1410005"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 73,
+      "name": "Div1WheelsOn",
+      "blank_count": 538495,
+      "blank_percent": 99.768,
+      "example_nonblank_values": [
+        "1140",
+        "1217",
+        "2129"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 74,
+      "name": "Div1TotalGTime",
+      "blank_count": 538495,
+      "blank_percent": 99.768,
+      "example_nonblank_values": [
+        "39.00",
+        "21.00",
+        "78.00"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 75,
+      "name": "Div1LongestGTime",
+      "blank_count": 538495,
+      "blank_percent": 99.768,
+      "example_nonblank_values": [
+        "29.00",
+        "13.00",
+        "66.00"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 76,
+      "name": "Div1WheelsOff",
+      "blank_count": 538829,
+      "blank_percent": 99.8299,
+      "example_nonblank_values": [
+        "1423",
+        "1425",
+        "0032"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 77,
+      "name": "Div1TailNum",
+      "blank_count": 538829,
+      "blank_percent": 99.8299,
+      "example_nonblank_values": [
+        "N826AW",
+        "N934AN",
+        "N111ZM"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 78,
+      "name": "Div2Airport",
+      "blank_count": 539724,
+      "blank_percent": 99.9957,
+      "example_nonblank_values": [
+        "PHX",
+        "DEN",
+        "IAH"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 79,
+      "name": "Div2AirportID",
+      "blank_count": 539724,
+      "blank_percent": 99.9957,
+      "example_nonblank_values": [
+        "14107",
+        "11292",
+        "12266"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 80,
+      "name": "Div2AirportSeqID",
+      "blank_count": 539724,
+      "blank_percent": 99.9957,
+      "example_nonblank_values": [
+        "1410702",
+        "1129202",
+        "1226603"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 81,
+      "name": "Div2WheelsOn",
+      "blank_count": 539724,
+      "blank_percent": 99.9957,
+      "example_nonblank_values": [
+        "0918",
+        "2139",
+        "2211"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 82,
+      "name": "Div2TotalGTime",
+      "blank_count": 539724,
+      "blank_percent": 99.9957,
+      "example_nonblank_values": [
+        "102.00",
+        "44.00",
+        "17.00"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 83,
+      "name": "Div2LongestGTime",
+      "blank_count": 539724,
+      "blank_percent": 99.9957,
+      "example_nonblank_values": [
+        "102.00",
+        "26.00",
+        "17.00"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 84,
+      "name": "Div2WheelsOff",
+      "blank_count": 539743,
+      "blank_percent": 99.9993,
+      "example_nonblank_values": [
+        "1100",
+        "0914",
+        "1932"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 85,
+      "name": "Div2TailNum",
+      "blank_count": 539743,
+      "blank_percent": 99.9993,
+      "example_nonblank_values": [
+        "N908AA",
+        "N453SW",
+        "N8723Q"
+      ],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 86,
+      "name": "Div3Airport",
+      "blank_count": 539747,
+      "blank_percent": 100.0,
+      "example_nonblank_values": [],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 87,
+      "name": "Div3AirportID",
+      "blank_count": 539747,
+      "blank_percent": 100.0,
+      "example_nonblank_values": [],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 88,
+      "name": "Div3AirportSeqID",
+      "blank_count": 539747,
+      "blank_percent": 100.0,
+      "example_nonblank_values": [],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 89,
+      "name": "Div3WheelsOn",
+      "blank_count": 539747,
+      "blank_percent": 100.0,
+      "example_nonblank_values": [],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 90,
+      "name": "Div3TotalGTime",
+      "blank_count": 539747,
+      "blank_percent": 100.0,
+      "example_nonblank_values": [],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 91,
+      "name": "Div3LongestGTime",
+      "blank_count": 539747,
+      "blank_percent": 100.0,
+      "example_nonblank_values": [],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 92,
+      "name": "Div3WheelsOff",
+      "blank_count": 539747,
+      "blank_percent": 100.0,
+      "example_nonblank_values": [],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 93,
+      "name": "Div3TailNum",
+      "blank_count": 539747,
+      "blank_percent": 100.0,
+      "example_nonblank_values": [],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 94,
+      "name": "Div4Airport",
+      "blank_count": 539747,
+      "blank_percent": 100.0,
+      "example_nonblank_values": [],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 95,
+      "name": "Div4AirportID",
+      "blank_count": 539747,
+      "blank_percent": 100.0,
+      "example_nonblank_values": [],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 96,
+      "name": "Div4AirportSeqID",
+      "blank_count": 539747,
+      "blank_percent": 100.0,
+      "example_nonblank_values": [],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 97,
+      "name": "Div4WheelsOn",
+      "blank_count": 539747,
+      "blank_percent": 100.0,
+      "example_nonblank_values": [],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 98,
+      "name": "Div4TotalGTime",
+      "blank_count": 539747,
+      "blank_percent": 100.0,
+      "example_nonblank_values": [],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 99,
+      "name": "Div4LongestGTime",
+      "blank_count": 539747,
+      "blank_percent": 100.0,
+      "example_nonblank_values": [],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 100,
+      "name": "Div4WheelsOff",
+      "blank_count": 539747,
+      "blank_percent": 100.0,
+      "example_nonblank_values": [],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 101,
+      "name": "Div4TailNum",
+      "blank_count": 539747,
+      "blank_percent": 100.0,
+      "example_nonblank_values": [],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 102,
+      "name": "Div5Airport",
+      "blank_count": 539747,
+      "blank_percent": 100.0,
+      "example_nonblank_values": [],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 103,
+      "name": "Div5AirportID",
+      "blank_count": 539747,
+      "blank_percent": 100.0,
+      "example_nonblank_values": [],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 104,
+      "name": "Div5AirportSeqID",
+      "blank_count": 539747,
+      "blank_percent": 100.0,
+      "example_nonblank_values": [],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 105,
+      "name": "Div5WheelsOn",
+      "blank_count": 539747,
+      "blank_percent": 100.0,
+      "example_nonblank_values": [],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 106,
+      "name": "Div5TotalGTime",
+      "blank_count": 539747,
+      "blank_percent": 100.0,
+      "example_nonblank_values": [],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 107,
+      "name": "Div5LongestGTime",
+      "blank_count": 539747,
+      "blank_percent": 100.0,
+      "example_nonblank_values": [],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 108,
+      "name": "Div5WheelsOff",
+      "blank_count": 539747,
+      "blank_percent": 100.0,
+      "example_nonblank_values": [],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 109,
+      "name": "Div5TailNum",
+      "blank_count": 539747,
+      "blank_percent": 100.0,
+      "example_nonblank_values": [],
+      "read_type": "text; curated type to be defined during preparation"
+    },
+    {
+      "position": 110,
+      "name": null,
+      "blank_count": 539747,
+      "blank_percent": 100.0,
+      "example_nonblank_values": [],
+      "read_type": "text; curated type to be defined during preparation"
+    }
+  ],
+  "date_min": "2025-01-01",
+  "date_max": "2025-01-31",
+  "date_count": 31,
+  "daily_row_counts": {
+    "2025-01-01": 16827,
+    "2025-01-02": 19640,
+    "2025-01-03": 19358,
+    "2025-01-04": 18544,
+    "2025-01-05": 19676,
+    "2025-01-06": 18732,
+    "2025-01-07": 15974,
+    "2025-01-08": 16276,
+    "2025-01-09": 17952,
+    "2025-01-10": 17873,
+    "2025-01-11": 14991,
+    "2025-01-12": 18359,
+    "2025-01-13": 17832,
+    "2025-01-14": 15767,
+    "2025-01-15": 16044,
+    "2025-01-16": 18542,
+    "2025-01-17": 18415,
+    "2025-01-18": 14690,
+    "2025-01-19": 16874,
+    "2025-01-20": 18595,
+    "2025-01-21": 16034,
+    "2025-01-22": 16244,
+    "2025-01-23": 18277,
+    "2025-01-24": 18142,
+    "2025-01-25": 15026,
+    "2025-01-26": 18674,
+    "2025-01-27": 18007,
+    "2025-01-28": 15911,
+    "2025-01-29": 16192,
+    "2025-01-30": 18206,
+    "2025-01-31": 18073
+  },
+  "reporting_airline_counts": {
+    "AA": 75088,
+    "AS": 18163,
+    "B6": 17918,
+    "DL": 76306,
+    "F9": 15526,
+    "G4": 9345,
+    "HA": 6690,
+    "MQ": 21890,
+    "NK": 17544,
+    "OH": 21094,
+    "OO": 65036,
+    "UA": 62007,
+    "WN": 105307,
+    "YX": 27833
+  },
+  "distinct_airports_origin_or_destination": 329,
+  "distinct_directional_routes": 5649,
+  "status_flag_counts": {
+    "Cancelled": {
+      "0.00": 523435,
+      "1.00": 16312
+    },
+    "Diverted": {
+      "0.00": 538581,
+      "1.00": 1166
+    }
+  },
+  "checks": {
+    "dates_outside_requested_month": 0,
+    "year_month_field_mismatches": 0,
+    "invalid_status_flags": 0,
+    "cancelled_and_diverted": 0,
+    "missing_arrival_delay": 17478,
+    "completed_nondiverted_missing_arrival_delay": 0,
+    "eligible_arrivals": 522269,
+    "arrival_delay_indicator_mismatches": 0
+  },
+  "inspection_scope": "Full-file structure, blank counts, calendar coverage and status/target checks. Duplicate keys, complete type/range validation and lookup joins remain pending."
+}
