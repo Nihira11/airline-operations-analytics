@@ -4,7 +4,7 @@ A portfolio project for data analyst, business intelligence, and data scientist 
 
 **Business question:** Where are flight disruptions concentrated, and which scheduled flights have a higher risk of arriving late?
 
-**Status:** January 2025 acquisition, type conversion, duplicate checks, and the first analytical database are complete. All 539,747 records are retained. One source measurement anomaly is explicitly flagged. SQL analysis, the Tableau workbook, and modelling remain to be built.
+**Status:** January 2025 acquisition, preparation, and the first business-analysis SQL are complete. All 539,747 records are retained. One source measurement anomaly is explicitly flagged. The Tableau workbook and full-year analysis/modelling remain in progress.
 
 ## Intended audience and decisions
 
@@ -96,9 +96,9 @@ Include date, airline, origin, and destination filters; clear metric definitions
 - [x] Acquire one month of source data and document its schema and provenance.
 - [x] Validate types, missingness, flight identifiers, duplicates, observed-source dimension joins, and status flags.
 - [x] Build repeatable cleaning scripts and a local analytical database.
-- [ ] Implement SQL metrics and verify aggregate counts and rates.
+- [x] Implement SQL metrics and verify January aggregate counts and rates.
 - [ ] Expand to the complete 2025 analysis period.
-- [ ] Explore the data and produce evidence-backed findings.
+- [x] Explore the January pilot and produce evidence-backed findings.
 - [ ] Export Tableau tables, build the workbook, and reconcile dashboard totals with SQL.
 - [ ] Train and evaluate the prediction extension.
 - [ ] Prepare screenshots, a concise business case study, limitations, and reproduction instructions.
@@ -224,6 +224,34 @@ Connect to the text file `data/processed/2025-01/tableau_flights.csv`. Confirm t
 
 Compute arrival on-time rate as `SUM([on_time_arrival_count]) / SUM([eligible_arrival_count])`, guarding against a zero denominator. Cancellation rate uses `SUM([cancelled_flight_count]) / SUM([scheduled_flight_count])`. Format these ratios as percentages. Use the underlying counts after filtering rather than averaging percentages from groups. The daily export is an alternative for an overview; it has date and airline filters only.
 
-## Next working session
+## January pilot findings
 
-Write and interpret the business-analysis queries, reconcile dashboard KPI calculations, and explore airline, airport, route, and departure-window differences. Finish the January pipeline and dashboard design before scaling to the complete 2025 period. No additional paid service is planned for the initial scope.
+The [analysis evidence](data/metadata/bts_2025_01_analysis.json) records denominators, thresholds, source database checksum, query fingerprints, and result-export checksums. Eight queries cover the overview, daily performance, airlines, origin airports, directional routes, departure windows, reported delay categories, and pairwise common-route comparisons.
+
+| Measure | January 2025 result |
+| --- | --- |
+| Arrival on-time rate | 81.21%: 424,139 / 522,269 eligible arrivals |
+| Cancellation rate | 3.02%: 16,312 / 539,747 scheduled flights |
+| Diversion rate | 0.22%: 1,166 / 539,747 scheduled flights |
+| Delayed eligible arrivals | 98,130 |
+| Median delay among arrivals delayed at least 15 minutes | 40 minutes |
+| 90th-percentile delay among arrivals delayed at least 15 minutes | 145 minutes |
+
+1. **Disruptions were concentrated on particular dates.** January 10 had the highest cancellation rate: 2,856 cancellations from 17,873 scheduled flights, or 15.98%. Investigate that day's operational records before attributing the spike to a cause.
+2. **Prioritise both rates and volumes.** GRR had the lowest arrival on-time rate among origins with at least 1,000 eligible arrivals: 73.93% over 1,312 eligible arrivals. DEN had a 75.06% rate across 24,350 eligible arrivals, including 6,074 delayed arrivals, making its volume material for operational review. These are arrival outcomes grouped by departure airport, not airport-controlled causal effects.
+3. **High-volume routes deserve a separate view.** ORD–LGA recorded the largest number of delayed eligible arrivals: 200 out of 905 eligible arrivals, from 923 scheduled flights. Route-rate comparisons require at least 500 eligible arrivals; route volumes remain available below that threshold.
+4. **Recorded category minutes suggest where to investigate.** Air-carrier and late-aircraft categories represented 36.16% and 34.72% of reported delay-category minutes. Review operational logs around those categories. This does not establish the underlying cause or the share of delays that an airline can prevent.
+5. **Unadjusted airline comparisons can change substantially with coverage.** WN's full-network arrival on-time rate exceeded UA's by 2.42 percentage points. On 123 shared directional routes and four-hour departure blocks, using the same pooled stratum weights for both carriers, the point estimates were 80.95% for UA and 80.92% for WN. The matched subset covers only 16.69% of UA's and 8.96% of WN's eligible arrivals; it does not establish an overall airline ranking or a statistically significant difference.
+
+### Reproduce business analysis
+
+```bash
+.venv/bin/python src/analyze_operations.py --year 2025 --month 1
+.venv/bin/python -m unittest discover -s tests -v
+```
+
+The analysis opens the prepared database read-only and exports reconciled result tables to `data/processed/2025-01/analysis/`. Rates are fractions, not formatted percentages. All grouped flight totals reconcile with the overview and preparation report; delay-category minutes reconcile with the typed source. Three additional tests cover shared-stratum weighting, overlap thresholds, and zero denominators.
+
+Comparison thresholds are recorded in the analysis manifest: 1,000 eligible arrivals for origin arrival-rate comparisons, 500 for route arrival-rate comparisons, and 100 for departure-window cells. Cancellation thresholds use scheduled flights. Pairwise comparisons require at least 20 eligible arrivals per carrier/stratum, 10 shared strata, and 1,000 matched eligible arrivals per carrier. Scores use pair-specific overlap populations and must not be combined into a global league table.
+
+This month is a descriptive pilot. Annual/seasonal claims, financial savings estimates, and predictive performance require additional evidence. The next step is to finish and verify the Tableau workbook before scaling to the full 2025 period.
