@@ -39,6 +39,18 @@ def validate_results(results, quality):
                         raise ValueError(f"Rate outside [0, 1]: {name}: {value}")
     if abs(sum(row["share_of_reported_minutes"] for row in results["delay_causes"]) - 1) > 1e-10:
         raise ValueError("Delay-minute category shares do not sum to one")
+    severity = results["delay_severity"]
+    for name in ["eligible_arrivals", "delayed_arrivals"]:
+        if sum(row[name] for row in severity) != overview[name]:
+            raise ValueError(f"Severity bands do not reconcile: {name}")
+    coverage = results["cause_coverage"][0]
+    if coverage["delayed_arrivals"] != overview["delayed_arrivals"]:
+        raise ValueError("Cause coverage differs from the delayed-arrival population")
+    if (coverage["delayed_arrivals_with_complete_causes"]
+            + coverage["delayed_arrivals_without_complete_causes"] != coverage["delayed_arrivals"]):
+        raise ValueError("Complete and incomplete cause populations do not partition delayed arrivals")
+    if coverage["reported_category_minutes"] != sum(row["reported_delay_minutes"] for row in results["delay_causes"]):
+        raise ValueError("Cause coverage minutes differ from category totals")
 
 
 def lowest(rows, metric, flag, limit=5):
@@ -104,6 +116,8 @@ def run(year, month):
                 "grouped_totals_match_overview": True,
                 "export_round_trips_match": True,
                 "delay_minutes_match_typed_source": True,
+                "severity_bands_match_eligible_and_delayed_arrivals": True,
+                "cause_coverage_matches_category_totals": True,
             },
             "overview": results["overview"][0], "daily": daily, "airlines": results["airlines"],
             "lowest_on_time_origins": lowest(origins, "arrival_on_time_rate", "meets_arrival_volume_threshold"),
@@ -116,6 +130,8 @@ def run(year, month):
             "highest_cancellation_day": max(daily, key=lambda row: row["cancellation_rate"]),
             "lowest_on_time_day": min(daily, key=lambda row: row["arrival_on_time_rate"]),
             "delay_causes": results["delay_causes"],
+            "delay_severity": results["delay_severity"],
+            "cause_coverage": results["cause_coverage"][0],
             "common_route_comparisons": [row for row in results["common_route_comparisons"] if row["meets_comparison_threshold"]],
             "exports": files,
             "limitations": [

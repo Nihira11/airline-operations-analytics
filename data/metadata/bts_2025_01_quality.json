@@ -175,7 +175,7 @@
     {
       "path": "data/processed/2025-01/airline_operations.duckdb",
       "bytes": 87568384,
-      "sha256": "aa35156b1ef983d9cc99c574665c131308bac990e209e85ea6b8a13cffb6667e"
+      "sha256": "f29514b98bfb8187393fd9d4944c3cb4d61879b6d318fa3e47deeb06e3c43f95"
     },
     {
       "path": "data/processed/2025-01/flights.parquet",

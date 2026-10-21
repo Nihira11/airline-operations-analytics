@@ -52,6 +52,21 @@ class BusinessAnalysisTests(unittest.TestCase):
         self.assertIsNone(self.connection.execute("SELECT safe_rate(0, 0)").fetchone()[0])
         self.assertAlmostEqual(self.connection.execute("SELECT safe_rate(1, 4)").fetchone()[0], 0.25)
 
+    def test_severity_boundaries_partition_only_eligible_arrivals(self):
+        self.connection.execute("""
+            CREATE OR REPLACE TABLE analytics.flights AS
+            SELECT delay AS arrival_delay_minutes, eligible AS is_arrival_eligible,
+                CAST(eligible AND delay >= 15 AS INTEGER) AS delayed_arrival_count
+            FROM (VALUES (-5, true), (0, true), (14, true), (15, true), (29, true),
+                (30, true), (59, true), (60, true), (119, true), (120, true),
+                (900, true), (NULL, false), (800, false)) AS t(delay, eligible)
+        """)
+        rows = self.connection.execute((ROOT / "sql/analysis/18_delay_severity.sql").read_text()).fetchall()
+        self.assertEqual([row[2] for row in rows], [1, 2, 2, 2, 2, 2])
+        self.assertEqual(sum(row[3] for row in rows), 8)
+        self.assertAlmostEqual(sum(row[4] for row in rows), 1)
+        self.assertAlmostEqual(sum(row[5] for row in rows), 1)
+
 
 if __name__ == "__main__":
     unittest.main()

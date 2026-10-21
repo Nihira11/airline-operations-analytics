@@ -5,7 +5,7 @@
   "source_database": {
     "path": "data/processed/2025-01/airline_operations.duckdb",
     "bytes": 87568384,
-    "sha256": "aa35156b1ef983d9cc99c574665c131308bac990e209e85ea6b8a13cffb6667e"
+    "sha256": "f29514b98bfb8187393fd9d4944c3cb4d61879b6d318fa3e47deeb06e3c43f95"
   },
   "thresholds": {
     "minimum_origin_flights": 1000,
@@ -19,7 +19,9 @@
     "overview_matches_preparation": true,
     "grouped_totals_match_overview": true,
     "export_round_trips_match": true,
-    "delay_minutes_match_typed_source": true
+    "delay_minutes_match_typed_source": true,
+    "severity_bands_match_eligible_and_delayed_arrivals": true,
+    "cause_coverage_matches_category_totals": true
   },
   "overview": {
     "date_start": "2025-01-01",
@@ -899,6 +901,65 @@
       "share_of_reported_minutes": 0.0015192985477810034
     }
   ],
+  "delay_severity": [
+    {
+      "band_order": 1,
+      "arrival_delay_band": "Early (<0 min)",
+      "eligible_arrivals": 341773,
+      "delayed_arrivals": 0,
+      "share_of_eligible_arrivals": 0.6544003186097586,
+      "share_of_delayed_arrivals": 0.0
+    },
+    {
+      "band_order": 2,
+      "arrival_delay_band": "0-14 min",
+      "eligible_arrivals": 82366,
+      "delayed_arrivals": 0,
+      "share_of_eligible_arrivals": 0.15770800104926772,
+      "share_of_delayed_arrivals": 0.0
+    },
+    {
+      "band_order": 3,
+      "arrival_delay_band": "15-29 min",
+      "eligible_arrivals": 35325,
+      "delayed_arrivals": 35325,
+      "share_of_eligible_arrivals": 0.06763755842295828,
+      "share_of_delayed_arrivals": 0.3599816569856313
+    },
+    {
+      "band_order": 4,
+      "arrival_delay_band": "30-59 min",
+      "eligible_arrivals": 29560,
+      "delayed_arrivals": 29560,
+      "share_of_eligible_arrivals": 0.05659918547721576,
+      "share_of_delayed_arrivals": 0.3012330581881178
+    },
+    {
+      "band_order": 5,
+      "arrival_delay_band": "60-119 min",
+      "eligible_arrivals": 19728,
+      "delayed_arrivals": 19728,
+      "share_of_eligible_arrivals": 0.03777363772308906,
+      "share_of_delayed_arrivals": 0.2010394374808927
+    },
+    {
+      "band_order": 6,
+      "arrival_delay_band": "120+ min",
+      "eligible_arrivals": 13517,
+      "delayed_arrivals": 13517,
+      "share_of_eligible_arrivals": 0.025881298717710607,
+      "share_of_delayed_arrivals": 0.1377458473453582
+    }
+  ],
+  "cause_coverage": {
+    "eligible_arrivals": 522269,
+    "delayed_arrivals": 98130,
+    "delayed_arrivals_with_complete_causes": 98130,
+    "delayed_arrivals_without_complete_causes": 0,
+    "complete_cause_reporting_rate": 1.0,
+    "reported_category_minutes": 6943994,
+    "total_delayed_arrival_minutes": 6943994
+  },
   "common_route_comparisons": [
     {
       "airline_a": "UA",
@@ -907,13 +968,13 @@
       "matched_routes": 123,
       "matched_arrivals_a": 10123,
       "matched_arrivals_b": 9152,
-      "standardised_on_time_rate_a": 0.8094777378799147,
+      "standardised_on_time_rate_a": 0.8094777378799151,
       "standardised_on_time_rate_b": 0.8092158273203246,
       "raw_on_time_rate_a": 0.8237291488099162,
       "raw_on_time_rate_b": 0.8479142185663925,
       "coverage_a": 0.16685897013252457,
       "coverage_b": 0.08962005483744614,
-      "standardised_gap_a_minus_b": 0.0002619105595901283,
+      "standardised_gap_a_minus_b": 0.0002619105595904614,
       "raw_gap_a_minus_b": -0.024185069756476274,
       "meets_comparison_threshold": true
     },
@@ -924,13 +985,13 @@
       "matched_routes": 108,
       "matched_arrivals_a": 8466,
       "matched_arrivals_b": 8865,
-      "standardised_on_time_rate_a": 0.8073519783857791,
+      "standardised_on_time_rate_a": 0.8073519783857793,
       "standardised_on_time_rate_b": 0.839861523580379,
       "raw_on_time_rate_a": 0.8077189867095808,
       "raw_on_time_rate_b": 0.8237291488099162,
       "coverage_a": 0.11744957132155046,
       "coverage_b": 0.14612316212830487,
-      "standardised_gap_a_minus_b": -0.03250954519459992,
+      "standardised_gap_a_minus_b": -0.0325095451945997,
       "raw_gap_a_minus_b": -0.016010162100335457,
       "meets_comparison_threshold": true
     },
@@ -975,13 +1036,13 @@
       "matched_routes": 95,
       "matched_arrivals_a": 6114,
       "matched_arrivals_b": 5970,
-      "standardised_on_time_rate_a": 0.8200531806923881,
-      "standardised_on_time_rate_b": 0.8655625977696896,
+      "standardised_on_time_rate_a": 0.8200531806923882,
+      "standardised_on_time_rate_b": 0.8655625977696898,
       "raw_on_time_rate_a": 0.7911719315927057,
       "raw_on_time_rate_b": 0.8479142185663925,
       "coverage_a": 0.09628043211237441,
       "coverage_b": 0.05846063454759107,
-      "standardised_gap_a_minus_b": -0.045509417077301495,
+      "standardised_gap_a_minus_b": -0.045509417077301606,
       "raw_gap_a_minus_b": -0.05674228697368677,
       "meets_comparison_threshold": true
     },
@@ -1009,13 +1070,13 @@
       "matched_routes": 81,
       "matched_arrivals_a": 4261,
       "matched_arrivals_b": 4987,
-      "standardised_on_time_rate_a": 0.8677303059179211,
+      "standardised_on_time_rate_a": 0.8677303059179212,
       "standardised_on_time_rate_b": 0.8522973460901783,
       "raw_on_time_rate_a": 0.8077189867095808,
       "raw_on_time_rate_b": 0.8479142185663925,
       "coverage_a": 0.059113232152271024,
       "coverage_b": 0.04883470426948688,
-      "standardised_gap_a_minus_b": 0.015432959827742843,
+      "standardised_gap_a_minus_b": 0.015432959827742954,
       "raw_gap_a_minus_b": -0.04019523185681173,
       "meets_comparison_threshold": true
     },
@@ -1043,13 +1104,13 @@
       "matched_routes": 63,
       "matched_arrivals_a": 4371,
       "matched_arrivals_b": 4697,
-      "standardised_on_time_rate_a": 0.7842661706476245,
-      "standardised_on_time_rate_b": 0.8367002589280512,
+      "standardised_on_time_rate_a": 0.7842661706476247,
+      "standardised_on_time_rate_b": 0.8367002589280513,
       "raw_on_time_rate_a": 0.8067950016886187,
       "raw_on_time_rate_b": 0.8237291488099162,
       "coverage_a": 0.05904761904761905,
       "coverage_b": 0.07742137535438781,
-      "standardised_gap_a_minus_b": -0.05243408828042673,
+      "standardised_gap_a_minus_b": -0.052434088280426616,
       "raw_gap_a_minus_b": -0.016934147121297483,
       "meets_comparison_threshold": true
     },
@@ -1060,13 +1121,13 @@
       "matched_routes": 56,
       "matched_arrivals_a": 3084,
       "matched_arrivals_b": 3683,
-      "standardised_on_time_rate_a": 0.7936961881542556,
-      "standardised_on_time_rate_b": 0.852354245971998,
+      "standardised_on_time_rate_a": 0.7936961881542555,
+      "standardised_on_time_rate_b": 0.8523542459719982,
       "raw_on_time_rate_a": 0.7911719315927057,
       "raw_on_time_rate_b": 0.8237291488099162,
       "coverage_a": 0.048565399514975904,
       "coverage_b": 0.0607074569789675,
-      "standardised_gap_a_minus_b": -0.05865805781774247,
+      "standardised_gap_a_minus_b": -0.05865805781774269,
       "raw_gap_a_minus_b": -0.0325572172172105,
       "meets_comparison_threshold": true
     },
@@ -1094,13 +1155,13 @@
       "matched_routes": 58,
       "matched_arrivals_a": 2417,
       "matched_arrivals_b": 4118,
-      "standardised_on_time_rate_a": 0.8714474793160412,
+      "standardised_on_time_rate_a": 0.8714474793160413,
       "standardised_on_time_rate_b": 0.8344602267523795,
       "raw_on_time_rate_a": 0.81919036940871,
       "raw_on_time_rate_b": 0.8479142185663925,
       "coverage_a": 0.1426295290924112,
       "coverage_b": 0.04032510771641207,
-      "standardised_gap_a_minus_b": 0.03698725256366164,
+      "standardised_gap_a_minus_b": 0.036987252563661754,
       "raw_gap_a_minus_b": -0.028723849157682446,
       "meets_comparison_threshold": true
     },
@@ -1128,13 +1189,13 @@
       "matched_routes": 57,
       "matched_arrivals_a": 2168,
       "matched_arrivals_b": 3567,
-      "standardised_on_time_rate_a": 0.7938304164907167,
-      "standardised_on_time_rate_b": 0.8255087440817492,
+      "standardised_on_time_rate_a": 0.7938304164907164,
+      "standardised_on_time_rate_b": 0.8255087440817493,
       "raw_on_time_rate_a": 0.7402382528127068,
       "raw_on_time_rate_b": 0.8479142185663925,
       "coverage_a": 0.14348113831899403,
       "coverage_b": 0.03492949471210341,
-      "standardised_gap_a_minus_b": -0.03167832759103251,
+      "standardised_gap_a_minus_b": -0.03167832759103295,
       "raw_gap_a_minus_b": -0.10767596575368565,
       "meets_comparison_threshold": true
     },
@@ -1146,12 +1207,12 @@
       "matched_arrivals_a": 2103,
       "matched_arrivals_b": 3619,
       "standardised_on_time_rate_a": 0.8231205503637332,
-      "standardised_on_time_rate_b": 0.8462152657483686,
+      "standardised_on_time_rate_b": 0.8462152657483685,
       "raw_on_time_rate_a": 0.81919036940871,
       "raw_on_time_rate_b": 0.8237291488099162,
       "coverage_a": 0.12410008261536645,
       "coverage_b": 0.05965253510911848,
-      "standardised_gap_a_minus_b": -0.023094715384635367,
+      "standardised_gap_a_minus_b": -0.023094715384635256,
       "raw_gap_a_minus_b": -0.004538779401206172,
       "meets_comparison_threshold": true
     },
@@ -1214,12 +1275,12 @@
       "matched_arrivals_a": 2438,
       "matched_arrivals_b": 2331,
       "standardised_on_time_rate_a": 0.8559444482265656,
-      "standardised_on_time_rate_b": 0.829946309794917,
+      "standardised_on_time_rate_b": 0.8299463097949172,
       "raw_on_time_rate_a": 0.8067950016886187,
       "raw_on_time_rate_b": 0.7911719315927057,
       "coverage_a": 0.03293481931779804,
       "coverage_b": 0.03670750527542439,
-      "standardised_gap_a_minus_b": 0.025998138431648554,
+      "standardised_gap_a_minus_b": 0.025998138431648332,
       "raw_gap_a_minus_b": 0.015623070095913016,
       "meets_comparison_threshold": true
     },
@@ -1230,13 +1291,13 @@
       "matched_routes": 36,
       "matched_arrivals_a": 2360,
       "matched_arrivals_b": 2344,
-      "standardised_on_time_rate_a": 0.8018461415589613,
+      "standardised_on_time_rate_a": 0.8018461415589611,
       "standardised_on_time_rate_b": 0.8580599731079257,
       "raw_on_time_rate_a": 0.8242281615957864,
       "raw_on_time_rate_b": 0.7911719315927057,
       "coverage_a": 0.13223510954221998,
       "coverage_b": 0.0369122232370634,
-      "standardised_gap_a_minus_b": -0.05621383154896442,
+      "standardised_gap_a_minus_b": -0.05621383154896464,
       "raw_gap_a_minus_b": 0.03305623000308067,
       "meets_comparison_threshold": true
     },
@@ -1281,13 +1342,13 @@
       "matched_routes": 49,
       "matched_arrivals_a": 1745,
       "matched_arrivals_b": 2238,
-      "standardised_on_time_rate_a": 0.78582853732181,
-      "standardised_on_time_rate_b": 0.8011686679282297,
+      "standardised_on_time_rate_a": 0.7858285373218099,
+      "standardised_on_time_rate_b": 0.80116866792823,
       "raw_on_time_rate_a": 0.8157073592242331,
       "raw_on_time_rate_b": 0.8237291488099162,
       "coverage_a": 0.08376938217080312,
       "coverage_b": 0.03688929913628272,
-      "standardised_gap_a_minus_b": -0.0153401306064197,
+      "standardised_gap_a_minus_b": -0.015340130606420144,
       "raw_gap_a_minus_b": -0.008021789585683115,
       "meets_comparison_threshold": true
     },
@@ -1315,13 +1376,13 @@
       "matched_routes": 33,
       "matched_arrivals_a": 1721,
       "matched_arrivals_b": 1954,
-      "standardised_on_time_rate_a": 0.8177845114444269,
-      "standardised_on_time_rate_b": 0.8819769270420172,
+      "standardised_on_time_rate_a": 0.817784511444427,
+      "standardised_on_time_rate_b": 0.8819769270420175,
       "raw_on_time_rate_a": 0.8242281615957864,
       "raw_on_time_rate_b": 0.8237291488099162,
       "coverage_a": 0.0964307726788816,
       "coverage_b": 0.03220808333882772,
-      "standardised_gap_a_minus_b": -0.06419241559759037,
+      "standardised_gap_a_minus_b": -0.06419241559759048,
       "raw_gap_a_minus_b": 0.0004990127858701676,
       "meets_comparison_threshold": true
     },
@@ -1332,13 +1393,13 @@
       "matched_routes": 30,
       "matched_arrivals_a": 2071,
       "matched_arrivals_b": 1575,
-      "standardised_on_time_rate_a": 0.8337300182969788,
-      "standardised_on_time_rate_b": 0.849068347032776,
+      "standardised_on_time_rate_a": 0.8337300182969786,
+      "standardised_on_time_rate_b": 0.8490683470327761,
       "raw_on_time_rate_a": 0.8237291488099162,
       "raw_on_time_rate_b": 0.8398231083461379,
       "coverage_a": 0.034136612382145444,
       "coverage_b": 0.059026346362852755,
-      "standardised_gap_a_minus_b": -0.015338328735797213,
+      "standardised_gap_a_minus_b": -0.015338328735797546,
       "raw_gap_a_minus_b": -0.016093959536221725,
       "meets_comparison_threshold": true
     },
@@ -1383,13 +1444,13 @@
       "matched_routes": 24,
       "matched_arrivals_a": 1239,
       "matched_arrivals_b": 1122,
-      "standardised_on_time_rate_a": 0.8483131320895183,
+      "standardised_on_time_rate_a": 0.8483131320895184,
       "standardised_on_time_rate_b": 0.8674824524694313,
       "raw_on_time_rate_a": 0.8479142185663925,
       "raw_on_time_rate_b": 0.8398231083461379,
       "coverage_a": 0.012132784958871915,
       "coverage_b": 0.04204924483753701,
-      "standardised_gap_a_minus_b": -0.019169320379913035,
+      "standardised_gap_a_minus_b": -0.019169320379912924,
       "raw_gap_a_minus_b": 0.00809111022025455,
       "meets_comparison_threshold": true
     },
@@ -1417,8 +1478,8 @@
       "matched_routes": 31,
       "matched_arrivals_a": 1042,
       "matched_arrivals_b": 1048,
-      "standardised_on_time_rate_a": 0.8093025598905054,
-      "standardised_on_time_rate_b": 0.7685279947330987,
+      "standardised_on_time_rate_a": 0.8093025598905053,
+      "standardised_on_time_rate_b": 0.7685279947330986,
       "raw_on_time_rate_a": 0.8157073592242331,
       "raw_on_time_rate_b": 0.7911719315927057,
       "coverage_a": 0.050021602419470984,
@@ -1467,7 +1528,17 @@
     {
       "path": "data/processed/2025-01/analysis/common_route_comparisons.csv",
       "rows": 61,
-      "sha256": "ad4889c86fe378f1f0c1946a172563f3b62505c488266d42906cddae729619b3"
+      "sha256": "2db1af43ec2a75d1d60d78133728f52d040afc7b3124a1ac3e45283110f6d3c9"
+    },
+    {
+      "path": "data/processed/2025-01/analysis/delay_severity.csv",
+      "rows": 6,
+      "sha256": "a5bca17811443111fe89d200680c090b619c0e2b98ce30d1c69fbf098886f797"
+    },
+    {
+      "path": "data/processed/2025-01/analysis/cause_coverage.csv",
+      "rows": 1,
+      "sha256": "b46c4dd32ea2e2e1b96a0644238d121032675bc7b21fec5ce644833eabac597e"
     }
   ],
   "limitations": [
@@ -1480,7 +1551,7 @@
   "build_inputs": [
     {
       "path": "src/analyze_operations.py",
-      "sha256": "3cfc25de672f0e8aec780402ced8e4c3269cb15d816539f52b8d3516bfe1e918"
+      "sha256": "50b8fd84f93f685384ae02c669d76729ee7889bf163a7645e95477eb9befe043"
     },
     {
       "path": "sql/analysis/00_helpers.sql",
@@ -1517,6 +1588,14 @@
     {
       "path": "sql/analysis/17_common_route_comparisons.sql",
       "sha256": "2880cd5a5fb15dec1aa946dd696ba9c02912c2b40d7de172b5e65c5f79c92dc8"
+    },
+    {
+      "path": "sql/analysis/18_delay_severity.sql",
+      "sha256": "d263b40f2345c530e1fccd5a0b4bc7a07d7ba9a56a8f22ffdcfb3f99d8e2bfea"
+    },
+    {
+      "path": "sql/analysis/19_cause_coverage.sql",
+      "sha256": "007a6c15b59c189a2ab3d7d216eb9d7d2636d0d4224a969036d45679e5b689f1"
     }
   ]
 }

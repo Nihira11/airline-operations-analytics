@@ -89,7 +89,49 @@ def plot(year, month):
     fig.savefig(output / "operations_overview.png", dpi=160)
     fig.savefig(output / "operations_overview.svg", metadata={"Date": None})
     plt.close(fig)
+    plot_diagnostics(report, output, blue, orange, ink, grid)
     print(output / "operations_overview.png")
+
+
+def plot_diagnostics(report, output, blue, orange, ink, grid):
+    fig, axes = plt.subplots(1, 2, figsize=(14, 7), facecolor="white")
+    fig.subplots_adjust(top=0.75, bottom=0.28, left=0.10, right=0.97, wspace=0.35)
+    fig.text(0.10, 0.94, "January 2025 | Delay severity and comparison", fontsize=22, weight="bold")
+    fig.text(0.10, 0.87, "98,130 eligible arrivals were delayed at least 15 minutes. Median: 40 min; 90th percentile: 145 min.",
+             fontsize=11, color=ink)
+    ax = axes[0]
+    bands = [row for row in report["delay_severity"] if row["delayed_arrivals"]][::-1]
+    ax.barh([row["arrival_delay_band"] for row in bands],
+            [row["share_of_delayed_arrivals"] for row in bands], color=orange, height=0.6)
+    for index, row in enumerate(bands):
+        ax.text(row["share_of_delayed_arrivals"] + .008, index,
+                f"{row['share_of_delayed_arrivals']:.1%}  (n={row['delayed_arrivals']:,})", va="center", fontsize=9)
+    ax.set(title="Delay length among delayed arrivals", xlabel="Share of 98,130 delayed eligible arrivals", xlim=(0, .52))
+    ax.xaxis.set_major_formatter(PercentFormatter(1))
+    ax = axes[1]
+    pair = next(row for row in report["common_route_comparisons"]
+                if row["airline_a"] == "UA" and row["airline_b"] == "WN")
+    for offset, suffix, colour, name in [(-.18, "a", blue, "UA"), (.18, "b", orange, "WN")]:
+        values = [pair[f"raw_on_time_rate_{suffix}"], pair[f"standardised_on_time_rate_{suffix}"]]
+        ax.bar([offset, 1 + offset], values, width=.32, color=colour, label=name)
+        for position, value in enumerate(values):
+            ax.text(position + offset, value + .02, f"{value:.2%}", ha="center", fontsize=9)
+    ax.set(title="Network mix changes the comparison", ylabel="Arrival on-time rate", ylim=(0, 1.02),
+           xticks=[0, 1], xticklabels=["Full network\n(unadjusted)", "Common routes and\ndeparture blocks"])
+    ax.yaxis.set_major_formatter(PercentFormatter(1))
+    ax.legend(frameon=False, loc="lower right")
+    for ax in axes:
+        ax.grid(axis="x" if ax == axes[0] else "y", color=grid, linewidth=.8)
+        ax.set_axisbelow(True)
+    fig.text(0.10, .055,
+             "Source: US DOT / BTS Reporting Carrier On-Time Performance, January 2025. Cancellations and diversions are excluded here.\n"
+             "The matched comparison uses 123 routes, 261 route/time strata and common pooled weights.\n"
+             "Matched eligible arrivals: UA 10,123 (16.69% coverage); WN 9,152 (8.96% coverage).\n"
+             "Each pair describes its own overlap population. These point estimates do not establish a significant difference or overall ranking.",
+             fontsize=9, linespacing=1.7)
+    fig.savefig(output / "delay_diagnostics.png", dpi=160)
+    fig.savefig(output / "delay_diagnostics.svg", metadata={"Date": None})
+    plt.close(fig)
 
 
 if __name__ == "__main__":
