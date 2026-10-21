@@ -1,0 +1,222 @@
+{
+  "period": "2025-01",
+  "status": "passed_with_warnings",
+  "duckdb_version": "1.5.6",
+  "source_manifest": "data/metadata/bts_2025_01_manifest.json",
+  "source_csv_sha256": "d7c7d59452cad1215d9605e8ff350a4bad7282750765084fe57928a5ad275453",
+  "source_named_fields_retained": 109,
+  "source_rows": 539747,
+  "cleaned_rows": 539747,
+  "rows_removed": 0,
+  "duplicate_checks": {
+    "exact_source_records": {
+      "duplicate_groups": 0,
+      "excess_records": 0
+    },
+    "date_carrier_flight_route": {
+      "duplicate_groups": 0,
+      "excess_records": 0
+    },
+    "date_carrier_flight_route_scheduled_departure": {
+      "duplicate_groups": 0,
+      "excess_records": 0
+    }
+  },
+  "quality_checks": {
+    "missing_required_identity_or_schedule": 0,
+    "calendar_mismatch": 0,
+    "invalid_core_codes_or_identifiers": 0,
+    "invalid_cancel_code": 0,
+    "overlapping_cancelled_and_diverted": 0,
+    "completed_missing_arrival_outcome": 0,
+    "ineligible_has_prediction_label": 0,
+    "eligible_missing_or_wrong_prediction_label": 0,
+    "arrival_count_partition": 0,
+    "duplicate_flight_id": 0,
+    "airport_dimension_key_conflicts": 0,
+    "airline_dimension_key_conflicts": 0,
+    "missing_airline_dimension_join": 0,
+    "missing_airport_dimension_join": 0,
+    "source_delay_indicator_mismatch": 0,
+    "source_clipped_delay_mismatch": 0,
+    "invalid_source_flight_count": 0,
+    "negative_core_measure": 0,
+    "row_count_difference_from_acquisition": 0,
+    "joined_export_row_count_difference": 0,
+    "records_outside_requested_month": 0
+  },
+  "nonnegative_source_field_violation_counts": {
+    "ActualElapsedTime": 0,
+    "AirTime": 0,
+    "ArrDelayMinutes": 0,
+    "CRSElapsedTime": 0,
+    "CarrierDelay": 0,
+    "DOT_ID_Reporting_Airline": 0,
+    "DayOfWeek": 0,
+    "DayofMonth": 0,
+    "DepDelayMinutes": 0,
+    "DestAirportID": 0,
+    "DestAirportSeqID": 0,
+    "DestCityMarketID": 0,
+    "DestWac": 0,
+    "Distance": 0,
+    "DistanceGroup": 0,
+    "Div1AirportID": 0,
+    "Div1AirportSeqID": 0,
+    "Div1LongestGTime": 0,
+    "Div1TotalGTime": 0,
+    "Div2AirportID": 0,
+    "Div2AirportSeqID": 0,
+    "Div2LongestGTime": 0,
+    "Div2TotalGTime": 0,
+    "Div3AirportID": 0,
+    "Div3AirportSeqID": 0,
+    "Div3LongestGTime": 0,
+    "Div3TotalGTime": 0,
+    "Div4AirportID": 0,
+    "Div4AirportSeqID": 0,
+    "Div4LongestGTime": 0,
+    "Div4TotalGTime": 0,
+    "Div5AirportID": 0,
+    "Div5AirportSeqID": 0,
+    "Div5LongestGTime": 0,
+    "Div5TotalGTime": 0,
+    "DivActualElapsedTime": 1,
+    "DivAirportLandings": 0,
+    "DivDistance": 0,
+    "Flights": 0,
+    "LateAircraftDelay": 0,
+    "LongestAddGTime": 0,
+    "Month": 0,
+    "NASDelay": 0,
+    "OriginAirportID": 0,
+    "OriginAirportSeqID": 0,
+    "OriginCityMarketID": 0,
+    "OriginWac": 0,
+    "Quarter": 0,
+    "SecurityDelay": 0,
+    "TaxiIn": 0,
+    "TaxiOut": 0,
+    "TotalAddGTime": 0,
+    "WeatherDelay": 0,
+    "Year": 0
+  },
+  "source_measurement_issues": [
+    {
+      "source_record_number": 81598,
+      "source_field": "DivActualElapsedTime",
+      "issue_code": "negative_nonnegative_measure",
+      "observed_value": "-175"
+    }
+  ],
+  "source_null_counts_preserved": true,
+  "summary_counts": {
+    "scheduled_flight_count": 539747,
+    "cancelled_flight_count": 16312,
+    "diverted_flight_count": 1166,
+    "eligible_arrival_count": 522269,
+    "on_time_arrival_count": 424139,
+    "delayed_arrival_count": 98130
+  },
+  "source_2400_counts": {
+    "ArrTime": 245,
+    "CRSArrTime": 0,
+    "CRSDepTime": 0,
+    "DepTime": 33,
+    "Div1WheelsOff": 0,
+    "Div1WheelsOn": 0,
+    "Div2WheelsOff": 0,
+    "Div2WheelsOn": 0,
+    "Div3WheelsOff": 0,
+    "Div3WheelsOn": 0,
+    "Div4WheelsOff": 0,
+    "Div4WheelsOn": 0,
+    "Div5WheelsOff": 0,
+    "Div5WheelsOn": 0,
+    "FirstDepTime": 0,
+    "WheelsOff": 58,
+    "WheelsOn": 202
+  },
+  "signed_delay_ranges_minutes": {
+    "arrival_min": -87,
+    "arrival_max": 3282,
+    "departure_min": -50,
+    "departure_max": 3298
+  },
+  "dimensions": {
+    "airports": 329,
+    "airlines": 14,
+    "provenance": "Observed source-month mappings; not externally enriched master data"
+  },
+  "exports": [
+    {
+      "path": "data/processed/2025-01/flights.parquet",
+      "row_count": 539747,
+      "row_reconciliation": "exact match in both directions"
+    },
+    {
+      "path": "data/processed/2025-01/tableau_flights.csv",
+      "row_count": 539747,
+      "row_reconciliation": "exact match in both directions"
+    },
+    {
+      "path": "data/processed/2025-01/daily_operations.csv",
+      "row_count": 434,
+      "row_reconciliation": "exact match in both directions"
+    }
+  ],
+  "limitations": [
+    "January 2025 only; candidate flight key uniqueness is checked per input month.",
+    "Local clock times cannot establish UTC timestamps or cross-airport elapsed durations.",
+    "Statistical outliers are retained; no unsupported upper-bound clipping is applied.",
+    "Cancellation/diversion rows have NULL prediction labels, not negative labels."
+  ],
+  "output_files": [
+    {
+      "path": "data/processed/2025-01/airline_operations.duckdb",
+      "bytes": 87830528,
+      "sha256": "132e2612b1a923576f0d0e6ebfb0fb76e051e07c11d75a1cbb07da802df91c95"
+    },
+    {
+      "path": "data/processed/2025-01/flights.parquet",
+      "bytes": 31062316,
+      "sha256": "035f1658d9627dc2af1bfdd464deefed920f453dcebcef1a097b27ae0b0b332e"
+    },
+    {
+      "path": "data/processed/2025-01/tableau_flights.csv",
+      "bytes": 134829156,
+      "sha256": "1ae21773c81dfbd4e01d662d8f231ba086954685644a3290450d49c0ec8ca401"
+    },
+    {
+      "path": "data/processed/2025-01/daily_operations.csv",
+      "bytes": 17820,
+      "sha256": "304253fcdc13841c0d12fa3e4b6fe080329aa2e007ee38c83c0bdc6c76880705"
+    }
+  ],
+  "build_inputs": [
+    {
+      "path": "requirements.txt",
+      "sha256": "afa5bd1cbd0d0be1318c3e8992b31f1deae587e80425877fc7dee2fee0d1572f"
+    },
+    {
+      "path": "src/schema.py",
+      "sha256": "64e892408176aafd203816615d200037b569c7182ba73993def5e3648d281a5a"
+    },
+    {
+      "path": "src/prepare_data.py",
+      "sha256": "553f20bd0c411cac56f33e669747ea76f3c6a06f579da1cc3ff656a4aef1c522"
+    },
+    {
+      "path": "sql/01_clean_flights.sql",
+      "sha256": "36685a4d1feaafdeecd08da2bc1cef5a1edd4d92547ad1e00e58df666ba93d09"
+    },
+    {
+      "path": "sql/02_dimensions_and_exports.sql",
+      "sha256": "02eb5e7b0bac6bf2d7794e053a2b02434e2d6a93ddfbd3e72ff8d4bd98ff0dd3"
+    },
+    {
+      "path": "sql/03_quality_checks.sql",
+      "sha256": "309044dbdbe9aa7eb8742a7e3794505025d736f4fc2f409f501ebead614fe8a6"
+    }
+  ]
+}

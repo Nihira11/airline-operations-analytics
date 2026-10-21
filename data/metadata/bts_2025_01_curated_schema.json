@@ -1,0 +1,773 @@
+{
+  "typed_source_fields": [
+    {
+      "source_field": "Year",
+      "duckdb_type": "INTEGER",
+      "null_count": 0
+    },
+    {
+      "source_field": "Quarter",
+      "duckdb_type": "INTEGER",
+      "null_count": 0
+    },
+    {
+      "source_field": "Month",
+      "duckdb_type": "INTEGER",
+      "null_count": 0
+    },
+    {
+      "source_field": "DayofMonth",
+      "duckdb_type": "INTEGER",
+      "null_count": 0
+    },
+    {
+      "source_field": "DayOfWeek",
+      "duckdb_type": "INTEGER",
+      "null_count": 0
+    },
+    {
+      "source_field": "FlightDate",
+      "duckdb_type": "DATE",
+      "null_count": 0
+    },
+    {
+      "source_field": "Reporting_Airline",
+      "duckdb_type": "VARCHAR",
+      "null_count": 0
+    },
+    {
+      "source_field": "DOT_ID_Reporting_Airline",
+      "duckdb_type": "INTEGER",
+      "null_count": 0
+    },
+    {
+      "source_field": "IATA_CODE_Reporting_Airline",
+      "duckdb_type": "VARCHAR",
+      "null_count": 0
+    },
+    {
+      "source_field": "Tail_Number",
+      "duckdb_type": "VARCHAR",
+      "null_count": 2530
+    },
+    {
+      "source_field": "Flight_Number_Reporting_Airline",
+      "duckdb_type": "VARCHAR",
+      "null_count": 0
+    },
+    {
+      "source_field": "OriginAirportID",
+      "duckdb_type": "INTEGER",
+      "null_count": 0
+    },
+    {
+      "source_field": "OriginAirportSeqID",
+      "duckdb_type": "INTEGER",
+      "null_count": 0
+    },
+    {
+      "source_field": "OriginCityMarketID",
+      "duckdb_type": "INTEGER",
+      "null_count": 0
+    },
+    {
+      "source_field": "Origin",
+      "duckdb_type": "VARCHAR",
+      "null_count": 0
+    },
+    {
+      "source_field": "OriginCityName",
+      "duckdb_type": "VARCHAR",
+      "null_count": 0
+    },
+    {
+      "source_field": "OriginState",
+      "duckdb_type": "VARCHAR",
+      "null_count": 0
+    },
+    {
+      "source_field": "OriginStateFips",
+      "duckdb_type": "VARCHAR",
+      "null_count": 0
+    },
+    {
+      "source_field": "OriginStateName",
+      "duckdb_type": "VARCHAR",
+      "null_count": 0
+    },
+    {
+      "source_field": "OriginWac",
+      "duckdb_type": "INTEGER",
+      "null_count": 0
+    },
+    {
+      "source_field": "DestAirportID",
+      "duckdb_type": "INTEGER",
+      "null_count": 0
+    },
+    {
+      "source_field": "DestAirportSeqID",
+      "duckdb_type": "INTEGER",
+      "null_count": 0
+    },
+    {
+      "source_field": "DestCityMarketID",
+      "duckdb_type": "INTEGER",
+      "null_count": 0
+    },
+    {
+      "source_field": "Dest",
+      "duckdb_type": "VARCHAR",
+      "null_count": 0
+    },
+    {
+      "source_field": "DestCityName",
+      "duckdb_type": "VARCHAR",
+      "null_count": 0
+    },
+    {
+      "source_field": "DestState",
+      "duckdb_type": "VARCHAR",
+      "null_count": 0
+    },
+    {
+      "source_field": "DestStateFips",
+      "duckdb_type": "VARCHAR",
+      "null_count": 0
+    },
+    {
+      "source_field": "DestStateName",
+      "duckdb_type": "VARCHAR",
+      "null_count": 0
+    },
+    {
+      "source_field": "DestWac",
+      "duckdb_type": "INTEGER",
+      "null_count": 0
+    },
+    {
+      "source_field": "CRSDepTime",
+      "duckdb_type": "VARCHAR",
+      "null_count": 0
+    },
+    {
+      "source_field": "DepTime",
+      "duckdb_type": "VARCHAR",
+      "null_count": 15886
+    },
+    {
+      "source_field": "DepDelay",
+      "duckdb_type": "INTEGER",
+      "null_count": 15923
+    },
+    {
+      "source_field": "DepDelayMinutes",
+      "duckdb_type": "INTEGER",
+      "null_count": 15923
+    },
+    {
+      "source_field": "DepDel15",
+      "duckdb_type": "BOOLEAN",
+      "null_count": 15923
+    },
+    {
+      "source_field": "DepartureDelayGroups",
+      "duckdb_type": "INTEGER",
+      "null_count": 15923
+    },
+    {
+      "source_field": "DepTimeBlk",
+      "duckdb_type": "VARCHAR",
+      "null_count": 0
+    },
+    {
+      "source_field": "TaxiOut",
+      "duckdb_type": "INTEGER",
+      "null_count": 16227
+    },
+    {
+      "source_field": "WheelsOff",
+      "duckdb_type": "VARCHAR",
+      "null_count": 16227
+    },
+    {
+      "source_field": "WheelsOn",
+      "duckdb_type": "VARCHAR",
+      "null_count": 16580
+    },
+    {
+      "source_field": "TaxiIn",
+      "duckdb_type": "INTEGER",
+      "null_count": 16580
+    },
+    {
+      "source_field": "CRSArrTime",
+      "duckdb_type": "VARCHAR",
+      "null_count": 0
+    },
+    {
+      "source_field": "ArrTime",
+      "duckdb_type": "VARCHAR",
+      "null_count": 16580
+    },
+    {
+      "source_field": "ArrDelay",
+      "duckdb_type": "INTEGER",
+      "null_count": 17478
+    },
+    {
+      "source_field": "ArrDelayMinutes",
+      "duckdb_type": "INTEGER",
+      "null_count": 17478
+    },
+    {
+      "source_field": "ArrDel15",
+      "duckdb_type": "BOOLEAN",
+      "null_count": 17478
+    },
+    {
+      "source_field": "ArrivalDelayGroups",
+      "duckdb_type": "INTEGER",
+      "null_count": 17478
+    },
+    {
+      "source_field": "ArrTimeBlk",
+      "duckdb_type": "VARCHAR",
+      "null_count": 0
+    },
+    {
+      "source_field": "Cancelled",
+      "duckdb_type": "BOOLEAN",
+      "null_count": 0
+    },
+    {
+      "source_field": "CancellationCode",
+      "duckdb_type": "VARCHAR",
+      "null_count": 523435
+    },
+    {
+      "source_field": "Diverted",
+      "duckdb_type": "BOOLEAN",
+      "null_count": 0
+    },
+    {
+      "source_field": "CRSElapsedTime",
+      "duckdb_type": "INTEGER",
+      "null_count": 0
+    },
+    {
+      "source_field": "ActualElapsedTime",
+      "duckdb_type": "INTEGER",
+      "null_count": 17478
+    },
+    {
+      "source_field": "AirTime",
+      "duckdb_type": "INTEGER",
+      "null_count": 17478
+    },
+    {
+      "source_field": "Flights",
+      "duckdb_type": "INTEGER",
+      "null_count": 0
+    },
+    {
+      "source_field": "Distance",
+      "duckdb_type": "INTEGER",
+      "null_count": 0
+    },
+    {
+      "source_field": "DistanceGroup",
+      "duckdb_type": "INTEGER",
+      "null_count": 0
+    },
+    {
+      "source_field": "CarrierDelay",
+      "duckdb_type": "INTEGER",
+      "null_count": 441617
+    },
+    {
+      "source_field": "WeatherDelay",
+      "duckdb_type": "INTEGER",
+      "null_count": 441617
+    },
+    {
+      "source_field": "NASDelay",
+      "duckdb_type": "INTEGER",
+      "null_count": 441617
+    },
+    {
+      "source_field": "SecurityDelay",
+      "duckdb_type": "INTEGER",
+      "null_count": 441617
+    },
+    {
+      "source_field": "LateAircraftDelay",
+      "duckdb_type": "INTEGER",
+      "null_count": 441617
+    },
+    {
+      "source_field": "FirstDepTime",
+      "duckdb_type": "VARCHAR",
+      "null_count": 535480
+    },
+    {
+      "source_field": "TotalAddGTime",
+      "duckdb_type": "INTEGER",
+      "null_count": 535480
+    },
+    {
+      "source_field": "LongestAddGTime",
+      "duckdb_type": "INTEGER",
+      "null_count": 535480
+    },
+    {
+      "source_field": "DivAirportLandings",
+      "duckdb_type": "INTEGER",
+      "null_count": 0
+    },
+    {
+      "source_field": "DivReachedDest",
+      "duckdb_type": "BOOLEAN",
+      "null_count": 538581
+    },
+    {
+      "source_field": "DivActualElapsedTime",
+      "duckdb_type": "INTEGER",
+      "null_count": 538849
+    },
+    {
+      "source_field": "DivArrDelay",
+      "duckdb_type": "INTEGER",
+      "null_count": 538849
+    },
+    {
+      "source_field": "DivDistance",
+      "duckdb_type": "INTEGER",
+      "null_count": 538581
+    },
+    {
+      "source_field": "Div1Airport",
+      "duckdb_type": "VARCHAR",
+      "null_count": 538495
+    },
+    {
+      "source_field": "Div1AirportID",
+      "duckdb_type": "INTEGER",
+      "null_count": 538495
+    },
+    {
+      "source_field": "Div1AirportSeqID",
+      "duckdb_type": "INTEGER",
+      "null_count": 538495
+    },
+    {
+      "source_field": "Div1WheelsOn",
+      "duckdb_type": "VARCHAR",
+      "null_count": 538495
+    },
+    {
+      "source_field": "Div1TotalGTime",
+      "duckdb_type": "INTEGER",
+      "null_count": 538495
+    },
+    {
+      "source_field": "Div1LongestGTime",
+      "duckdb_type": "INTEGER",
+      "null_count": 538495
+    },
+    {
+      "source_field": "Div1WheelsOff",
+      "duckdb_type": "VARCHAR",
+      "null_count": 538829
+    },
+    {
+      "source_field": "Div1TailNum",
+      "duckdb_type": "VARCHAR",
+      "null_count": 538829
+    },
+    {
+      "source_field": "Div2Airport",
+      "duckdb_type": "VARCHAR",
+      "null_count": 539724
+    },
+    {
+      "source_field": "Div2AirportID",
+      "duckdb_type": "INTEGER",
+      "null_count": 539724
+    },
+    {
+      "source_field": "Div2AirportSeqID",
+      "duckdb_type": "INTEGER",
+      "null_count": 539724
+    },
+    {
+      "source_field": "Div2WheelsOn",
+      "duckdb_type": "VARCHAR",
+      "null_count": 539724
+    },
+    {
+      "source_field": "Div2TotalGTime",
+      "duckdb_type": "INTEGER",
+      "null_count": 539724
+    },
+    {
+      "source_field": "Div2LongestGTime",
+      "duckdb_type": "INTEGER",
+      "null_count": 539724
+    },
+    {
+      "source_field": "Div2WheelsOff",
+      "duckdb_type": "VARCHAR",
+      "null_count": 539743
+    },
+    {
+      "source_field": "Div2TailNum",
+      "duckdb_type": "VARCHAR",
+      "null_count": 539743
+    },
+    {
+      "source_field": "Div3Airport",
+      "duckdb_type": "VARCHAR",
+      "null_count": 539747
+    },
+    {
+      "source_field": "Div3AirportID",
+      "duckdb_type": "INTEGER",
+      "null_count": 539747
+    },
+    {
+      "source_field": "Div3AirportSeqID",
+      "duckdb_type": "INTEGER",
+      "null_count": 539747
+    },
+    {
+      "source_field": "Div3WheelsOn",
+      "duckdb_type": "VARCHAR",
+      "null_count": 539747
+    },
+    {
+      "source_field": "Div3TotalGTime",
+      "duckdb_type": "INTEGER",
+      "null_count": 539747
+    },
+    {
+      "source_field": "Div3LongestGTime",
+      "duckdb_type": "INTEGER",
+      "null_count": 539747
+    },
+    {
+      "source_field": "Div3WheelsOff",
+      "duckdb_type": "VARCHAR",
+      "null_count": 539747
+    },
+    {
+      "source_field": "Div3TailNum",
+      "duckdb_type": "VARCHAR",
+      "null_count": 539747
+    },
+    {
+      "source_field": "Div4Airport",
+      "duckdb_type": "VARCHAR",
+      "null_count": 539747
+    },
+    {
+      "source_field": "Div4AirportID",
+      "duckdb_type": "INTEGER",
+      "null_count": 539747
+    },
+    {
+      "source_field": "Div4AirportSeqID",
+      "duckdb_type": "INTEGER",
+      "null_count": 539747
+    },
+    {
+      "source_field": "Div4WheelsOn",
+      "duckdb_type": "VARCHAR",
+      "null_count": 539747
+    },
+    {
+      "source_field": "Div4TotalGTime",
+      "duckdb_type": "INTEGER",
+      "null_count": 539747
+    },
+    {
+      "source_field": "Div4LongestGTime",
+      "duckdb_type": "INTEGER",
+      "null_count": 539747
+    },
+    {
+      "source_field": "Div4WheelsOff",
+      "duckdb_type": "VARCHAR",
+      "null_count": 539747
+    },
+    {
+      "source_field": "Div4TailNum",
+      "duckdb_type": "VARCHAR",
+      "null_count": 539747
+    },
+    {
+      "source_field": "Div5Airport",
+      "duckdb_type": "VARCHAR",
+      "null_count": 539747
+    },
+    {
+      "source_field": "Div5AirportID",
+      "duckdb_type": "INTEGER",
+      "null_count": 539747
+    },
+    {
+      "source_field": "Div5AirportSeqID",
+      "duckdb_type": "INTEGER",
+      "null_count": 539747
+    },
+    {
+      "source_field": "Div5WheelsOn",
+      "duckdb_type": "VARCHAR",
+      "null_count": 539747
+    },
+    {
+      "source_field": "Div5TotalGTime",
+      "duckdb_type": "INTEGER",
+      "null_count": 539747
+    },
+    {
+      "source_field": "Div5LongestGTime",
+      "duckdb_type": "INTEGER",
+      "null_count": 539747
+    },
+    {
+      "source_field": "Div5WheelsOff",
+      "duckdb_type": "VARCHAR",
+      "null_count": 539747
+    },
+    {
+      "source_field": "Div5TailNum",
+      "duckdb_type": "VARCHAR",
+      "null_count": 539747
+    }
+  ],
+  "analytics_fields": [
+    {
+      "name": "flight_id",
+      "duckdb_type": "VARCHAR"
+    },
+    {
+      "name": "source_record_number",
+      "duckdb_type": "BIGINT"
+    },
+    {
+      "name": "source_file",
+      "duckdb_type": "VARCHAR"
+    },
+    {
+      "name": "has_source_quality_issue",
+      "duckdb_type": "BOOLEAN"
+    },
+    {
+      "name": "flight_date",
+      "duckdb_type": "DATE"
+    },
+    {
+      "name": "flight_year",
+      "duckdb_type": "INTEGER"
+    },
+    {
+      "name": "flight_quarter",
+      "duckdb_type": "INTEGER"
+    },
+    {
+      "name": "flight_month",
+      "duckdb_type": "INTEGER"
+    },
+    {
+      "name": "day_of_month",
+      "duckdb_type": "INTEGER"
+    },
+    {
+      "name": "day_of_week",
+      "duckdb_type": "INTEGER"
+    },
+    {
+      "name": "reporting_airline",
+      "duckdb_type": "VARCHAR"
+    },
+    {
+      "name": "airline_id",
+      "duckdb_type": "INTEGER"
+    },
+    {
+      "name": "flight_number",
+      "duckdb_type": "VARCHAR"
+    },
+    {
+      "name": "tail_number",
+      "duckdb_type": "VARCHAR"
+    },
+    {
+      "name": "origin_airport_id",
+      "duckdb_type": "INTEGER"
+    },
+    {
+      "name": "destination_airport_id",
+      "duckdb_type": "INTEGER"
+    },
+    {
+      "name": "origin_airport",
+      "duckdb_type": "VARCHAR"
+    },
+    {
+      "name": "destination_airport",
+      "duckdb_type": "VARCHAR"
+    },
+    {
+      "name": "route",
+      "duckdb_type": "VARCHAR"
+    },
+    {
+      "name": "scheduled_departure_hhmm",
+      "duckdb_type": "VARCHAR"
+    },
+    {
+      "name": "scheduled_arrival_hhmm",
+      "duckdb_type": "VARCHAR"
+    },
+    {
+      "name": "actual_departure_hhmm",
+      "duckdb_type": "VARCHAR"
+    },
+    {
+      "name": "actual_arrival_hhmm",
+      "duckdb_type": "VARCHAR"
+    },
+    {
+      "name": "scheduled_departure_local",
+      "duckdb_type": "TIME"
+    },
+    {
+      "name": "scheduled_arrival_local",
+      "duckdb_type": "TIME"
+    },
+    {
+      "name": "actual_departure_local",
+      "duckdb_type": "TIME"
+    },
+    {
+      "name": "actual_arrival_local",
+      "duckdb_type": "TIME"
+    },
+    {
+      "name": "scheduled_departure_is_2400",
+      "duckdb_type": "BOOLEAN"
+    },
+    {
+      "name": "scheduled_arrival_is_2400",
+      "duckdb_type": "BOOLEAN"
+    },
+    {
+      "name": "scheduled_departure_hour",
+      "duckdb_type": "INTEGER"
+    },
+    {
+      "name": "scheduled_elapsed_minutes",
+      "duckdb_type": "INTEGER"
+    },
+    {
+      "name": "actual_elapsed_minutes",
+      "duckdb_type": "INTEGER"
+    },
+    {
+      "name": "air_time_minutes",
+      "duckdb_type": "INTEGER"
+    },
+    {
+      "name": "distance_miles",
+      "duckdb_type": "INTEGER"
+    },
+    {
+      "name": "departure_delay_minutes",
+      "duckdb_type": "INTEGER"
+    },
+    {
+      "name": "arrival_delay_minutes",
+      "duckdb_type": "INTEGER"
+    },
+    {
+      "name": "is_cancelled",
+      "duckdb_type": "BOOLEAN"
+    },
+    {
+      "name": "cancellation_code",
+      "duckdb_type": "VARCHAR"
+    },
+    {
+      "name": "is_diverted",
+      "duckdb_type": "BOOLEAN"
+    },
+    {
+      "name": "carrier_delay_minutes",
+      "duckdb_type": "INTEGER"
+    },
+    {
+      "name": "weather_delay_minutes",
+      "duckdb_type": "INTEGER"
+    },
+    {
+      "name": "nas_delay_minutes",
+      "duckdb_type": "INTEGER"
+    },
+    {
+      "name": "security_delay_minutes",
+      "duckdb_type": "INTEGER"
+    },
+    {
+      "name": "late_aircraft_delay_minutes",
+      "duckdb_type": "INTEGER"
+    },
+    {
+      "name": "operation_status",
+      "duckdb_type": "VARCHAR"
+    },
+    {
+      "name": "is_arrival_eligible",
+      "duckdb_type": "BOOLEAN"
+    },
+    {
+      "name": "arrival_delayed_15",
+      "duckdb_type": "BOOLEAN"
+    },
+    {
+      "name": "positive_arrival_delay_minutes",
+      "duckdb_type": "INTEGER"
+    },
+    {
+      "name": "has_reported_delay_causes",
+      "duckdb_type": "BOOLEAN"
+    },
+    {
+      "name": "scheduled_flight_count",
+      "duckdb_type": "INTEGER"
+    },
+    {
+      "name": "cancelled_flight_count",
+      "duckdb_type": "INTEGER"
+    },
+    {
+      "name": "diverted_flight_count",
+      "duckdb_type": "INTEGER"
+    },
+    {
+      "name": "eligible_arrival_count",
+      "duckdb_type": "INTEGER"
+    },
+    {
+      "name": "on_time_arrival_count",
+      "duckdb_type": "INTEGER"
+    },
+    {
+      "name": "delayed_arrival_count",
+      "duckdb_type": "INTEGER"
+    }
+  ],
+  "clock_policy": "Source HHMM strings including 2400 are retained. Local TIME values map 2400 to 00:00:00 with scheduled 2400 marker flags. No date offset or UTC timestamp is inferred.",
+  "missing_policy": "Blank/whitespace source values become NULL; no imputation"
+}
