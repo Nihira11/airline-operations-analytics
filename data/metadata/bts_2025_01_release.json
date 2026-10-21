@@ -1,0 +1,86 @@
+{
+  "period": "2025-01",
+  "analytics_status": "verified",
+  "complete_portfolio_release_status": "awaiting_user_tableau_dashboard_and_screenshots",
+  "source_rows": 539747,
+  "core_quality_checks": 21,
+  "source_measurement_issues": 1,
+  "analysis_exports": 10,
+  "validation": {
+    "source_and_output_checksums": "passed",
+    "build_input_checksums": "passed",
+    "outcome_population_reconciliation": "passed",
+    "local_document_links": "passed"
+  },
+  "analysis_manifest_sha256": "7709e35c69437fb12d0f27c1f2c38cdb1a507545220844f3b0b412d848f7838e",
+  "quality_manifest_sha256": "6fc7806517b69b1ca46fabd384596ed8fc4eda17133c3d1c06afa263c11bf2fa",
+  "artifacts": [
+    {
+      "path": "reports/2025-01/case_study.md",
+      "sha256": "d7b2adc982915bc541286ea182f0380b119990ebf57920073b151f4846c12709",
+      "bytes": 7804
+    },
+    {
+      "path": "reports/2025-01/operations_overview.png",
+      "sha256": "ea4e4fdc0895795ca53c98a0b036b29c477fe79021fbe6ecfeccdc56a63c36a8",
+      "bytes": 250737
+    },
+    {
+      "path": "reports/2025-01/operations_overview.svg",
+      "sha256": "b8b53a0fb42a080dc641e5a17e0dae99b902054e418d302ad006bb703aaeef63",
+      "bytes": 160791
+    },
+    {
+      "path": "reports/2025-01/delay_diagnostics.png",
+      "sha256": "74598b210bc18c32d597dbcf2823e0d5d32aef81d124c86e8c824bcdfd027392",
+      "bytes": 182372
+    },
+    {
+      "path": "reports/2025-01/delay_diagnostics.svg",
+      "sha256": "a28808de5ae87e69515dfce07ce7567f2d4247911948712b8e1bfceb573478f8",
+      "bytes": 119753
+    },
+    {
+      "path": "docs/data_model.md",
+      "sha256": "bd758afed88fe2ca4e92b5d8370ff75ac9205ed49be0fe9a4029623ebbb89fbb",
+      "bytes": 6352
+    },
+    {
+      "path": "docs/reproduce.md",
+      "sha256": "a0c86d553dcdf924ac2d9d61826ba7048adde822035374095a1e9c07608cf8ae",
+      "bytes": 4176
+    },
+    {
+      "path": "docs/tableau_guide.md",
+      "sha256": "2851a92a8f4b3909d4b4f86f3384158b502173563147c9820dcb10218c40daa4",
+      "bytes": 12287
+    },
+    {
+      "path": "README.md",
+      "sha256": "283a7c75f476d9d9c9486d019ff6bd116e9d94847431504b26fc18cd71e98220",
+      "bytes": 25276
+    },
+    {
+      "path": "src/plot_findings.py",
+      "sha256": "8cf2e68ad88a33cd6dce83a43aff0e98e65e4b5a06636902a5c19c7c1f14dede",
+      "bytes": 8417
+    },
+    {
+      "path": "src/run_january.py",
+      "sha256": "d20fb93dfb57b1aac6ae6019ee1d38ea33b3cf19d6f36aec49fb85de403d5741",
+      "bytes": 1348
+    },
+    {
+      "path": "src/verify_release.py",
+      "sha256": "e34f7d8fbbbf90eae8c78ff9b0244cd080823fbc85ae97be88c40f1a60414cde",
+      "bytes": 4951
+    },
+    {
+      "path": "requirements-visuals.txt",
+      "sha256": "014db7ddd3ce3b55d58f50501fc7e8fb92ec458209d5d70d5f06de1f9fad32e3",
+      "bytes": 209
+    }
+  ],
+  "scope": "January descriptive analytics. Full-year data and prediction are deferred.",
+  "tableau": "User-managed; no native rendering, interaction, or publishing claim is made by this check."
+}
