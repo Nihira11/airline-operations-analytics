@@ -21,3 +21,7 @@ __pycache__/
 
 # Packaged Tableau workbooks embed generated data; rebuild them from tracked XML/code.
 /tableau/*.twbx
+
+# Tableau recovery and lock files are temporary session state.
+/tableau/*.twbr
+/tableau/.~*
