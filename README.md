@@ -21,7 +21,7 @@ An airline operations manager needs to monitor service reliability, identify rou
 | scikit-learn | Build and evaluate arrival-delay classifiers after the analytics foundation is complete |
 | Git and GitHub | Track changes and present reproducible work |
 
-DuckDB runs within Python and supports a local database file, avoiding a separate database server. Tableau will consume CSV exports produced by SQL; a direct database connector is not required.
+DuckDB runs within Python and supports a local database file, avoiding a separate database server. Tableau consumes SQL-produced exports through local Hyper extracts; a direct database connector is not required.
 
 References: [DuckDB Python documentation](https://duckdb.org/docs/stable/clients/python/overview), [Tableau Public](https://public.tableau.com/app).
 
@@ -269,19 +269,26 @@ The [SVG version](reports/2025-01/operations_overview.svg) is available for shar
 
 ## Tableau workbook draft
 
-The [editable workbook XML](tableau/airline_operations_2025_01_DRAFT.twb) and revised local package `tableau/airline_operations_2025_01_DRAFT_v3.twbx` contain 10 worksheets arranged into two pages:
+The [editable workbook XML](tableau/airline_operations_2025_01_DRAFT.twb) and revised local package `tableau/airline_operations_2025_01_DRAFT_v4.twbx` contain 10 worksheets arranged into two pages:
 
 1. **Operations overview:** scheduled flights, arrival on-time rate, cancellation rate, diversion rate, daily trends, and unadjusted airline rates alongside volumes.
 2. **Delay diagnostics:** weekday/departure-hour reliability, with a minimum of 100 eligible arrivals per cell, and reported delay-category minute shares.
 
 The first page uses the validated flight-level export and aggregate ratio calculations. The category-minute chart uses a separate full-month aggregate source. It is labelled accordingly and does not follow filters added to the flight source.
 
-**Revision 3 awaits native verification.** The initial format failed with error `D2E8DA72`. Revision 2 removed the versioned-manifest problem but exposed incompatible modern `simple-id` and `explain-data` nodes in the legacy format. Revision 3 removes those nodes and aligns dashboard/window containers with the installed `PerformanceRecording_new.twb` example. The document and datasource format is legacy 18.1 throughout. XML well-formedness, field/sheet references, source checksums, and ZIP integrity pass. Published modern XSD validation is no longer used as evidence of legacy compatibility: previous baseline passes did not predict native loading. Desktop control remains unavailable, so native screenshots and interaction checks are pending.
+**Revision 4 includes extracts for both data sources and awaits native verification.** The latest user-reported blocker is `3C242D89`: Tableau Public saving requires an extract for `Airline Flights`. The earlier packages used live CSV connections. Revision 4 retains those connections for refresh and adds enabled `.hyper` extracts for both `Airline Flights` and `Reported Causes`, using Tableau's official [Hyper API](https://tableau.github.io/hyper-db/docs/guides/hyper_file/create_update/). No aggregation or sample is applied: the extracts contain all 539,747 flight records across 39 fields and all five category-summary records across five fields. Telemetry is disabled. Each completed extract is reopened, exported, and compared with the original using typed `EXCEPT ALL` in both directions, preserving duplicates and missing values. All values match. The five KPI counts also agree: 539,747 scheduled, 424,139 on-time arrivals, 522,269 eligible arrivals, 16,312 cancellations, and 1,166 diversions.
 
-To review locally, open `tableau/airline_operations_2025_01_DRAFT_v3.twbx` in the installed Tableau Public application. Verify the source connection and the four KPI values against the SQL analysis before treating it as a completed dashboard. The native review, shared filters/actions, and origin/route hotspot page remain unfinished. Track this status and prior failures in the [draft validation manifest](data/metadata/bts_2025_01_tableau_draft.json).
+The initial format failed with error `D2E8DA72`. Revision 2 exposed incompatible modern `simple-id` and `explain-data` nodes in the legacy format. Revision 3 removed those nodes and aligned dashboard/window containers with the installed `PerformanceRecording_new.twb` example; revision 4 keeps that format. XML well-formedness, field/sheet references, source checksums, extract activation/path checks, embedded-extract hashes, and ZIP integrity pass. Published modern XSD validation is not evidence of legacy compatibility: earlier baseline passes did not predict native loading. Desktop control still reports `Sky Computer Use service startup request failed`, including after the user confirmed both macOS permissions were already enabled and updated Tableau. Native rendering and save checks remain pending.
 
-The `.twbx` contains the public source exports and is ignored by Git because it embeds generated data. The XML and builder are tracked. Rebuild the package after preparing and analysing the month:
+To review locally, open `tableau/airline_operations_2025_01_DRAFT_v4.twbx` in Tableau Public. Confirm both data sources use their included extracts and reconcile the displayed KPIs: 539,747 scheduled flights, 81.21% arrival on-time rate, 3.02% cancellation rate, and 0.22% diversion rate. A successful API conversion does not confirm native workbook rendering or Tableau Public acceptance. Shared filters/actions and the origin/route hotspot page also remain unfinished. Track evidence and pending checks in the [draft validation manifest](data/metadata/bts_2025_01_tableau_draft.json).
+
+If continuing in an earlier open workbook, use **Data Source → Airline Flights → Extract / Create Extract**, keep **All rows** with no aggregation, then repeat for **Reported Causes**. Save the extracts when prompted. Tableau's [extract instructions](https://help.tableau.com/current/pro/desktop/en-us/extracting_data.htm) describe the version-dependent controls. This manual conversion is unnecessary when revision 4 correctly activates its bundled extracts.
+
+The `.twbx` contains both public source exports and Hyper extracts and is ignored by Git because it embeds generated data. XML, code, dependency pins, and verification metadata are tracked. Rebuild after preparing and analysing the month:
 
 ```bash
+.venv/bin/python -m pip install -r requirements-tableau.txt
 .venv/bin/python src/build_tableau.py
 ```
+
+Hyper starts a local engine and communication socket, which may require running outside a restricted process sandbox. Its temporary files and logs are confined to a temporary build folder under the generated-data directory. Run checks with `.venv/bin/python -m unittest discover -s tests -v`; the 14 checks include a real Hyper round trip with dates, clock strings, booleans, large integers, missing values, duplicate rows, and quoted file paths.

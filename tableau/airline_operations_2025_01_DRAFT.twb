@@ -108,6 +108,11 @@
       <column name="[Window on-time rate (n &gt;= 100)]" caption="Window on-time rate (n &gt;= 100)" datatype="real" role="measure" type="quantitative" default-format="p0.00%">
         <calculation formula="IF SUM([eligible_arrival_count]) &gt;= 100 THEN SUM([on_time_arrival_count]) / SUM([eligible_arrival_count]) END" class="tableau"/>
       </column>
+      <extract count="-1" enabled="true" units="records">
+        <connection authentication="auth-none" author-locale="en_US" dbname="../data/processed/2025-01/airline_flights.hyper" default-settings="yes" schema="Extract" tablename="Extract" username="tableau_internal_user" class="hyper">
+          <relation name="Extract" table="[Extract].[Extract]" type="table"/>
+        </connection>
+      </extract>
     </datasource>
     <datasource name="reported_causes" caption="Reported Causes" inline="true" version="18.1">
       <connection class="federated">
@@ -131,6 +136,11 @@
       <column name="[flights_with_complete_cause_reporting]" caption="Flights With Complete Cause Reporting" datatype="integer" role="measure" type="quantitative" default-format="n#,##0"/>
       <column name="[flights_with_positive_category_minutes]" caption="Flights With Positive Category Minutes" datatype="integer" role="measure" type="quantitative" default-format="n#,##0"/>
       <column name="[share_of_reported_minutes]" caption="Share Of Reported Minutes" datatype="real" role="measure" type="quantitative" default-format="p0.00%"/>
+      <extract count="-1" enabled="true" units="records">
+        <connection authentication="auth-none" author-locale="en_US" dbname="../data/processed/2025-01/reported_causes.hyper" default-settings="yes" schema="Extract" tablename="Extract" username="tableau_internal_user" class="hyper">
+          <relation name="Extract" table="[Extract].[Extract]" type="table"/>
+        </connection>
+      </extract>
     </datasource>
   </datasources>
   <worksheets>

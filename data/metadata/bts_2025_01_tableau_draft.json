@@ -5,11 +5,40 @@
   "xml_well_formed_and_references": "passed",
   "dashboard_sheet_references": "passed",
   "package_integrity": "passed",
-  "native_open_and_visual_check": "revision 3 awaiting native check; revisions 1 and 2 failed with D2E8DA72",
+  "native_open_and_visual_check": "revision 4 awaiting native check; user reported extract requirement 3C242D89 after revision 3",
+  "extracts": {
+    "airline_flights": {
+      "rows": 539747,
+      "columns": 39,
+      "sha256": "ce6b3c9cf772740820a96f2948ad97a31b7f2b995b2a28fdf3d314d495e19955",
+      "bytes": 53346304,
+      "typed_multiset_round_trip": "passed",
+      "kpi_counts": {
+        "scheduled_flight_count": 539747,
+        "on_time_arrival_count": 424139,
+        "eligible_arrival_count": 522269,
+        "cancelled_flight_count": 16312,
+        "diverted_flight_count": 1166
+      },
+      "telemetry": "disabled",
+      "path": "data/processed/2025-01/airline_flights.hyper"
+    },
+    "reported_causes": {
+      "rows": 5,
+      "columns": 5,
+      "sha256": "1e7b6b36798c4dc21c7c379e2fc02db527dbab2b4db4a549e1284098d4505d9b",
+      "bytes": 65536,
+      "typed_multiset_round_trip": "passed",
+      "kpi_counts": null,
+      "telemetry": "disabled",
+      "path": "data/processed/2025-01/reported_causes.hyper"
+    }
+  },
   "compatibility": {
     "format_version": "18.1",
     "reference": "Tableau Public 2026.2 bundled PerformanceRecording_new.twb",
-    "change": "Remove modern simple-id/explain-data nodes; use legacy dashboard containers and windows",
+    "change": "Include enabled, reconciled Hyper extracts for both sources to address Tableau Public error 3C242D89",
+    "revision_3_native_error": "Tableau Public save requires extracts; Airline Flights was live CSV (3C242D89)",
     "revision_1_native_errors": [
       "Missing worksheet number attribute",
       "Missing mark type attribute",
@@ -24,20 +53,22 @@
   "published_xsd_validation": "Not used for legacy compatibility; previous published-schema passes did not predict native loading",
   "workbook": {
     "path": "tableau/airline_operations_2025_01_DRAFT.twb",
-    "sha256": "9beae8b8230f1e8570ad6204154f9adea619390104fc2790e43ad184c057489a"
+    "sha256": "c54358cd84b0f70ac8382c3ec3af65ea1a39a2b71290e46010632bb7f975fe2b"
   },
   "package": {
-    "path": "tableau/airline_operations_2025_01_DRAFT_v3.twbx",
-    "sha256": "f73efd23cf03a2af7b5df1c32b2fb6c16d1cc206ba9cc7ca5bdc7e7a42058d85",
-    "bytes": 42455757
+    "path": "tableau/airline_operations_2025_01_DRAFT_v4.twbx",
+    "sha256": "15249c3983ae35d7d35d93b3f3db4a03acd158e41493852e54477b0038d9756a",
+    "bytes": 71445363
   },
   "source_csv_sha256": "1ae21773c81dfbd4e01d662d8f231ba086954685644a3290450d49c0ec8ca401",
   "cause_csv_sha256": "2a1001e725af945e0efbf184d98eb26d1b39fdcc4909a0fa4e0ab875d4e04faa",
-  "build_script_sha256": "800b33c6a7b72f8d1555542f2e4340007686127e0b7f5bd5dfcc46e36d763378",
+  "build_script_sha256": "9b2e93a418118d4a5665d6e6df6b8e894b9fd0c0f016c8b8db48c785265c8052",
+  "extract_builder_sha256": "aec85d000c4ce9b95e55048a84c79a40af70bb423119aae0bc676cac2ac584d8",
   "pending": [
-    "Open revision 3 in Tableau Public",
+    "Open revision 4 in Tableau Public",
+    "Verify both extracts are active and Tableau Public saving is accepted",
     "Check rendering, field formats and data connections",
-    "Reconcile KPI values with SQL",
+    "Reconcile displayed KPI values with SQL",
     "Add and verify shared filters/actions",
     "Build the route/origin hotspot page",
     "Capture native screenshots"
