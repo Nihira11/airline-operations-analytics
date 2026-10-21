@@ -1,7 +1,8 @@
 """Author a local Tableau workbook draft; native rendering must be checked separately.
 
-Workbook XML follows Tableau's published 2026.1 schema and connection conventions
-from the official installed Superstore sample. No sample data is copied.
+Workbook XML uses the legacy 18.1 format found in Tableau Public 2026.2's own
+bundled examples. The 26.1 ManifestByVersion route failed native loading even
+though it passed the published baseline schema. No sample data is copied.
 """
 
 import argparse
@@ -17,8 +18,9 @@ from lxml import etree as E
 
 from acquire_bts import ROOT, sha256, write_json
 
-SCHEMA_URL = "https://raw.githubusercontent.com/tableau/tableau-document-schemas/main/schemas/2026_1/twb_2026.1.0.xsd"
+SCHEMA_URL = "https://raw.githubusercontent.com/tableau/tableau-document-schemas/main/schemas/2026_2/twb_2026.2.0.xsd"
 NS_XS = "http://www.w3.org/2001/XMLSchema"
+WORKBOOK_VERSION = "18.1"
 
 
 def child(parent, tag, text=None, **attributes):
@@ -38,7 +40,7 @@ def title(parent, text):
 
 
 def source(parent, name, csv_path, schema, columns):
-    datasource = child(parent, "datasource", name=name, caption=name.replace("_", " ").title(), inline="true", version="26.1")
+    datasource = child(parent, "datasource", name=name, caption=name.replace("_", " ").title(), inline="true", version=WORKBOOK_VERSION)
     connection = child(datasource, "connection", class_="federated")
     connection.attrib["class"] = connection.attrib.pop("class-")
     named = child(child(connection, "named-connections"), "named-connection", name=f"textscan.{name}", caption=name)
@@ -155,6 +157,7 @@ class NamespaceSupport(E.Resolver):
 
 
 def validate_xml(root, schema_path):
+    validate_legacy_compatibility(root)
     parser = E.XMLParser(no_network=True)
     parser.resolvers.add(NamespaceSupport())
     schema_doc = E.fromstring(schema_path.read_bytes(), parser)
@@ -182,6 +185,17 @@ def validate_xml(root, schema_path):
                 raise ValueError("Worksheet instance references an undefined field")
 
 
+def validate_legacy_compatibility(root):
+    """Keep the entire document on the bundled-sample legacy upgrade path."""
+    if root.get("version") != WORKBOOK_VERSION:
+        raise ValueError("Workbook version differs from the legacy compatibility target")
+    if root.find("document-format-change-manifest/ManifestByVersion") is not None:
+        raise ValueError("ManifestByVersion must not select the failing native format")
+    for datasource in root.findall("datasources/datasource"):
+        if datasource.get("version") != WORKBOOK_VERSION:
+            raise ValueError("Mixed workbook and datasource format versions")
+
+
 def build(schema_path):
     period = "2025-01"
     processed = ROOT / "data/processed" / period
@@ -203,10 +217,9 @@ def build(schema_path):
         fields = dict((row[0], row[1]) for row in connection.execute("DESCRIBE analytics.tableau_flights").fetchall())
     finally:
         connection.close()
-    root = E.Element("workbook", version="26.1", **{
-        "original-version": "26.1", "source-build": "0.0.0 (0000.0.0.0)", "source-platform": "mac", "locale": "en_US",
+    root = E.Element("workbook", version=WORKBOOK_VERSION, **{
+        "source-build": "0.0.0 (0000.0.0.0)", "source-platform": "mac", "locale": "en_US",
     })
-    child(child(root, "document-format-change-manifest"), "ManifestByVersion")
     sources = child(root, "datasources")
     columns = {}
     datasource = source(sources, "airline_flights", Path("../data/processed/2025-01/tableau_flights.csv"), fields, columns)
@@ -271,30 +284,36 @@ def build(schema_path):
     validate_xml(root, schema_path)
     workbook = directory / "airline_operations_2025_01_DRAFT.twb"
     E.ElementTree(root).write(str(workbook), encoding="utf-8", xml_declaration=True, pretty_print=True)
-    packaged = directory / "airline_operations_2025_01_DRAFT.twbx"
+    packaged = directory / "airline_operations_2025_01_DRAFT_v2.twbx"
     packaged_root = deepcopy(root)
     for node in packaged_root.findall(".//connection[@class='textscan']"):
         node.set("directory", "Data")
-    with zipfile.ZipFile(packaged, "w", compression=zipfile.ZIP_DEFLATED) as zipped:
+    temporary_package = packaged.with_suffix(".twbx.part")
+    with zipfile.ZipFile(temporary_package, "w", compression=zipfile.ZIP_DEFLATED) as zipped:
         zipped.writestr(workbook.name, E.tostring(packaged_root, encoding="utf-8", xml_declaration=True))
         zipped.write(csv_path, "Data/tableau_flights.csv")
         zipped.write(cause_path, "Data/delay_causes.csv")
-    with zipfile.ZipFile(packaged) as zipped:
+    with zipfile.ZipFile(temporary_package) as zipped:
         if zipped.testzip() is not None:
             raise ValueError("Packaged workbook integrity check failed")
         validate_xml(E.fromstring(zipped.read(workbook.name)), schema_path)
+    temporary_package.replace(packaged)
     report = {
         "status": "draft_native_verification_pending", "worksheets": len(root.findall("worksheets/worksheet")),
         "dashboards": len(root.findall("dashboards/dashboard")),
         "xml_structure_validation": "passed", "dashboard_sheet_references": "passed",
-        "package_integrity": "passed", "native_open_and_visual_check": "not performed; computer-control service startup failed twice",
+        "package_integrity": "passed", "native_open_and_visual_check": "revision 2 awaiting native check; revision 1 failed with D2E8DA72",
+        "compatibility": {"format_version": WORKBOOK_VERSION,
+                          "reference": "Tableau Public 2026.2 bundled Superstore and PerformanceRecording_new workbooks",
+                          "change": "Use legacy document/datasource format and omit ManifestByVersion so Tableau applies its legacy upgrade path",
+                          "revision_1_native_errors": ["Missing worksheet number attribute", "Missing mark type attribute", "Missing worksheet-number element", "Sort-G/ShelfSorts-G schema-group errors"]},
         "schema_url": SCHEMA_URL, "schema_sha256": sha256(schema_path),
         "schema_import_support": "Local empty user-attribute group (no user attributes emitted) and standard xml:base declaration; Tableau core definitions unchanged",
         "workbook": {"path": str(workbook.relative_to(ROOT)), "sha256": sha256(workbook)},
         "package": {"path": str(packaged.relative_to(ROOT)), "sha256": sha256(packaged), "bytes": packaged.stat().st_size},
         "source_csv_sha256": sha256(csv_path), "cause_csv_sha256": sha256(cause_path),
         "build_script_sha256": sha256(Path(__file__)),
-        "pending": ["Open in Tableau Public 2026.1+", "Check rendering, field formats and data connections", "Reconcile KPI values with SQL", "Add and verify shared filters/actions", "Build the route/origin hotspot page", "Capture native screenshots"],
+        "pending": ["Open revision 2 in Tableau Public", "Check rendering, field formats and data connections", "Reconcile KPI values with SQL", "Add and verify shared filters/actions", "Build the route/origin hotspot page", "Capture native screenshots"],
     }
     write_json(ROOT / "data/metadata/bts_2025_01_tableau_draft.json", report)
     print(json.dumps(report, indent=2))

@@ -1,10 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<workbook version="26.1" original-version="26.1" source-build="0.0.0 (0000.0.0.0)" source-platform="mac" locale="en_US">
-  <document-format-change-manifest>
-    <ManifestByVersion/>
-  </document-format-change-manifest>
+<workbook version="18.1" source-build="0.0.0 (0000.0.0.0)" source-platform="mac" locale="en_US">
   <datasources>
-    <datasource name="airline_flights" caption="Airline Flights" inline="true" version="26.1">
+    <datasource name="airline_flights" caption="Airline Flights" inline="true" version="18.1">
       <connection class="federated">
         <named-connections>
           <named-connection name="textscan.airline_flights" caption="airline_flights">
@@ -110,7 +107,7 @@
         <calculation formula="IF SUM([eligible_arrival_count]) &gt;= 100 THEN SUM([on_time_arrival_count]) / SUM([eligible_arrival_count]) END" class="tableau"/>
       </column>
     </datasource>
-    <datasource name="reported_causes" caption="Reported Causes" inline="true" version="26.1">
+    <datasource name="reported_causes" caption="Reported Causes" inline="true" version="18.1">
       <connection class="federated">
         <named-connections>
           <named-connection name="textscan.reported_causes" caption="reported_causes">
