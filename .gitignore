@@ -1,0 +1,20 @@
+.DS_Store
+.venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.env
+.env.*
+!.env.example
+
+# Original and generated data stay local; retain the directory scaffolding.
+/data/raw/*
+!/data/raw/.gitkeep
+/data/processed/*
+!/data/processed/.gitkeep
+
+# Local analytical databases and generated model binaries.
+*.duckdb
+*.duckdb.wal
+*.joblib
+*.pkl
