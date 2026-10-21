@@ -10,7 +10,6 @@ from copy import deepcopy
 import json
 from pathlib import Path
 import re
-import uuid
 import zipfile
 
 import duckdb
@@ -18,8 +17,6 @@ from lxml import etree as E
 
 from acquire_bts import ROOT, sha256, write_json
 
-SCHEMA_URL = "https://raw.githubusercontent.com/tableau/tableau-document-schemas/main/schemas/2026_2/twb_2026.2.0.xsd"
-NS_XS = "http://www.w3.org/2001/XMLSchema"
 WORKBOOK_VERSION = "18.1"
 
 
@@ -28,10 +25,6 @@ def child(parent, tag, text=None, **attributes):
     if text is not None:
         result.text = str(text)
     return result
-
-
-def simple_id(parent, name):
-    child(parent, "simple-id", uuid="{" + str(uuid.uuid5(uuid.NAMESPACE_URL, "airline-operations/" + name)).upper() + "}")
 
 
 def title(parent, text):
@@ -121,55 +114,36 @@ def worksheet(parent, columns, name, datasource, row=None, col=None, text=None,
         child(mark_rule, "format", attr="mark-labels-show", value="true")
     child(table, "rows", references.get(row, ""))
     child(table, "cols", references.get(col, ""))
-    simple_id(sheet, name)
 
 
 def dashboard(parent, name, placements, note):
     dash = child(parent, "dashboard", name=name)
     title(dash, name)
+    child(dash, "style")
     child(dash, "size", minwidth="1200", maxwidth="1200", minheight="900", maxheight="900", sizing_mode="fixed")
-    zones = child(dash, "zones", is_pixels="false")
+    links = child(dash, "datasources")
+    root = parent.getparent()
+    sheet_sources = {sheet.get("name"): sheet.find("table/view/datasources/datasource").get("name")
+                     for sheet in root.findall("worksheets/worksheet")}
+    for source_name in sorted({sheet_sources[item[0]] for item in placements}):
+        child(links, "datasource", name=source_name, caption=source_name.replace("_", " ").title())
+    zones = child(child(dash, "zones"), "zone", id="0", x="0", y="0", w="100000", h="100000", type="layout-basic")
     for index, (sheet_name, x, y, width, height) in enumerate(placements, 1):
         zone = child(zones, "zone", id=index, name=sheet_name, x=x, y=y, w=width, h=height,
-                     type_v2="visual", show_title="true")
+                     show_title="true")
         zone_style = child(zone, "zone-style")
         child(zone_style, "format", attr="margin", value="10")
-    zone = child(zones, "zone", id=len(placements) + 1, x=2000, y=93000, w=96000, h=6500, type_v2="text")
+    zone = child(zones, "zone", id=len(placements) + 1, x=2000, y=93000, w=96000, h=6500, type="text")
     child(child(zone, "formatted-text"), "run", note, fontsize="10", fontname="Arial")
-    simple_id(dash, name)
 
 
-class NamespaceSupport(E.Resolver):
-    """Resolve vendor schema imports that omit schemaLocation.
-
-    This workbook emits no user:* attributes. An empty user-attribute group and
-    the W3C xml:base declaration complete those imports without changing any
-    Tableau core definitions or permitting additional unvalidated core content.
-    """
-    def resolve(self, url, public_id, context):
-        if url == "urn:airline:tableau-user":
-            xml = f'<xs:schema xmlns:xs="{NS_XS}" targetNamespace="http://www.tableausoftware.com/xml/user"><xs:attributeGroup name="UserAttributes-AG"/></xs:schema>'
-        elif url == "urn:airline:xml-base":
-            xml = f'<xs:schema xmlns:xs="{NS_XS}" targetNamespace="http://www.w3.org/XML/1998/namespace"><xs:attribute name="base" type="xs:anyURI"/></xs:schema>'
-        else:
-            raise ValueError(f"Unexpected schema import: {url}")
-        return self.resolve_string(xml, context)
-
-
-def validate_xml(root, schema_path):
+def validate_xml(root):
     validate_legacy_compatibility(root)
-    parser = E.XMLParser(no_network=True)
-    parser.resolvers.add(NamespaceSupport())
-    schema_doc = E.fromstring(schema_path.read_bytes(), parser)
-    imports = {"http://www.tableausoftware.com/xml/user": "urn:airline:tableau-user",
-               "http://www.w3.org/XML/1998/namespace": "urn:airline:xml-base"}
-    for node in schema_doc.findall(f"{{{NS_XS}}}import"):
-        node.set("schemaLocation", imports[node.get("namespace")])
-    E.XMLSchema(schema_doc).assertValid(root)
+    E.fromstring(E.tostring(root))
     sheet_names = [sheet.get("name") for sheet in root.findall("worksheets/worksheet")]
     if len(sheet_names) != len(set(sheet_names)):
         raise ValueError("Duplicate worksheet names")
-    for zone in root.findall("dashboards/dashboard/zones/zone[@type-v2='visual']"):
+    for zone in root.findall("dashboards/dashboard/zones//zone[@name]"):
         if zone.get("name") not in sheet_names:
             raise ValueError("Dashboard references a missing sheet")
     for datasource in root.findall("datasources/datasource"):
@@ -191,12 +165,14 @@ def validate_legacy_compatibility(root):
         raise ValueError("Workbook version differs from the legacy compatibility target")
     if root.find("document-format-change-manifest/ManifestByVersion") is not None:
         raise ValueError("ManifestByVersion must not select the failing native format")
+    if root.findall(".//simple-id") or root.find("explain-data") is not None:
+        raise ValueError("Modern simple-id/explain-data elements are incompatible with this legacy format")
     for datasource in root.findall("datasources/datasource"):
         if datasource.get("version") != WORKBOOK_VERSION:
             raise ValueError("Mixed workbook and datasource format versions")
 
 
-def build(schema_path):
+def build():
     period = "2025-01"
     processed = ROOT / "data/processed" / period
     quality = json.loads((ROOT / "data/metadata/bts_2025_01_quality.json").read_text())
@@ -220,6 +196,8 @@ def build(schema_path):
     root = E.Element("workbook", version=WORKBOOK_VERSION, **{
         "source-build": "0.0.0 (0000.0.0.0)", "source-platform": "mac", "locale": "en_US",
     })
+    child(root, "preferences")
+    child(root, "style")
     sources = child(root, "datasources")
     columns = {}
     datasource = source(sources, "airline_flights", Path("../data/processed/2025-01/tableau_flights.csv"), fields, columns)
@@ -278,13 +256,20 @@ def build(schema_path):
         ("Departure window reliability", 1000, 7000, 98000, 47000),
         ("Reported delay minutes (full January)", 1000, 56000, 98000, 34000),
     ], "Weekday: Monday=1 to Sunday=7. Low-volume cells (<100 eligible arrivals) are unavailable. Reported category shares cover the full month and use a separate aggregate source; they do not follow flight-source filters.")
-    child(child(root, "explain-data", enabled_for_viewer="false", extreme_values_enabled_for_all="false"), "explanation-types")
+    windows = child(root, "windows", source_height="900")
+    for index, dash in enumerate(dashboards):
+        window = child(windows, "window", name=dash.get("name"), maximized="true" if index == 0 else "false")
+        window.set("class", "dashboard")
+        viewpoints = child(window, "viewpoints")
+        for zone in dash.findall("zones//zone[@name]"):
+            child(child(viewpoints, "viewpoint", name=zone.get("name")), "zoom", type="entire-view")
+        child(window, "active", id="-1")
     directory = ROOT / "tableau"
     directory.mkdir(exist_ok=True)
-    validate_xml(root, schema_path)
+    validate_xml(root)
     workbook = directory / "airline_operations_2025_01_DRAFT.twb"
     E.ElementTree(root).write(str(workbook), encoding="utf-8", xml_declaration=True, pretty_print=True)
-    packaged = directory / "airline_operations_2025_01_DRAFT_v2.twbx"
+    packaged = directory / "airline_operations_2025_01_DRAFT_v3.twbx"
     packaged_root = deepcopy(root)
     for node in packaged_root.findall(".//connection[@class='textscan']"):
         node.set("directory", "Data")
@@ -296,24 +281,24 @@ def build(schema_path):
     with zipfile.ZipFile(temporary_package) as zipped:
         if zipped.testzip() is not None:
             raise ValueError("Packaged workbook integrity check failed")
-        validate_xml(E.fromstring(zipped.read(workbook.name)), schema_path)
+        validate_xml(E.fromstring(zipped.read(workbook.name)))
     temporary_package.replace(packaged)
     report = {
         "status": "draft_native_verification_pending", "worksheets": len(root.findall("worksheets/worksheet")),
         "dashboards": len(root.findall("dashboards/dashboard")),
-        "xml_structure_validation": "passed", "dashboard_sheet_references": "passed",
-        "package_integrity": "passed", "native_open_and_visual_check": "revision 2 awaiting native check; revision 1 failed with D2E8DA72",
+        "xml_well_formed_and_references": "passed", "dashboard_sheet_references": "passed",
+        "package_integrity": "passed", "native_open_and_visual_check": "revision 3 awaiting native check; revisions 1 and 2 failed with D2E8DA72",
         "compatibility": {"format_version": WORKBOOK_VERSION,
-                          "reference": "Tableau Public 2026.2 bundled Superstore and PerformanceRecording_new workbooks",
-                          "change": "Use legacy document/datasource format and omit ManifestByVersion so Tableau applies its legacy upgrade path",
-                          "revision_1_native_errors": ["Missing worksheet number attribute", "Missing mark type attribute", "Missing worksheet-number element", "Sort-G/ShelfSorts-G schema-group errors"]},
-        "schema_url": SCHEMA_URL, "schema_sha256": sha256(schema_path),
-        "schema_import_support": "Local empty user-attribute group (no user attributes emitted) and standard xml:base declaration; Tableau core definitions unchanged",
+                          "reference": "Tableau Public 2026.2 bundled PerformanceRecording_new.twb",
+                          "change": "Remove modern simple-id/explain-data nodes; use legacy dashboard containers and windows",
+                          "revision_1_native_errors": ["Missing worksheet number attribute", "Missing mark type attribute", "Missing worksheet-number element", "Sort-G/ShelfSorts-G schema-group errors"],
+                          "revision_2_native_errors": ["simple-id elements/uuid attributes not declared in legacy schema", "explain-data not allowed in legacy workbook"]},
+        "published_xsd_validation": "Not used for legacy compatibility; previous published-schema passes did not predict native loading",
         "workbook": {"path": str(workbook.relative_to(ROOT)), "sha256": sha256(workbook)},
         "package": {"path": str(packaged.relative_to(ROOT)), "sha256": sha256(packaged), "bytes": packaged.stat().st_size},
         "source_csv_sha256": sha256(csv_path), "cause_csv_sha256": sha256(cause_path),
         "build_script_sha256": sha256(Path(__file__)),
-        "pending": ["Open revision 2 in Tableau Public", "Check rendering, field formats and data connections", "Reconcile KPI values with SQL", "Add and verify shared filters/actions", "Build the route/origin hotspot page", "Capture native screenshots"],
+        "pending": ["Open revision 3 in Tableau Public", "Check rendering, field formats and data connections", "Reconcile KPI values with SQL", "Add and verify shared filters/actions", "Build the route/origin hotspot page", "Capture native screenshots"],
     }
     write_json(ROOT / "data/metadata/bts_2025_01_tableau_draft.json", report)
     print(json.dumps(report, indent=2))
@@ -321,5 +306,5 @@ def build(schema_path):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--schema", type=Path, required=True)
-    build(parser.parse_args().schema)
+    parser.parse_args()
+    build()

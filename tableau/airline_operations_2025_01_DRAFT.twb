@@ -1,5 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <workbook version="18.1" source-build="0.0.0 (0000.0.0.0)" source-platform="mac" locale="en_US">
+  <preferences/>
+  <style/>
   <datasources>
     <datasource name="airline_flights" caption="Airline Flights" inline="true" version="18.1">
       <connection class="federated">
@@ -229,7 +231,6 @@
         <rows></rows>
         <cols></cols>
       </table>
-      <simple-id uuid="{9A903ED9-14BE-5F89-85B6-68711F0E3BC9}"/>
     </worksheet>
     <worksheet name="Arrival on-time rate">
       <layout-options>
@@ -328,7 +329,6 @@
         <rows></rows>
         <cols></cols>
       </table>
-      <simple-id uuid="{27304C9D-6486-5FBD-8428-0BBA05847191}"/>
     </worksheet>
     <worksheet name="Cancellation rate">
       <layout-options>
@@ -427,7 +427,6 @@
         <rows></rows>
         <cols></cols>
       </table>
-      <simple-id uuid="{0D18ECC2-3D5B-5CA4-B6F4-161C7C58064C}"/>
     </worksheet>
     <worksheet name="Diversion rate">
       <layout-options>
@@ -526,7 +525,6 @@
         <rows></rows>
         <cols></cols>
       </table>
-      <simple-id uuid="{B438D04D-6297-5189-8F9F-AB2EA7528921}"/>
     </worksheet>
     <worksheet name="Daily arrival reliability">
       <layout-options>
@@ -626,7 +624,6 @@
         <rows>[airline_flights].[usr:Arrival on-time rate:qk]</rows>
         <cols>[airline_flights].[none:flight_date:qk]</cols>
       </table>
-      <simple-id uuid="{1B7FFD6B-5544-5B25-B2BB-A58EF2BCE0F2}"/>
     </worksheet>
     <worksheet name="Daily cancellations">
       <layout-options>
@@ -726,7 +723,6 @@
         <rows>[airline_flights].[usr:Cancellation rate:qk]</rows>
         <cols>[airline_flights].[none:flight_date:qk]</cols>
       </table>
-      <simple-id uuid="{E45D19DE-F9ED-594B-82CB-ADCF365186C9}"/>
     </worksheet>
     <worksheet name="Airline on-time rates (unadjusted)">
       <layout-options>
@@ -826,7 +822,6 @@
         <rows>[airline_flights].[none:reporting_airline:nk]</rows>
         <cols>[airline_flights].[usr:Arrival on-time rate:qk]</cols>
       </table>
-      <simple-id uuid="{FF6D97DD-7644-56F8-AF3F-8E1A1FF5B8EC}"/>
     </worksheet>
     <worksheet name="Airline flight volumes">
       <layout-options>
@@ -926,7 +921,6 @@
         <rows>[airline_flights].[none:reporting_airline:nk]</rows>
         <cols>[airline_flights].[sum:scheduled_flight_count:qk]</cols>
       </table>
-      <simple-id uuid="{7714E193-5D4F-5A58-9FAB-3EDEF0E5A600}"/>
     </worksheet>
     <worksheet name="Departure window reliability">
       <layout-options>
@@ -1028,7 +1022,6 @@
         <rows>[airline_flights].[usr:Weekday:ok]</rows>
         <cols>[airline_flights].[none:scheduled_departure_hour:ok]</cols>
       </table>
-      <simple-id uuid="{ABA47349-5985-50B7-80D9-1170DB1BB803}"/>
     </worksheet>
     <worksheet name="Reported delay minutes (full January)">
       <layout-options>
@@ -1079,7 +1072,6 @@
         <rows>[reported_causes].[none:category:nk]</rows>
         <cols>[reported_causes].[avg:share_of_reported_minutes:qk]</cols>
       </table>
-      <simple-id uuid="{E2180EF3-E204-59CA-B859-88E5C7E38191}"/>
     </worksheet>
   </worksheets>
   <dashboards>
@@ -1091,55 +1083,60 @@
           </formatted-text>
         </title>
       </layout-options>
+      <style/>
       <size minwidth="1200" maxwidth="1200" minheight="900" maxheight="900" sizing-mode="fixed"/>
-      <zones is-pixels="false">
-        <zone id="1" name="Scheduled flights" x="1000" y="6000" w="24000" h="13000" type-v2="visual" show-title="true">
-          <zone-style>
-            <format attr="margin" value="10"/>
-          </zone-style>
-        </zone>
-        <zone id="2" name="Arrival on-time rate" x="26000" y="6000" w="24000" h="13000" type-v2="visual" show-title="true">
-          <zone-style>
-            <format attr="margin" value="10"/>
-          </zone-style>
-        </zone>
-        <zone id="3" name="Cancellation rate" x="51000" y="6000" w="24000" h="13000" type-v2="visual" show-title="true">
-          <zone-style>
-            <format attr="margin" value="10"/>
-          </zone-style>
-        </zone>
-        <zone id="4" name="Diversion rate" x="76000" y="6000" w="23000" h="13000" type-v2="visual" show-title="true">
-          <zone-style>
-            <format attr="margin" value="10"/>
-          </zone-style>
-        </zone>
-        <zone id="5" name="Daily arrival reliability" x="1000" y="21000" w="49000" h="33000" type-v2="visual" show-title="true">
-          <zone-style>
-            <format attr="margin" value="10"/>
-          </zone-style>
-        </zone>
-        <zone id="6" name="Daily cancellations" x="51000" y="21000" w="48000" h="33000" type-v2="visual" show-title="true">
-          <zone-style>
-            <format attr="margin" value="10"/>
-          </zone-style>
-        </zone>
-        <zone id="7" name="Airline on-time rates (unadjusted)" x="1000" y="56000" w="49000" h="35000" type-v2="visual" show-title="true">
-          <zone-style>
-            <format attr="margin" value="10"/>
-          </zone-style>
-        </zone>
-        <zone id="8" name="Airline flight volumes" x="51000" y="56000" w="48000" h="35000" type-v2="visual" show-title="true">
-          <zone-style>
-            <format attr="margin" value="10"/>
-          </zone-style>
-        </zone>
-        <zone id="9" x="2000" y="93000" w="96000" h="6500" type-v2="text">
-          <formatted-text>
-            <run fontsize="10" fontname="Arial">BTS reporting-carrier records, January 2025. On time: arrival delay &lt;15 min among eligible arrivals. Cancellations/diversions use scheduled flights. Airline comparisons are unadjusted.</run>
-          </formatted-text>
+      <datasources>
+        <datasource name="airline_flights" caption="Airline Flights"/>
+      </datasources>
+      <zones>
+        <zone id="0" x="0" y="0" w="100000" h="100000" type="layout-basic">
+          <zone id="1" name="Scheduled flights" x="1000" y="6000" w="24000" h="13000" show-title="true">
+            <zone-style>
+              <format attr="margin" value="10"/>
+            </zone-style>
+          </zone>
+          <zone id="2" name="Arrival on-time rate" x="26000" y="6000" w="24000" h="13000" show-title="true">
+            <zone-style>
+              <format attr="margin" value="10"/>
+            </zone-style>
+          </zone>
+          <zone id="3" name="Cancellation rate" x="51000" y="6000" w="24000" h="13000" show-title="true">
+            <zone-style>
+              <format attr="margin" value="10"/>
+            </zone-style>
+          </zone>
+          <zone id="4" name="Diversion rate" x="76000" y="6000" w="23000" h="13000" show-title="true">
+            <zone-style>
+              <format attr="margin" value="10"/>
+            </zone-style>
+          </zone>
+          <zone id="5" name="Daily arrival reliability" x="1000" y="21000" w="49000" h="33000" show-title="true">
+            <zone-style>
+              <format attr="margin" value="10"/>
+            </zone-style>
+          </zone>
+          <zone id="6" name="Daily cancellations" x="51000" y="21000" w="48000" h="33000" show-title="true">
+            <zone-style>
+              <format attr="margin" value="10"/>
+            </zone-style>
+          </zone>
+          <zone id="7" name="Airline on-time rates (unadjusted)" x="1000" y="56000" w="49000" h="35000" show-title="true">
+            <zone-style>
+              <format attr="margin" value="10"/>
+            </zone-style>
+          </zone>
+          <zone id="8" name="Airline flight volumes" x="51000" y="56000" w="48000" h="35000" show-title="true">
+            <zone-style>
+              <format attr="margin" value="10"/>
+            </zone-style>
+          </zone>
+          <zone id="9" x="2000" y="93000" w="96000" h="6500" type="text">
+            <formatted-text>
+              <run fontsize="10" fontname="Arial">BTS reporting-carrier records, January 2025. On time: arrival delay &lt;15 min among eligible arrivals. Cancellations/diversions use scheduled flights. Airline comparisons are unadjusted.</run>
+            </formatted-text>
+          </zone>
         </zone>
       </zones>
-      <simple-id uuid="{C4527C47-5A37-5C46-A986-794BA281D34C}"/>
     </dashboard>
     <dashboard name="02 Delay diagnostics | January 2025">
       <layout-options>
@@ -1149,28 +1146,73 @@
           </formatted-text>
         </title>
       </layout-options>
+      <style/>
       <size minwidth="1200" maxwidth="1200" minheight="900" maxheight="900" sizing-mode="fixed"/>
-      <zones is-pixels="false">
-        <zone id="1" name="Departure window reliability" x="1000" y="7000" w="98000" h="47000" type-v2="visual" show-title="true">
-          <zone-style>
-            <format attr="margin" value="10"/>
-          </zone-style>
-        </zone>
-        <zone id="2" name="Reported delay minutes (full January)" x="1000" y="56000" w="98000" h="34000" type-v2="visual" show-title="true">
-          <zone-style>
-            <format attr="margin" value="10"/>
-          </zone-style>
-        </zone>
-        <zone id="3" x="2000" y="93000" w="96000" h="6500" type-v2="text">
-          <formatted-text>
-            <run fontsize="10" fontname="Arial">Weekday: Monday=1 to Sunday=7. Low-volume cells (&lt;100 eligible arrivals) are unavailable. Reported category shares cover the full month and use a separate aggregate source; they do not follow flight-source filters.</run>
-          </formatted-text>
+      <datasources>
+        <datasource name="airline_flights" caption="Airline Flights"/>
+        <datasource name="reported_causes" caption="Reported Causes"/>
+      </datasources>
+      <zones>
+        <zone id="0" x="0" y="0" w="100000" h="100000" type="layout-basic">
+          <zone id="1" name="Departure window reliability" x="1000" y="7000" w="98000" h="47000" show-title="true">
+            <zone-style>
+              <format attr="margin" value="10"/>
+            </zone-style>
+          </zone>
+          <zone id="2" name="Reported delay minutes (full January)" x="1000" y="56000" w="98000" h="34000" show-title="true">
+            <zone-style>
+              <format attr="margin" value="10"/>
+            </zone-style>
+          </zone>
+          <zone id="3" x="2000" y="93000" w="96000" h="6500" type="text">
+            <formatted-text>
+              <run fontsize="10" fontname="Arial">Weekday: Monday=1 to Sunday=7. Low-volume cells (&lt;100 eligible arrivals) are unavailable. Reported category shares cover the full month and use a separate aggregate source; they do not follow flight-source filters.</run>
+            </formatted-text>
+          </zone>
         </zone>
       </zones>
-      <simple-id uuid="{806FA761-7D09-5B33-9657-4BB093832266}"/>
     </dashboard>
   </dashboards>
-  <explain-data enabled-for-viewer="false" extreme-values-enabled-for-all="false">
-    <explanation-types/>
-  </explain-data>
+  <windows source-height="900">
+    <window name="01 Operations overview | January 2025" maximized="true" class="dashboard">
+      <viewpoints>
+        <viewpoint name="Scheduled flights">
+          <zoom type="entire-view"/>
+        </viewpoint>
+        <viewpoint name="Arrival on-time rate">
+          <zoom type="entire-view"/>
+        </viewpoint>
+        <viewpoint name="Cancellation rate">
+          <zoom type="entire-view"/>
+        </viewpoint>
+        <viewpoint name="Diversion rate">
+          <zoom type="entire-view"/>
+        </viewpoint>
+        <viewpoint name="Daily arrival reliability">
+          <zoom type="entire-view"/>
+        </viewpoint>
+        <viewpoint name="Daily cancellations">
+          <zoom type="entire-view"/>
+        </viewpoint>
+        <viewpoint name="Airline on-time rates (unadjusted)">
+          <zoom type="entire-view"/>
+        </viewpoint>
+        <viewpoint name="Airline flight volumes">
+          <zoom type="entire-view"/>
+        </viewpoint>
+      </viewpoints>
+      <active id="-1"/>
+    </window>
+    <window name="02 Delay diagnostics | January 2025" maximized="false" class="dashboard">
+      <viewpoints>
+        <viewpoint name="Departure window reliability">
+          <zoom type="entire-view"/>
+        </viewpoint>
+        <viewpoint name="Reported delay minutes (full January)">
+          <zoom type="entire-view"/>
+        </viewpoint>
+      </viewpoints>
+      <active id="-1"/>
+    </window>
+  </windows>
 </workbook>

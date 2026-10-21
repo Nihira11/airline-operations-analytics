@@ -269,20 +269,19 @@ The [SVG version](reports/2025-01/operations_overview.svg) is available for shar
 
 ## Tableau workbook draft
 
-The [editable workbook XML](tableau/airline_operations_2025_01_DRAFT.twb) and revised local package `tableau/airline_operations_2025_01_DRAFT_v2.twbx` contain 10 worksheets arranged into two pages:
+The [editable workbook XML](tableau/airline_operations_2025_01_DRAFT.twb) and revised local package `tableau/airline_operations_2025_01_DRAFT_v3.twbx` contain 10 worksheets arranged into two pages:
 
 1. **Operations overview:** scheduled flights, arrival on-time rate, cancellation rate, diversion rate, daily trends, and unadjusted airline rates alongside volumes.
 2. **Delay diagnostics:** weekday/departure-hour reliability, with a minimum of 100 eligible arrivals per cell, and reported delay-category minute shares.
 
 The first page uses the validated flight-level export and aggregate ratio calculations. The category-minute chart uses a separate full-month aggregate source. It is labelled accordingly and does not follow filters added to the flight source.
 
-**Revision 2 awaits native verification.** The initial draft failed in Tableau Public 2026.2 with error `D2E8DA72`: missing worksheet numbers, a required mark-type attribute, and native schema-group errors. Revision 2 uses the legacy 18.1 document/datasource format found in that application's bundled Superstore and performance workbooks, without `ManifestByVersion`. This routes loading through Tableau's legacy upgrade path rather than declaring the newer format directly. The revised structure passes [Tableau's published 2026.2 baseline schema](https://github.com/tableau/tableau-document-schemas), but native success must be confirmed separately. Desktop control remains unavailable, so no native screenshots or interaction checks have been performed.
+**Revision 3 awaits native verification.** The initial format failed with error `D2E8DA72`. Revision 2 removed the versioned-manifest problem but exposed incompatible modern `simple-id` and `explain-data` nodes in the legacy format. Revision 3 removes those nodes and aligns dashboard/window containers with the installed `PerformanceRecording_new.twb` example. The document and datasource format is legacy 18.1 throughout. XML well-formedness, field/sheet references, source checksums, and ZIP integrity pass. Published modern XSD validation is no longer used as evidence of legacy compatibility: previous baseline passes did not predict native loading. Desktop control remains unavailable, so native screenshots and interaction checks are pending.
 
-To review locally, open `tableau/airline_operations_2025_01_DRAFT_v2.twbx` in the installed Tableau Public application. Verify the source connection and the four KPI values against the SQL analysis before treating it as a completed dashboard. The native review, shared filters/actions, and origin/route hotspot page remain unfinished. Track this status and the initial failure in the [draft validation manifest](data/metadata/bts_2025_01_tableau_draft.json).
+To review locally, open `tableau/airline_operations_2025_01_DRAFT_v3.twbx` in the installed Tableau Public application. Verify the source connection and the four KPI values against the SQL analysis before treating it as a completed dashboard. The native review, shared filters/actions, and origin/route hotspot page remain unfinished. Track this status and prior failures in the [draft validation manifest](data/metadata/bts_2025_01_tableau_draft.json).
 
 The `.twbx` contains the public source exports and is ignored by Git because it embeds generated data. The XML and builder are tracked. Rebuild the package after preparing and analysing the month:
 
 ```bash
-curl --fail --location --output /tmp/twb_2026.2.0.xsd https://raw.githubusercontent.com/tableau/tableau-document-schemas/main/schemas/2026_2/twb_2026.2.0.xsd
-.venv/bin/python src/build_tableau.py --schema /tmp/twb_2026.2.0.xsd
+.venv/bin/python src/build_tableau.py
 ```

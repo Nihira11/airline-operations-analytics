@@ -2,38 +2,40 @@
   "status": "draft_native_verification_pending",
   "worksheets": 10,
   "dashboards": 2,
-  "xml_structure_validation": "passed",
+  "xml_well_formed_and_references": "passed",
   "dashboard_sheet_references": "passed",
   "package_integrity": "passed",
-  "native_open_and_visual_check": "revision 2 awaiting native check; revision 1 failed with D2E8DA72",
+  "native_open_and_visual_check": "revision 3 awaiting native check; revisions 1 and 2 failed with D2E8DA72",
   "compatibility": {
     "format_version": "18.1",
-    "reference": "Tableau Public 2026.2 bundled Superstore and PerformanceRecording_new workbooks",
-    "change": "Use legacy document/datasource format and omit ManifestByVersion so Tableau applies its legacy upgrade path",
+    "reference": "Tableau Public 2026.2 bundled PerformanceRecording_new.twb",
+    "change": "Remove modern simple-id/explain-data nodes; use legacy dashboard containers and windows",
     "revision_1_native_errors": [
       "Missing worksheet number attribute",
       "Missing mark type attribute",
       "Missing worksheet-number element",
       "Sort-G/ShelfSorts-G schema-group errors"
+    ],
+    "revision_2_native_errors": [
+      "simple-id elements/uuid attributes not declared in legacy schema",
+      "explain-data not allowed in legacy workbook"
     ]
   },
-  "schema_url": "https://raw.githubusercontent.com/tableau/tableau-document-schemas/main/schemas/2026_2/twb_2026.2.0.xsd",
-  "schema_sha256": "ff330e7df790e1479c75fe364a610202aafa2d691872f77bc7c991aed0b3a733",
-  "schema_import_support": "Local empty user-attribute group (no user attributes emitted) and standard xml:base declaration; Tableau core definitions unchanged",
+  "published_xsd_validation": "Not used for legacy compatibility; previous published-schema passes did not predict native loading",
   "workbook": {
     "path": "tableau/airline_operations_2025_01_DRAFT.twb",
-    "sha256": "51522898eb4564a17d13bd25d9b728aeab2e3f9a0b915b66487319df75d31537"
+    "sha256": "9beae8b8230f1e8570ad6204154f9adea619390104fc2790e43ad184c057489a"
   },
   "package": {
-    "path": "tableau/airline_operations_2025_01_DRAFT_v2.twbx",
-    "sha256": "57e7b381821ec43bdf0be5568e7e7c1196e154b530fe45483e88c9ed1d43a955",
-    "bytes": 42456075
+    "path": "tableau/airline_operations_2025_01_DRAFT_v3.twbx",
+    "sha256": "f73efd23cf03a2af7b5df1c32b2fb6c16d1cc206ba9cc7ca5bdc7e7a42058d85",
+    "bytes": 42455757
   },
   "source_csv_sha256": "1ae21773c81dfbd4e01d662d8f231ba086954685644a3290450d49c0ec8ca401",
   "cause_csv_sha256": "2a1001e725af945e0efbf184d98eb26d1b39fdcc4909a0fa4e0ab875d4e04faa",
-  "build_script_sha256": "a414d85fe9604f0e01366b08757fad370e62a67bfce03de672bbf15cccc20c14",
+  "build_script_sha256": "800b33c6a7b72f8d1555542f2e4340007686127e0b7f5bd5dfcc46e36d763378",
   "pending": [
-    "Open revision 2 in Tableau Public",
+    "Open revision 3 in Tableau Public",
     "Check rendering, field formats and data connections",
     "Reconcile KPI values with SQL",
     "Add and verify shared filters/actions",
