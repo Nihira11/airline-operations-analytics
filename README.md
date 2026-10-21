@@ -266,3 +266,23 @@ The [SVG version](reports/2025-01/operations_overview.svg) is available for shar
 .venv/bin/python -m pip install -r requirements-visuals.txt
 .venv/bin/python src/plot_findings.py
 ```
+
+## Tableau workbook draft
+
+The [editable workbook XML](tableau/airline_operations_2025_01_DRAFT.twb) and local packaged workbook `tableau/airline_operations_2025_01_DRAFT.twbx` contain 10 worksheets arranged into two pages:
+
+1. **Operations overview:** scheduled flights, arrival on-time rate, cancellation rate, diversion rate, daily trends, and unadjusted airline rates alongside volumes.
+2. **Delay diagnostics:** weekday/departure-hour reliability, with a minimum of 100 eligible arrivals per cell, and reported delay-category minute shares.
+
+The first page uses the validated flight-level export and aggregate ratio calculations. The category-minute chart uses a separate full-month aggregate source. It is labelled accordingly and does not follow filters added to the flight source.
+
+**Native loading failed for the initial draft.** The user opened the package in Tableau Public 2026.2 and received error `D2E8DA72`: missing worksheet numbers, a required mark-type attribute, and native schema-group errors. The core XML structure passed [Tableau's published 2026.1 schema](https://github.com/tableau/tableau-document-schemas), but that did not establish native compatibility. The compatibility repair is in progress. Computer control failed to start twice, so no native screenshots or interaction checks have been performed.
+
+To review locally, open `tableau/airline_operations_2025_01_DRAFT.twbx` in Tableau Public 2026.1 or later. Verify the source connection and the four KPI values against the SQL analysis before treating it as a completed dashboard. The native review, shared filters/actions, and origin/route hotspot page remain unfinished. Track this status in the [draft validation manifest](data/metadata/bts_2025_01_tableau_draft.json).
+
+The `.twbx` contains the public source exports and is ignored by Git because it embeds generated data. The XML and builder are tracked. Rebuild the package after preparing and analysing the month:
+
+```bash
+curl --fail --location --output /tmp/twb_2026.1.0.xsd https://raw.githubusercontent.com/tableau/tableau-document-schemas/main/schemas/2026_1/twb_2026.1.0.xsd
+.venv/bin/python src/build_tableau.py --schema /tmp/twb_2026.1.0.xsd
+```

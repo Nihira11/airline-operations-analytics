@@ -18,3 +18,6 @@ __pycache__/
 *.duckdb.wal
 *.joblib
 *.pkl
+
+# Packaged Tableau workbooks embed generated data; rebuild them from tracked XML/code.
+/tableau/*.twbx
