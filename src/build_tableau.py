@@ -7,6 +7,7 @@ though it passed the published baseline schema. No sample data is copied.
 
 import argparse
 from copy import deepcopy
+import hashlib
 import json
 from pathlib import Path
 import re
@@ -14,8 +15,10 @@ import zipfile
 
 import duckdb
 from lxml import etree as E
+import tableau_extracts
 
 from acquire_bts import ROOT, sha256, write_json
+from tableau_extracts import create_extract
 
 WORKBOOK_VERSION = "18.1"
 
@@ -70,6 +73,15 @@ def calculated(datasource, columns, field, formula, datatype="real", dimension=F
     calc = child(column, "calculation", formula=formula)
     calc.set("class", "tableau")
     columns[(name, field)] = column
+
+
+def attach_extract(datasource, path):
+    extract = child(datasource, "extract", count="-1", enabled="true", units="records")
+    connection = child(extract, "connection", authentication="auth-none", author_locale="en_US",
+                       dbname=str(path), default_settings="yes", schema="Extract", tablename="Extract",
+                       username="tableau_internal_user")
+    connection.set("class", "hyper")
+    child(connection, "relation", name="Extract", table="[Extract].[Extract]", type="table")
 
 
 def worksheet(parent, columns, name, datasource, row=None, col=None, text=None,
@@ -147,6 +159,12 @@ def validate_xml(root):
         if zone.get("name") not in sheet_names:
             raise ValueError("Dashboard references a missing sheet")
     for datasource in root.findall("datasources/datasource"):
+        extract = datasource.find("extract")
+        if extract is None or extract.get("enabled") != "true":
+            raise ValueError("Tableau Public requires an enabled extract for every data source")
+        extract_connection = extract.find("connection")
+        if extract_connection is None or extract_connection.get("class") != "hyper" or not extract_connection.get("dbname"):
+            raise ValueError("Extract must reference a Hyper file")
         available = {column.get("name") for column in datasource.findall("column")}
         for calc in datasource.findall("column/calculation"):
             for field in re.findall(r"\[[^\]]+\]", calc.get("formula")):
@@ -215,7 +233,17 @@ def build():
     cause_schema = {"category": "VARCHAR", "reported_delay_minutes": "BIGINT",
                     "flights_with_complete_cause_reporting": "BIGINT",
                     "flights_with_positive_category_minutes": "BIGINT", "share_of_reported_minutes": "DOUBLE"}
-    source(sources, "reported_causes", Path("../data/processed/2025-01/analysis/delay_causes.csv"), cause_schema, columns)
+    cause_source = source(sources, "reported_causes", Path("../data/processed/2025-01/analysis/delay_causes.csv"), cause_schema, columns)
+    extracts = {}
+    for name, data_source, path, schema in [
+        ("airline_flights", datasource, csv_path, fields),
+        ("reported_causes", cause_source, cause_path, cause_schema),
+    ]:
+        extract_path = processed / f"{name}.hyper"
+        print(f"Building and reconciling {name}.hyper", flush=True)
+        extracts[name] = create_extract(path, schema, extract_path)
+        extracts[name]["path"] = str(extract_path.relative_to(ROOT))
+        attach_extract(data_source, Path("../data/processed/2025-01") / extract_path.name)
     sheets = child(root, "worksheets")
     dimension = lambda name: (name, "None", "nominal")
     measure = lambda name: (name, "Sum", "quantitative")
@@ -269,28 +297,39 @@ def build():
     validate_xml(root)
     workbook = directory / "airline_operations_2025_01_DRAFT.twb"
     E.ElementTree(root).write(str(workbook), encoding="utf-8", xml_declaration=True, pretty_print=True)
-    packaged = directory / "airline_operations_2025_01_DRAFT_v3.twbx"
+    packaged = directory / "airline_operations_2025_01_DRAFT_v4.twbx"
     packaged_root = deepcopy(root)
     for node in packaged_root.findall(".//connection[@class='textscan']"):
         node.set("directory", "Data")
+    for node in packaged_root.findall("datasources/datasource/extract/connection"):
+        node.set("dbname", "Data/" + Path(node.get("dbname")).name)
     temporary_package = packaged.with_suffix(".twbx.part")
     with zipfile.ZipFile(temporary_package, "w", compression=zipfile.ZIP_DEFLATED) as zipped:
         zipped.writestr(workbook.name, E.tostring(packaged_root, encoding="utf-8", xml_declaration=True))
         zipped.write(csv_path, "Data/tableau_flights.csv")
         zipped.write(cause_path, "Data/delay_causes.csv")
+        for item in extracts.values():
+            zipped.write(ROOT / item["path"], "Data/" + Path(item["path"]).name)
     with zipfile.ZipFile(temporary_package) as zipped:
         if zipped.testzip() is not None:
             raise ValueError("Packaged workbook integrity check failed")
         validate_xml(E.fromstring(zipped.read(workbook.name)))
+        for node in packaged_root.findall("datasources/datasource/extract/connection"):
+            info = zipped.getinfo(node.get("dbname"))
+            expected_extract = extracts[Path(info.filename).stem]
+            if hashlib.sha256(zipped.read(info.filename)).hexdigest() != expected_extract["sha256"]:
+                raise ValueError("Packaged Hyper extract checksum mismatch")
     temporary_package.replace(packaged)
     report = {
         "status": "draft_native_verification_pending", "worksheets": len(root.findall("worksheets/worksheet")),
         "dashboards": len(root.findall("dashboards/dashboard")),
         "xml_well_formed_and_references": "passed", "dashboard_sheet_references": "passed",
-        "package_integrity": "passed", "native_open_and_visual_check": "revision 3 awaiting native check; revisions 1 and 2 failed with D2E8DA72",
+        "package_integrity": "passed", "native_open_and_visual_check": "revision 4 awaiting native check; user reported extract requirement 3C242D89 after revision 3",
+        "extracts": extracts,
         "compatibility": {"format_version": WORKBOOK_VERSION,
                           "reference": "Tableau Public 2026.2 bundled PerformanceRecording_new.twb",
-                          "change": "Remove modern simple-id/explain-data nodes; use legacy dashboard containers and windows",
+                          "change": "Include enabled, reconciled Hyper extracts for both sources to address Tableau Public error 3C242D89",
+                          "revision_3_native_error": "Tableau Public save requires extracts; Airline Flights was live CSV (3C242D89)",
                           "revision_1_native_errors": ["Missing worksheet number attribute", "Missing mark type attribute", "Missing worksheet-number element", "Sort-G/ShelfSorts-G schema-group errors"],
                           "revision_2_native_errors": ["simple-id elements/uuid attributes not declared in legacy schema", "explain-data not allowed in legacy workbook"]},
         "published_xsd_validation": "Not used for legacy compatibility; previous published-schema passes did not predict native loading",
@@ -298,7 +337,8 @@ def build():
         "package": {"path": str(packaged.relative_to(ROOT)), "sha256": sha256(packaged), "bytes": packaged.stat().st_size},
         "source_csv_sha256": sha256(csv_path), "cause_csv_sha256": sha256(cause_path),
         "build_script_sha256": sha256(Path(__file__)),
-        "pending": ["Open revision 3 in Tableau Public", "Check rendering, field formats and data connections", "Reconcile KPI values with SQL", "Add and verify shared filters/actions", "Build the route/origin hotspot page", "Capture native screenshots"],
+        "extract_builder_sha256": sha256(Path(tableau_extracts.__file__)),
+        "pending": ["Open revision 4 in Tableau Public", "Verify both extracts are active and Tableau Public saving is accepted", "Check rendering, field formats and data connections", "Reconcile displayed KPI values with SQL", "Add and verify shared filters/actions", "Build the route/origin hotspot page", "Capture native screenshots"],
     }
     write_json(ROOT / "data/metadata/bts_2025_01_tableau_draft.json", report)
     print(json.dumps(report, indent=2))
