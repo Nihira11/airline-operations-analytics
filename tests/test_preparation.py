@@ -128,6 +128,20 @@ class FlightPreparationTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 output_reconciliation(self.connection, "sample", path, "csv")
 
+    def test_export_check_works_read_only_and_does_not_persist_scratch_view(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            database = Path(temporary) / "sample.duckdb"
+            path = Path(temporary) / "source's export.csv"
+            with duckdb.connect(str(database)) as writer:
+                writer.execute("CREATE TABLE sample AS SELECT 1 AS count")
+                writer.execute("COPY sample TO ? (HEADER true)", [str(path)])
+            with duckdb.connect(str(database), read_only=True) as reader:
+                self.assertEqual(output_reconciliation(reader, "sample", path, "csv"), 1)
+            with duckdb.connect(str(database), read_only=True) as reader:
+                self.assertEqual(reader.execute(
+                    "SELECT count(*) FROM information_schema.views WHERE table_name = 'exported'"
+                ).fetchone()[0], 0)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -154,13 +154,19 @@ def schema_snapshot(connection, types):
 
 
 def output_reconciliation(connection, relation, path, file_format):
+    # CREATE VIEW cannot bind parameters. Escape SQL literals explicitly and
+    # keep the scratch view temporary, including when the database is read-only.
+    literal = lambda value: "'" + str(value).replace("'", "''") + "'"
     if file_format == "parquet":
-        connection.read_parquet(str(path)).create_view("exported", replace=True)
+        query = f"SELECT * FROM read_parquet({literal(path)})"
     else:
         types = {row[0]: row[1] for row in connection.execute(f"DESCRIBE {relation}").fetchall()}
-        connection.read_csv(str(path), columns=types, header=True, auto_detect=False).create_view(
-            "exported", replace=True
+        columns = "{" + ", ".join(f"{literal(name)}: {literal(kind)}" for name, kind in types.items()) + "}"
+        query = (
+            f"SELECT * FROM read_csv({literal(path)}, columns={columns}, "
+            "header=true, auto_detect=false)"
         )
+    connection.execute("CREATE OR REPLACE TEMP VIEW exported AS " + query)
     # Compare both directions and multiplicities, not merely aggregate totals.
     different = connection.execute(f"""
         SELECT count(*) FROM (

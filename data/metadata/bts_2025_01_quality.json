@@ -174,8 +174,8 @@
   "output_files": [
     {
       "path": "data/processed/2025-01/airline_operations.duckdb",
-      "bytes": 87830528,
-      "sha256": "132e2612b1a923576f0d0e6ebfb0fb76e051e07c11d75a1cbb07da802df91c95"
+      "bytes": 87568384,
+      "sha256": "aa35156b1ef983d9cc99c574665c131308bac990e209e85ea6b8a13cffb6667e"
     },
     {
       "path": "data/processed/2025-01/flights.parquet",
@@ -204,7 +204,7 @@
     },
     {
       "path": "src/prepare_data.py",
-      "sha256": "553f20bd0c411cac56f33e669747ea76f3c6a06f579da1cc3ff656a4aef1c522"
+      "sha256": "172eb780b1fa5efceb823d9297ec7bcf39a6a2c6941d1a4f8c86c5653b2787fd"
     },
     {
       "path": "sql/01_clean_flights.sql",

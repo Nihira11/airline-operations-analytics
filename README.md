@@ -214,7 +214,7 @@ python3.12 -m venv .venv
 .venv/bin/python -m unittest discover -s tests -v
 ```
 
-Eight boundary tests cover early arrivals, the 15-minute cutoff, midnight, cancelled/diverted labels, source-issue flags, malformed values, duplicate multiplicities, and CSV round trips. Synthetic fixtures are confined to tests; exported project data comes from BTS.
+Nine preparation tests cover early arrivals, the 15-minute cutoff, midnight, cancelled/diverted labels, source-issue flags, malformed values, duplicate multiplicities, CSV round trips, and read-only checks without persisted scratch views. Synthetic fixtures are confined to tests; exported project data comes from BTS.
 
 The build verifies the raw CSV against its acquisition checksum and publishes outputs only after its core validation and export comparisons pass. Large data/database files and `.venv` are ignored by Git; code, SQL, requirements, and metadata are retained.
 
