@@ -4,11 +4,29 @@ A portfolio project for data analyst, business intelligence, and data scientist 
 
 **Business question:** Where are flight disruptions concentrated, and which dates, origins, routes, and departure windows warrant operational review?
 
-**Status:** The January 2025 analytics handoff includes validated data, ten SQL analyses, two figure sets, a business case study, and a reproducible release check. All 539,747 records are retained. The user-authored lilac Tableau workbook contains three dashboards; final interaction checks, portability checks, and portfolio screenshots are pending. Full-year acquisition and prediction are deferred until after this January release.
+**Status:** The January 2025 analytics handoff includes validated data, ten SQL analyses, two figure sets, a business case study, and a reproducible release check. All 539,747 records are retained. The January Tableau workbook and screenshots of all three dashboards are available below. Final interaction and package reopen checks remain pending; annual analysis and prediction are separate extensions.
 
-Start with the [case study](reports/2025-01/case_study.md), [reproduction instructions](docs/reproduce.md), [data model](docs/data_model.md), and [step-by-step Tableau guide](docs/tableau_guide.md). The [release manifest](data/metadata/bts_2025_01_release.json) distinguishes verified analytics from the unfinished dashboard.
+Start with the [case study](reports/2025-01/case_study.md), [reproduction instructions](docs/reproduce.md), [data model](docs/data_model.md), and [step-by-step Tableau guide](docs/tableau_guide.md). The [release manifest](data/metadata/bts_2025_01_release.json) records the analytics verification separately from manual Tableau checks.
 
 With the project environment installed, run `.venv/bin/python src/run_january.py --reuse-prepared` to verify cached preparation, regenerate the analysis/figures, and run checks. A fresh build uses the same command without `--reuse-prepared`.
+
+## January Tableau dashboards
+
+[Download the January workbook (.twbx)](https://github.com/Nihira11/airline-operations-analytics/raw/refs/heads/main/tableau/Airline%20Operations%20January%202025.twbx)
+
+One workbook contains all three dashboards, the January flight-data extract, and the dashboard images. Download and open it in Tableau to explore the airline, date, origin, and destination filters. GitHub shows the static previews below; a live Tableau Public link has not been added yet.
+
+**Operations Overview** — flight volume, arrival reliability, cancellations, diversions, and daily trends.
+
+![January 2025 Tableau Operations Overview](reports/2025-01/dashboard_screenshots/01-operations-overview.png)
+
+**Disruption Hotspots** — origin and route comparisons, plus reliability by weekday and departure hour.
+
+![January 2025 Tableau Disruption Hotspots](reports/2025-01/dashboard_screenshots/02-disruption-hotspots.png)
+
+**Delay Diagnostics** — delayed-arrival median and P90, severity bands, and reported delay-category minutes.
+
+![January 2025 Tableau Delay Diagnostics](reports/2025-01/dashboard_screenshots/03-delay-diagnostics.png)
 
 ## Intended audience and decisions
 
@@ -107,7 +125,8 @@ No prediction model has been trained in this January release. The following is a
 - [x] Prepare the business case study, figures, limitations, reproduction instructions, and manual dashboard guide.
 - [x] Verify the analytics release and local documentation links.
 - [x] User authors the Tableau workbook with three dashboards.
-- [ ] Check the current workbook's filtered/unfiltered totals, verify portability, and capture portfolio screenshots.
+- [x] Capture and add screenshots of all three January dashboards and the packaged workbook.
+- [ ] Check filtered/unfiltered totals and reopen the package in Tableau to verify portability.
 - [ ] User publishes the completed dashboard if desired and adds the actual portfolio link.
 - [ ] Later: expand to the complete 2025 analysis period and evaluate prediction models.
 
@@ -263,7 +282,7 @@ The analysis opens the prepared database read-only and exports reconciled result
 
 Comparison thresholds are recorded in the analysis manifest: 1,000 eligible arrivals for origin arrival-rate comparisons, 500 for route arrival-rate comparisons, and 100 for departure-window cells. Cancellation thresholds use scheduled flights. Pairwise comparisons require at least 20 eligible arrivals per carrier/stratum, 10 shared strata, and 1,000 matched eligible arrivals per carrier. Scores use pair-specific overlap populations and must not be combined into a global league table.
 
-This month is a descriptive pilot. Annual/seasonal claims, financial savings estimates, and predictive performance require additional evidence. The remaining January work is final Tableau interaction and portability checks, and portfolio screenshots.
+This month is a descriptive pilot. Annual/seasonal claims, financial savings estimates, and predictive performance require additional evidence. The remaining January checks are Tableau interactions and reopening the packaged workbook; the three dashboard screenshots are included above.
 
 ### Portfolio figure
 
@@ -282,6 +301,6 @@ The [diagnostics SVG](reports/2025-01/delay_diagnostics.svg) provides the same s
 
 ## Tableau handoff
 
-The current user-authored workbook is `tableau/Airline Operations January 2025 - lilac.twb`, replacing the earlier January workbook. It contains 14 worksheets and three dashboards: Operations Overview, Disruption Hotspots, and Delay Diagnostics. The validated `tableau_flights.csv` and analysis CSV files remain available to rebuild its data connections.
+The published January workbook is `tableau/Airline Operations January 2025.twbx`. It contains 14 worksheets, three styled dashboards, a Hyper extract, and ten image assets. This packaged workbook replaces the earlier `- lilac.twb` source file in GitHub, so visitors have one January workbook to download. Raw downloads and standalone processed datasets remain outside Git; the January package deliberately includes the data needed to open the dashboards.
 
-Use the [Tableau progress notes](docs/tableau_progress.md) for the remaining checks and the [manual Tableau guide](docs/tableau_guide.md) for build checkpoints. The saved workbook references local data, a temporary Hyper extract, and images in Downloads; a portable reopen check and clean portfolio screenshots are pending. The [release verifier](src/verify_release.py) verifies the analytics handoff without opening Tableau or asserting publication.
+The [three screenshots](reports/2025-01/dashboard_screenshots/) show the unfiltered January views. The package's archive integrity, dashboard names, and embedded image/extract references have been checked. Reopening it in Tableau and testing filtered interactions remain manual checks in the [Tableau progress notes](docs/tableau_progress.md). Use the [manual Tableau guide](docs/tableau_guide.md) for metric checkpoints. The [release verifier](src/verify_release.py) verifies the analytics handoff without opening Tableau or asserting online publication.

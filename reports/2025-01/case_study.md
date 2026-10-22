@@ -49,9 +49,9 @@ The UA/WN comparison spans 123 shared routes and 261 strata. The resulting point
 
 ![Delay severity and the UA WN comparison](delay_diagnostics.png)
 
-## Deliverables and remaining dashboard work
+## Tableau dashboards and deliverables
 
-The analytics handoff includes a reproducible acquisition/preparation pipeline, ten reconciled SQL result exports, explicit denominator definitions, static figures, source/quality metadata, and a [Tableau build guide](../../docs/tableau_guide.md). The project owner has authored three dashboards in `tableau/Airline Operations January 2025 - lilac.twb`; final interaction and portability checks, and clean portfolio screenshots, remain pending in the [Tableau progress notes](../../docs/tableau_progress.md). The static figures shown here are SQL-analysis outputs, not Tableau screenshots.
+The analytics handoff includes a reproducible acquisition/preparation pipeline, ten reconciled SQL result exports, explicit denominator definitions, static figures, source/quality metadata, and a [Tableau build guide](../../docs/tableau_guide.md). The project owner has authored three dashboards in the [downloadable January workbook](https://github.com/Nihira11/airline-operations-analytics/raw/refs/heads/main/tableau/Airline%20Operations%20January%202025.twbx), which includes its data extract and images. View the screenshots of [Operations Overview](dashboard_screenshots/01-operations-overview.png), [Disruption Hotspots](dashboard_screenshots/02-disruption-hotspots.png), and [Delay Diagnostics](dashboard_screenshots/03-delay-diagnostics.png). The static figures earlier in this case study are separate SQL-analysis outputs. Final interaction and package reopen checks remain in the [Tableau progress notes](../../docs/tableau_progress.md).
 
 The main limits are the single-month reporting scope, observational comparisons, and lack of passenger, financial, independent weather, or operational-log data. No measured business improvement or predictive performance is claimed.
 
@@ -61,4 +61,4 @@ Use the [reproduction instructions](../../docs/reproduce.md), [data model](../..
 
 ## Portfolio description
 
-Built a reproducible Python and DuckDB analysis of 539,747 BTS flight records, preserving cancellations and diversions while validating types, duplicate keys, joins, and export consistency. Used SQL to quantify disruption hotspots, delay severity, reported category minutes, and airline comparison sensitivity to route/time mix. Prepared validated CSV inputs, figures, and a case study for a manually authored Tableau dashboard.
+Built a reproducible Python and DuckDB analysis of 539,747 BTS flight records, preserving cancellations and diversions while validating types, duplicate keys, joins, and export consistency. Used SQL to quantify disruption hotspots, delay severity, reported category minutes, and airline comparison sensitivity to route/time mix. Built three Tableau dashboards with airline, date, and airport filters; supplied a packaged January workbook, dashboard screenshots, validated CSV inputs, figures, and a business case study.

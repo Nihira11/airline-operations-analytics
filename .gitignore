@@ -19,8 +19,9 @@ __pycache__/
 *.joblib
 *.pkl
 
-# Packaged Tableau workbooks embed generated data; rebuild them from tracked XML/code.
+# Keep working packages local; publish the January portfolio workbook with its data/images.
 /tableau/*.twbx
+!/tableau/Airline Operations January 2025.twbx
 
 # Tableau recovery and lock files are temporary session state.
 /tableau/*.twbr
