@@ -4,7 +4,7 @@ A portfolio project for data analyst, business intelligence, and data scientist 
 
 **Business question:** Where are flight disruptions concentrated, and which dates, origins, routes, and departure windows warrant operational review?
 
-**Status:** The January 2025 analytics handoff includes validated data, ten SQL analyses, two figure sets, a business case study, and a reproducible release check. All 539,747 records are retained. The January Tableau workbook and screenshots of all three dashboards are available below. Final interaction and package reopen checks remain pending; annual analysis and prediction are separate extensions.
+**Status:** The January 2025 analytics handoff includes validated data, ten SQL analyses, two figure sets, a business case study, and a reproducible release check. All 539,747 records are retained. The January Tableau workbook is [live on Tableau Public](https://public.tableau.com/app/profile/nihira.sharma/viz/AirlineOperationsJanuary2025/01OperationsOverview); its download and three dashboard screenshots are available below. Final interaction and package reopen checks remain pending; annual analysis and prediction are separate extensions.
 
 Start with the [case study](reports/2025-01/case_study.md), [reproduction instructions](docs/reproduce.md), [data model](docs/data_model.md), and [step-by-step Tableau guide](docs/tableau_guide.md). The [release manifest](data/metadata/bts_2025_01_release.json) records the analytics verification separately from manual Tableau checks.
 
@@ -12,21 +12,23 @@ With the project environment installed, run `.venv/bin/python src/run_january.py
 
 ## January Tableau dashboards
 
+**[View interactive dashboards on Tableau Public](https://public.tableau.com/app/profile/nihira.sharma/viz/AirlineOperationsJanuary2025/01OperationsOverview)**
+
 [Download the January workbook (.twbx)](https://github.com/Nihira11/airline-operations-analytics/raw/refs/heads/main/tableau/Airline%20Operations%20January%202025.twbx)
 
-One workbook contains all three dashboards, the January flight-data extract, and the dashboard images. Download and open it in Tableau to explore the airline, date, origin, and destination filters. GitHub shows the static previews below; a live Tableau Public link has not been added yet.
+One workbook contains all three dashboards, the January flight-data extract, and the dashboard images. Download and open it in Tableau to explore the airline, date, origin, and destination filters. Explore all three dashboards online using the dashboard tabs and filters. Click any screenshot below to open the live workbook.
 
 **Operations Overview** — flight volume, arrival reliability, cancellations, diversions, and daily trends.
 
-![January 2025 Tableau Operations Overview](reports/2025-01/dashboard_screenshots/01-operations-overview.png)
+[![January 2025 Tableau Operations Overview](reports/2025-01/dashboard_screenshots/01-operations-overview.png)](https://public.tableau.com/app/profile/nihira.sharma/viz/AirlineOperationsJanuary2025/01OperationsOverview)
 
 **Disruption Hotspots** — origin and route comparisons, plus reliability by weekday and departure hour.
 
-![January 2025 Tableau Disruption Hotspots](reports/2025-01/dashboard_screenshots/02-disruption-hotspots.png)
+[![January 2025 Tableau Disruption Hotspots](reports/2025-01/dashboard_screenshots/02-disruption-hotspots.png)](https://public.tableau.com/app/profile/nihira.sharma/viz/AirlineOperationsJanuary2025/01OperationsOverview)
 
 **Delay Diagnostics** — delayed-arrival median and P90, severity bands, and reported delay-category minutes.
 
-![January 2025 Tableau Delay Diagnostics](reports/2025-01/dashboard_screenshots/03-delay-diagnostics.png)
+[![January 2025 Tableau Delay Diagnostics](reports/2025-01/dashboard_screenshots/03-delay-diagnostics.png)](https://public.tableau.com/app/profile/nihira.sharma/viz/AirlineOperationsJanuary2025/01OperationsOverview)
 
 ## Intended audience and decisions
 
@@ -127,7 +129,7 @@ No prediction model has been trained in this January release. The following is a
 - [x] User authors the Tableau workbook with three dashboards.
 - [x] Capture and add screenshots of all three January dashboards and the packaged workbook.
 - [ ] Check filtered/unfiltered totals and reopen the package in Tableau to verify portability.
-- [ ] User publishes the completed dashboard if desired and adds the actual portfolio link.
+- [x] Publish the January workbook to Tableau Public and add the live portfolio link.
 - [ ] Later: expand to the complete 2025 analysis period and evaluate prediction models.
 
 The first complete portfolio release is the analytics pipeline, SQL, Tableau dashboard, and case study. The prediction extension follows that release.
