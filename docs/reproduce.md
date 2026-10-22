@@ -61,4 +61,4 @@ The verifier checks source/output checksums, SQL/preparation fingerprints, the J
 
 ## Finish the portfolio release
 
-Build the Tableau workbook from the validated input, compare the unfiltered and filtered views with the guide's checkpoints, and save screenshots into `reports/2025-01/`. Add the user's workbook to `tableau/`. If publishing, add the actual Tableau Public link to the README and case study. Until those steps are checked, the repository accurately describes a completed analytics handoff with a dashboard still in progress.
+Open the current workbook, `tableau/Airline Operations January 2025 - lilac.twb`, and compare its unfiltered and filtered views with the guide's checkpoints. Follow the [Tableau progress notes](tableau_progress.md) to verify durable data and image connections, then save portfolio screenshots into `reports/2025-01/`. If publishing, add the actual Tableau Public link to the README and case study. Until those steps are checked, the repository describes a completed analytics handoff with three authored dashboards awaiting final verification.

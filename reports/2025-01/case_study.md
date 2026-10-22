@@ -51,7 +51,7 @@ The UA/WN comparison spans 123 shared routes and 261 strata. The resulting point
 
 ## Deliverables and remaining dashboard work
 
-The analytics handoff includes a reproducible acquisition/preparation pipeline, ten reconciled SQL result exports, explicit denominator definitions, static figures, source/quality metadata, and a [Tableau build guide](../../docs/tableau_guide.md). The interactive workbook and its screenshots will be created by the project owner. The static figures shown here are SQL-analysis outputs, not Tableau screenshots.
+The analytics handoff includes a reproducible acquisition/preparation pipeline, ten reconciled SQL result exports, explicit denominator definitions, static figures, source/quality metadata, and a [Tableau build guide](../../docs/tableau_guide.md). The project owner has authored three dashboards in `tableau/Airline Operations January 2025 - lilac.twb`; final interaction and portability checks, and clean portfolio screenshots, remain pending in the [Tableau progress notes](../../docs/tableau_progress.md). The static figures shown here are SQL-analysis outputs, not Tableau screenshots.
 
 The main limits are the single-month reporting scope, observational comparisons, and lack of passenger, financial, independent weather, or operational-log data. No measured business improvement or predictive performance is claimed.
 

@@ -4,7 +4,7 @@ A portfolio project for data analyst, business intelligence, and data scientist 
 
 **Business question:** Where are flight disruptions concentrated, and which dates, origins, routes, and departure windows warrant operational review?
 
-**Status:** The January 2025 analytics handoff includes validated data, ten SQL analyses, two figure sets, a business case study, and a reproducible release check. All 539,747 records are retained. Tableau authoring and screenshots are user-managed and still pending. Full-year acquisition and prediction are deferred until after this January release.
+**Status:** The January 2025 analytics handoff includes validated data, ten SQL analyses, two figure sets, a business case study, and a reproducible release check. All 539,747 records are retained. The user-authored lilac Tableau workbook contains three dashboards; final interaction checks, portability checks, and portfolio screenshots are pending. Full-year acquisition and prediction are deferred until after this January release.
 
 Start with the [case study](reports/2025-01/case_study.md), [reproduction instructions](docs/reproduce.md), [data model](docs/data_model.md), and [step-by-step Tableau guide](docs/tableau_guide.md). The [release manifest](data/metadata/bts_2025_01_release.json) distinguishes verified analytics from the unfinished dashboard.
 
@@ -21,7 +21,7 @@ An airline operations manager needs to monitor service reliability, identify rou
 | Python | Download, inventory, validate, and orchestrate repeatable scripts |
 | SQL with DuckDB | Store analytical tables locally and demonstrate joins, CTEs, aggregations, and window functions |
 | Matplotlib | Explain SQL findings in static PNG/SVG figures |
-| Tableau Public | User-authored interactive dashboard, pending |
+| Tableau Public | Three user-authored dashboards; final checks pending |
 | Git | Small local commits and a reproducible repository; remote publication is separate |
 
 DuckDB runs within Python and supports a local database file, avoiding a separate database server. Tableau will consume the validated CSV exports; a direct database connector is not required.
@@ -106,7 +106,8 @@ No prediction model has been trained in this January release. The following is a
 - [x] Export and reconcile dashboard inputs, severity bands, and category coverage.
 - [x] Prepare the business case study, figures, limitations, reproduction instructions, and manual dashboard guide.
 - [x] Verify the analytics release and local documentation links.
-- [ ] User builds the Tableau workbook, checks filtered/unfiltered totals, and captures screenshots.
+- [x] User authors the Tableau workbook with three dashboards.
+- [ ] Check the current workbook's filtered/unfiltered totals, verify portability, and capture portfolio screenshots.
 - [ ] User publishes the completed dashboard if desired and adds the actual portfolio link.
 - [ ] Later: expand to the complete 2025 analysis period and evaluate prediction models.
 
@@ -121,7 +122,7 @@ data/metadata/     Source manifest, checksums, column profiles, and field defini
 docs/              Data model, reproduction instructions, and Tableau walkthrough
 src/               Repeatable data acquisition, preparation, analysis, and checks
 sql/               Table definitions, quality checks, and analytical queries
-tableau/           Reserved for the user's Tableau workbook
+tableau/           User-authored January Tableau workbook
 reports/           Findings, figures, and final case study
 ```
 
@@ -262,7 +263,7 @@ The analysis opens the prepared database read-only and exports reconciled result
 
 Comparison thresholds are recorded in the analysis manifest: 1,000 eligible arrivals for origin arrival-rate comparisons, 500 for route arrival-rate comparisons, and 100 for departure-window cells. Cancellation thresholds use scheduled flights. Pairwise comparisons require at least 20 eligible arrivals per carrier/stratum, 10 shared strata, and 1,000 matched eligible arrivals per carrier. Scores use pair-specific overlap populations and must not be combined into a global league table.
 
-This month is a descriptive pilot. Annual/seasonal claims, financial savings estimates, and predictive performance require additional evidence. The remaining January work is the user's Tableau workbook, interaction checks, and screenshots.
+This month is a descriptive pilot. Annual/seasonal claims, financial savings estimates, and predictive performance require additional evidence. The remaining January work is final Tableau interaction and portability checks, and portfolio screenshots.
 
 ### Portfolio figure
 
@@ -281,6 +282,6 @@ The [diagnostics SVG](reports/2025-01/delay_diagnostics.svg) provides the same s
 
 ## Tableau handoff
 
-Tableau authoring is user-managed. The `tableau/` folder is reserved for the workbook the user creates; all previous generated drafts and draft-building files have been removed. The validated `tableau_flights.csv` and analysis CSV files remain available for a fresh build.
+The current user-authored workbook is `tableau/Airline Operations January 2025 - lilac.twb`, replacing the earlier January workbook. It contains 14 worksheets and three dashboards: Operations Overview, Disruption Hotspots, and Delay Diagnostics. The validated `tableau_flights.csv` and analysis CSV files remain available to rebuild its data connections.
 
-Use the [manual Tableau guide](docs/tableau_guide.md) one checkpoint at a time. Native screenshots and interactive verification will be added after the user builds the dashboard. The [release verifier](src/verify_release.py) verifies the analytics handoff without opening Tableau or asserting publication.
+Use the [Tableau progress notes](docs/tableau_progress.md) for the remaining checks and the [manual Tableau guide](docs/tableau_guide.md) for build checkpoints. The saved workbook references local data, a temporary Hyper extract, and images in Downloads; a portable reopen check and clean portfolio screenshots are pending. The [release verifier](src/verify_release.py) verifies the analytics handoff without opening Tableau or asserting publication.
